@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">OnlineLibrary</string>
+    <string name="prijavite_se">Prijavite se</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="ne_mogu_da_pristupim_mom_nalogu">Ne mogu da pristupim mom nalogu</string>
+    <string name="nemas_nalog">Nemaš nalog?</string>
+    <string name="morate_ukucati_podatke_da_pristupite_sistemu">Morate ukucati podatke da pristupite sistemu.</string>
+    <string name="zapamti_me">Zapamti me</string>
+</resources>
