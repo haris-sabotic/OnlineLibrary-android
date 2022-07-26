@@ -3,9 +3,14 @@
     <string name="prijavite_se">Prijavite se</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="email">Email</string>
     <string name="log_in">Log in</string>
     <string name="ne_mogu_da_pristupim_mom_nalogu">Ne mogu da pristupim mom nalogu</string>
     <string name="nemas_nalog">Nemaš nalog?</string>
     <string name="morate_ukucati_podatke_da_pristupite_sistemu">Morate ukucati podatke da pristupite sistemu.</string>
     <string name="zapamti_me">Zapamti me</string>
+    <string name="nazad_na_log_in">Nazad na log in</string>
+    <string name="posalji">Pošalji</string>
+    <string name="ukucajte_trazeni_podatak_i_dobicete_email">Ukucajte traženi podatak i dobićete email sa instrukcijama kako da pristupite vašem nalogu.</string>
+    <string name="sta_ste_zaboravili">Šta ste zaboravili?</string>
 </resources>
