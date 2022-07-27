@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_login"
+    app:startDestination="@id/nav_login_main_fragment" >
+
+    <fragment
+        android:id="@+id/nav_login_main_fragment"
+        android:name="com.ets.onlinebiblioteka.fragments.LoginFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/nav_login_action_main_to_forgot"
+            app:destination="@id/nav_login_forgot_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login_forgot_fragment"
+        android:name="com.ets.onlinebiblioteka.fragments.ForgotLoginFragment"
+        tools:layout="@layout/fragment_forgot_login" >
+        <action
+            android:id="@+id/nav_login_action_forgot_to_main"
+            app:destination="@id/nav_login_main_fragment" />
+
+        <action
+            android:id="@+id/nav_login_action_forgot_to_forgot_info"
+            app:destination="@id/nav_login_forgot_info_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login_forgot_info_fragment"
+        android:name="com.ets.onlinebiblioteka.fragments.ForgotLoginInfoFragment"
+        tools:layout="@layout/fragment_forgot_login_info" >
+        <action
+            android:id="@+id/nav_login_action_forgot_info_to_main"
+            app:destination="@id/nav_login_main_fragment" />
+    </fragment>
+
+</navigation>

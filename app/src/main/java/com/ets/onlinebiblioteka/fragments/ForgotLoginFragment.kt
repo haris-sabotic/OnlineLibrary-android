@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.RadioGroup
+import android.widget.TextView
+import androidx.navigation.findNavController
 import com.ets.onlinebiblioteka.R
 import com.google.android.material.textfield.TextInputLayout
 
@@ -34,6 +37,19 @@ class ForgotLoginFragment : Fragment() {
                 R.id.forgot_login_radio_password -> txtInput.setHint(R.string.username)
                 R.id.forgot_login_radio_username -> txtInput.setHint(R.string.email)
             }
+        }
+
+
+        val submitBtn = view.findViewById<Button>(R.id.forgot_login_btn_submit)
+
+        submitBtn.setOnClickListener {
+            view.findNavController().navigate(R.id.nav_login_action_forgot_to_forgot_info)
+        }
+
+        val returnText = view.findViewById<TextView>(R.id.forgot_login_text_nazad)
+
+        returnText.setOnClickListener {
+            view.findNavController().navigate(R.id.nav_login_action_forgot_to_main)
         }
     }
 }
