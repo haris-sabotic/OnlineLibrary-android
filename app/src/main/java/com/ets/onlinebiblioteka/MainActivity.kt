@@ -3,10 +3,13 @@ package com.ets.onlinebiblioteka
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.valueIterator
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -60,6 +63,18 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+
+
+        navigationView.getHeaderView(0).findViewById<ConstraintLayout>(R.id.nav_drawer_header).setOnClickListener {
+            val size = navigationView.menu.size
+            navigationView.menu.clear()
+
+            if (size == 2) {
+                navigationView.inflateMenu(R.menu.drawer_menu_main)
+            } else {
+                navigationView.inflateMenu(R.menu.drawer_menu_profile)
+            }
+        }
     }
 
     override fun onBackPressed() {

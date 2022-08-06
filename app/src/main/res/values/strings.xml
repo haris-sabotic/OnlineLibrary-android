@@ -22,4 +22,6 @@
     <string name="aktivnosti">Aktivnosti</string>
     <string name="open_drawer">open</string>
     <string name="close_drawer">close</string>
+    <string name="moj_profil">Moj profil</string>
+    <string name="log_out">Log out</string>
 </resources>
