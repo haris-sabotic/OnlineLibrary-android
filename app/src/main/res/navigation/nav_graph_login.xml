@@ -11,6 +11,7 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/nav_login_action_main_to_forgot"
+            app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_forgot_fragment" />
     </fragment>
 
@@ -20,10 +21,12 @@
         tools:layout="@layout/fragment_forgot_login" >
         <action
             android:id="@+id/nav_login_action_forgot_to_main"
+            app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_main_fragment" />
 
         <action
             android:id="@+id/nav_login_action_forgot_to_forgot_info"
+            app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_forgot_info_fragment" />
     </fragment>
 
@@ -33,6 +36,7 @@
         tools:layout="@layout/fragment_forgot_login_info" >
         <action
             android:id="@+id/nav_login_action_forgot_info_to_main"
+            app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_main_fragment" />
     </fragment>
 
