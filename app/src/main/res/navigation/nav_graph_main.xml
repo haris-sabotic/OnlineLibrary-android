@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/menu_item_moji_zahtjevi"
+    android:id="@+id/nav_graph_main">
+
+    <fragment
+        android:id="@+id/menu_item_moji_zahtjevi"
+        android:name="com.ets.onlinebiblioteka.fragments.main.MojiZahtjeviFragment"
+        android:label="@string/moji_zahtjevi"
+        tools:layout="@layout/fragment_moji_zahtjevi" />
+
+    <fragment
+        android:id="@+id/menu_item_lista_zelja"
+        android:name="com.ets.onlinebiblioteka.fragments.main.ListaZeljaFragment"
+        android:label="@string/lista_zelja"
+        tools:layout="@layout/fragment_lista_zelja" />
+
+    <fragment
+        android:id="@+id/menu_item_aktivnosti"
+        android:name="com.ets.onlinebiblioteka.fragments.main.AktivnostiFragment"
+        android:label="@string/aktivnosti"
+        tools:layout="@layout/fragment_aktivnosti" />
+
+</navigation>

@@ -21,6 +21,27 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.OnlineLibrary1" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_blue</item>
+        <item name="colorSecondaryVariant">@color/light_blue</item>
+        <item name="colorOnSecondary">@color/almost_black</item>
+        <!-- Status bar color. -->
+
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- <item name="android:statusBarColor">@color/white</item> -->
+        <!-- <item name="android:windowLightStatusBar">true</item> -->
+        <!-- <item name="android:statusBarColor">@color/light_gray</item> -->
+        <!-- <item name="android:windowLightStatusBar">true</item> -->
+
+        <!-- Customize your theme here. -->
+    </style>
+
     <style name="TextHeadline6">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>

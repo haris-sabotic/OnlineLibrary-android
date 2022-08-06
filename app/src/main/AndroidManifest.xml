@@ -14,6 +14,10 @@
         android:theme="@style/Theme.OnlineLibrary"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.OnlineLibrary1"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>

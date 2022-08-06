@@ -17,4 +17,9 @@
     <string name="ukoliko_ne_primite_email">Ukoliko ne primite email kontaktirajte administratora biblioteke.</string>
     <string name="povratak_na_log_in">Povratak na log in</string>
     <string name="zahtjev_uspjesno_poslat">Zahtjev uspješno poslat</string>
+    <string name="moji_zahtjevi">Moji zahtjevi</string>
+    <string name="lista_zelja">Lista želja</string>
+    <string name="aktivnosti">Aktivnosti</string>
+    <string name="open_drawer">open</string>
+    <string name="close_drawer">close</string>
 </resources>
