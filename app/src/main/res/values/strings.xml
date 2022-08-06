@@ -24,4 +24,6 @@
     <string name="close_drawer">close</string>
     <string name="moj_profil">Moj profil</string>
     <string name="log_out">Log out</string>
+    <string name="knjige">Knjige</string>
+    <string name="settings">Settings</string>
 </resources>

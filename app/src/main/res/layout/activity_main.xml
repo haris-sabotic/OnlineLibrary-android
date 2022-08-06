@@ -22,6 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:dividerInsetEnd="10dp"
+        app:dividerInsetStart="10dp"
         app:menu="@menu/drawer_menu_main"
         app:headerLayout="@layout/nav_drawer_header"
         android:fitsSystemWindows="true" />
