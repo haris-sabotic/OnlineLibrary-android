@@ -4,18 +4,22 @@
         android:id="@+id/menu_group_main" >
         <item
             android:id="@+id/menu_item_moji_zahtjevi"
+            android:icon="@drawable/ic_moji_zahtjevi"
             android:title="@string/moji_zahtjevi" />
 
         <item
             android:id="@+id/menu_item_lista_zelja"
+            android:icon="@drawable/ic_lista_zelja"
             android:title="@string/lista_zelja" />
 
         <item
             android:id="@+id/menu_item_aktivnosti"
+            android:icon="@drawable/ic_aktivnosti"
             android:title="@string/aktivnosti" />
 
         <item
             android:id="@+id/menu_item_knjige"
+            android:icon="@drawable/ic_knjige"
             android:title="@string/knjige" />
     </group>
 
@@ -23,6 +27,7 @@
         android:id="@+id/menu_group_settings" >
         <item
             android:id="@+id/menu_item_settings"
+            android:icon="@drawable/ic_settings"
             android:title="@string/settings" />
     </group>
 </menu>

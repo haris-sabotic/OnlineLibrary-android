@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
 
-
         navigationView.getHeaderView(0).findViewById<ConstraintLayout>(R.id.nav_drawer_header).setOnClickListener {
             val size = navigationView.menu.size
             navigationView.menu.clear()

@@ -7,6 +7,9 @@
         <entry key="app/src/main/res/drawable/cortex_icon.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/ic_cortex.xml" value="0.267" />
+        <entry key="app/src/main/res/drawable/ic_lista_zelja.xml" value="0.267" />
+        <entry key="app/src/main/res/drawable/ic_moj_profil.xml" value="0.267" />
+        <entry key="app/src/main/res/drawable/ic_moji_zahtjevi.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/ic_triangle_down.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/text_input_layout_hint_color.xml" value="0.267" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3651041666666667" />

@@ -25,6 +25,8 @@
         app:dividerInsetEnd="10dp"
         app:dividerInsetStart="10dp"
         app:menu="@menu/drawer_menu_main"
+        app:itemIconSize="18dp"
+        app:itemIconPadding="35dp"
         app:headerLayout="@layout/nav_drawer_header"
         android:fitsSystemWindows="true" />
 
