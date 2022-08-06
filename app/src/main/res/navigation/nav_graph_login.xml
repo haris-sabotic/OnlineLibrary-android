@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_login_main_fragment"
-        android:name="com.ets.onlinebiblioteka.fragments.LoginFragment"
+        android:name="com.ets.onlinebiblioteka.fragments.login.LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/nav_login_action_main_to_forgot"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/nav_login_forgot_fragment"
-        android:name="com.ets.onlinebiblioteka.fragments.ForgotLoginFragment"
+        android:name="com.ets.onlinebiblioteka.fragments.login.ForgotLoginFragment"
         tools:layout="@layout/fragment_forgot_login" >
         <action
             android:id="@+id/nav_login_action_forgot_to_main"
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/nav_login_forgot_info_fragment"
-        android:name="com.ets.onlinebiblioteka.fragments.ForgotLoginInfoFragment"
+        android:name="com.ets.onlinebiblioteka.fragments.login.ForgotLoginInfoFragment"
         tools:layout="@layout/fragment_forgot_login_info" >
         <action
             android:id="@+id/nav_login_action_forgot_info_to_main"

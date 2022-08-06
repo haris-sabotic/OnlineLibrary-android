@@ -1,4 +1,4 @@
-package com.ets.onlinebiblioteka.fragments
+package com.ets.onlinebiblioteka.fragments.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

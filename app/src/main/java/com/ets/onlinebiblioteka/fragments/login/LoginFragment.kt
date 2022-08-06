@@ -1,12 +1,15 @@
-package com.ets.onlinebiblioteka.fragments
+package com.ets.onlinebiblioteka.fragments.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.findNavController
+import com.ets.onlinebiblioteka.MainActivity
 import com.ets.onlinebiblioteka.R
 
 class LoginFragment : Fragment() {
@@ -25,9 +28,14 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val forgotLoginText = view.findViewById<TextView>(R.id.login_text_ne_mogu_da_pristupim)
+        val loginBtn = view.findViewById<Button>(R.id.login_btn_log_in)
 
         forgotLoginText.setOnClickListener {
             view.findNavController().navigate(R.id.nav_login_action_main_to_forgot)
+        }
+
+        loginBtn.setOnClickListener {
+            startActivity(Intent(activity, MainActivity::class.java))
         }
     }
 }
