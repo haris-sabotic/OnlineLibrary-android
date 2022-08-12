@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.main.ProfileFragment">
+
+    <ImageView
+        android:id="@+id/profile_img"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_btn_back"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_btn_edit"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_edit"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <TextView
+        android:id="@+id/profile_text_ime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextHeadline6"
+        android:padding="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_img" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_ime" />
+
+
+    <TextView
+        android:id="@+id/profile_text_label_jmbg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:text="@string/jmbg"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_ime" />
+
+    <TextView
+        android:id="@+id/profile_text_jmbg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_label_jmbg"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_label_jmbg" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_jmbg" />
+
+    <TextView
+        android:id="@+id/profile_text_label_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:text="@string/email"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_jmbg" />
+
+    <TextView
+        android:id="@+id/profile_text_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_label_email"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_label_email" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_email" />
+
+    <TextView
+        android:id="@+id/profile_text_label_korisnicko_ime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:text="@string/korisnicko_ime"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_email" />
+
+    <TextView
+        android:id="@+id/profile_text_korisnicko_ime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_label_korisnicko_ime"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_label_korisnicko_ime" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_korisnicko_ime" />
+
+    <TextView
+        android:id="@+id/profile_text_label_sifra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:text="@string/sifra"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_korisnicko_ime" />
+
+    <TextView
+        android:id="@+id/profile_text_sifra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:text="********"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_label_sifra"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_label_sifra" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@id/profile_text_sifra" />
+
+    <ProgressBar
+        android:id="@+id/profile_progress_bar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

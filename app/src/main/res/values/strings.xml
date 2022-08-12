@@ -26,4 +26,7 @@
     <string name="log_out">Log out</string>
     <string name="knjige">Knjige</string>
     <string name="settings">Settings</string>
+    <string name="jmbg">JMBG</string>
+    <string name="korisnicko_ime">Korisničko ime</string>
+    <string name="sifra">Šifra</string>
 </resources>

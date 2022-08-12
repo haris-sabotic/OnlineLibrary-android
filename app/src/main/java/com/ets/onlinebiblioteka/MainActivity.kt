@@ -2,8 +2,8 @@ package com.ets.onlinebiblioteka
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
+import android.view.*
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.valueIterator
@@ -28,41 +28,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
+
+    private lateinit var fragmentBackActions: HashMap<Int, Int>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        drawerLayout = findViewById(R.id.main_drawer_layout)
-        navigationView = findViewById(R.id.main_nav_view)
+        fragmentBackActions = hashMapOf(
+            R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi
+        )
 
-
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.main_fragment)
-                    as NavHostFragment
-
-        navController = navHostFragment.navController
-
-        navigationView.setupWithNavController(navController)
-
-
-
-        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer)
-
-        drawerLayout.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
-
-
-        val topLevelDestinations: MutableSet<Int> = HashSet()
-        for (node in navController.graph.nodes.valueIterator()) {
-            topLevelDestinations.add(node.id)
-        }
-
-
-        val appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
-            .setOpenableLayout(drawerLayout)
-            .build()
-
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        setupNavigation()
+        setupDrawer()
 
         navigationView.getHeaderView(0).findViewById<ConstraintLayout>(R.id.nav_drawer_header).setOnClickListener {
             val size = navigationView.menu.size
@@ -72,6 +50,24 @@ class MainActivity : AppCompatActivity() {
                 navigationView.inflateMenu(R.menu.drawer_menu_main)
             } else {
                 navigationView.inflateMenu(R.menu.drawer_menu_profile)
+            }
+        }
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (fragmentBackActions.containsKey(destination.id)) {
+                supportActionBar?.hide()
+
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+                window.statusBarColor = resources.getColor(R.color.light_gray, theme)
+                window.insetsController?.setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS)
+            } else {
+                supportActionBar?.show()
+
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+
+                window.statusBarColor = resources.getColor(R.color.blue, theme)
+                window.insetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
             }
         }
     }
@@ -85,8 +81,43 @@ class MainActivity : AppCompatActivity() {
             homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(homeIntent)
         } else {
+            fragmentBackActions[navController.currentDestination!!.id]?.let {
+                navController.navigate(it)
+                return;
+            }
+
             super.onBackPressed()
         }
+    }
+
+    private fun setupNavigation() {
+        navigationView = findViewById(R.id.main_nav_view)
+
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_fragment)
+                    as NavHostFragment
+
+        navController = navHostFragment.navController
+
+        navigationView.setupWithNavController(navController)
+    }
+
+    private fun setupDrawer() {
+        drawerLayout = findViewById(R.id.main_drawer_layout)
+        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer)
+        drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
+        val topLevelDestinations: MutableSet<Int> = HashSet()
+        for (node in navController.graph.nodes.valueIterator()) {
+            topLevelDestinations.add(node.id)
+        }
+
+        val appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
+            .setOpenableLayout(drawerLayout)
+            .build()
+
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
