@@ -14,6 +14,7 @@
     <string name="ukucajte_trazeni_podatak_i_dobicete_email">Ukucajte traženi podatak i dobićete email sa instrukcijama kako da pristupite vašem nalogu.</string>
     <string name="sta_ste_zaboravili">Šta ste zaboravili?</string>
     <string name="uskoro_cete_dobiti_email_sa_instrukcijama">Uskoro ćete dobiti email sa instrukcijama kako da promijenite šifru.</string>
+    <string name="uskoro_cete_dobiti_email_sa_usernameom">Uskoro ćete dobiti email sa vašim username-om.</string>
     <string name="ukoliko_ne_primite_email">Ukoliko ne primite email kontaktirajte administratora biblioteke.</string>
     <string name="povratak_na_log_in">Povratak na log in</string>
     <string name="zahtjev_uspjesno_poslat">Zahtjev uspješno poslat</string>

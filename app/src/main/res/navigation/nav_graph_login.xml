@@ -28,6 +28,11 @@
             android:id="@+id/nav_login_action_forgot_to_request_sent_password"
             app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_request_sent_password_fragment" />
+
+        <action
+            android:id="@+id/nav_login_action_forgot_to_request_sent_username"
+            app:enterAnim="@anim/fade_in"
+            app:destination="@id/nav_login_request_sent_username_fragment" />
     </fragment>
 
     <fragment
@@ -36,6 +41,16 @@
         tools:layout="@layout/fragment_request_sent_password" >
         <action
             android:id="@+id/nav_login_action_request_sent_password_to_main"
+            app:enterAnim="@anim/fade_in"
+            app:destination="@id/nav_login_main_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login_request_sent_username_fragment"
+        android:name="com.ets.onlinebiblioteka.fragments.login.RequestSentUsernameFragment"
+        tools:layout="@layout/fragment_request_sent_username" >
+        <action
+            android:id="@+id/nav_login_action_request_sent_username_to_main"
             app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_main_fragment" />
     </fragment>

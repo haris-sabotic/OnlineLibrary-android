@@ -43,7 +43,16 @@ class ForgotLoginFragment : Fragment() {
         val submitBtn = view.findViewById<Button>(R.id.forgot_login_btn_submit)
 
         submitBtn.setOnClickListener {
-            view.findNavController().navigate(R.id.nav_login_action_forgot_to_request_sent_password)
+            when (radioGroup.checkedRadioButtonId) {
+                R.id.forgot_login_radio_password -> {
+                    view.findNavController()
+                        .navigate(R.id.nav_login_action_forgot_to_request_sent_password)
+                }
+                R.id.forgot_login_radio_username -> {
+                    view.findNavController()
+                        .navigate(R.id.nav_login_action_forgot_to_request_sent_username)
+                }
+            }
         }
 
         val returnText = view.findViewById<TextView>(R.id.forgot_login_text_nazad)

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_forgot_login_info"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".fragments.login.RequestSentUsernameFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cortex" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextHeadline6"
+        android:text="@string/zahtjev_uspjesno_poslat"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        style="@style/TextBody1"
+        android:text="@string/uskoro_cete_dobiti_email_sa_usernameom"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        style="@style/TextBody1"
+        android:text="@string/ukoliko_ne_primite_email"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/request_sent_username_text_povratak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextLink"
+        android:text="@string/povratak_na_log_in"
+        android:layout_marginTop="40dp" />
+
+</LinearLayout>

@@ -29,15 +29,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(navController.currentDestination!!.id == R.id.nav_login_request_sent_password_fragment) {
-            navController.navigate(R.id.nav_login_action_request_sent_password_to_main)
-        } else if(navController.currentDestination!!.id == R.id.nav_login_forgot_fragment) {
-            navController.navigate(R.id.nav_login_action_forgot_to_main)
-        } else {
-            val homeIntent = Intent(Intent.ACTION_MAIN)
-            homeIntent.addCategory(Intent.CATEGORY_HOME)
-            homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(homeIntent)
+        when (navController.currentDestination!!.id) {
+            R.id.nav_login_request_sent_password_fragment -> {
+                navController.navigate(R.id.nav_login_action_request_sent_password_to_main)
+            }
+            R.id.nav_login_request_sent_username_fragment -> {
+                navController.navigate(R.id.nav_login_action_request_sent_username_to_main)
+            }
+            R.id.nav_login_forgot_fragment -> {
+                navController.navigate(R.id.nav_login_action_forgot_to_main)
+            }
+            else -> {
+                val homeIntent = Intent(Intent.ACTION_MAIN)
+                homeIntent.addCategory(Intent.CATEGORY_HOME)
+                homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(homeIntent)
+            }
         }
     }
 }
