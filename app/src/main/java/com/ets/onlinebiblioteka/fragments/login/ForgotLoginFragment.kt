@@ -43,7 +43,7 @@ class ForgotLoginFragment : Fragment() {
         val submitBtn = view.findViewById<Button>(R.id.forgot_login_btn_submit)
 
         submitBtn.setOnClickListener {
-            view.findNavController().navigate(R.id.nav_login_action_forgot_to_forgot_info)
+            view.findNavController().navigate(R.id.nav_login_action_forgot_to_request_sent_password)
         }
 
         val returnText = view.findViewById<TextView>(R.id.forgot_login_text_nazad)

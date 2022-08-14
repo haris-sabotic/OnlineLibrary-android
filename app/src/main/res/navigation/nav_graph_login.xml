@@ -25,17 +25,17 @@
             app:destination="@id/nav_login_main_fragment" />
 
         <action
-            android:id="@+id/nav_login_action_forgot_to_forgot_info"
+            android:id="@+id/nav_login_action_forgot_to_request_sent_password"
             app:enterAnim="@anim/fade_in"
-            app:destination="@id/nav_login_forgot_info_fragment" />
+            app:destination="@id/nav_login_request_sent_password_fragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_login_forgot_info_fragment"
-        android:name="com.ets.onlinebiblioteka.fragments.login.ForgotLoginInfoFragment"
-        tools:layout="@layout/fragment_forgot_login_info" >
+        android:id="@+id/nav_login_request_sent_password_fragment"
+        android:name="com.ets.onlinebiblioteka.fragments.login.RequestSentPasswordFragment"
+        tools:layout="@layout/fragment_request_sent_password" >
         <action
-            android:id="@+id/nav_login_action_forgot_info_to_main"
+            android:id="@+id/nav_login_action_request_sent_password_to_main"
             app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_main_fragment" />
     </fragment>

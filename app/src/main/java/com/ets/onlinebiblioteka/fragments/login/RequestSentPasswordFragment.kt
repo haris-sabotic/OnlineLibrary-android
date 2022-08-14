@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import com.ets.onlinebiblioteka.R
 
-class ForgotLoginInfoFragment : Fragment() {
+class RequestSentPasswordFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -18,16 +18,16 @@ class ForgotLoginInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_forgot_login_info, container, false)
+        return inflater.inflate(R.layout.fragment_request_sent_password, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val backText = view.findViewById<TextView>(R.id.forgot_login_info_text_povratak)
+        val backText = view.findViewById<TextView>(R.id.reqeust_sent_password_text_povratak)
 
         backText.setOnClickListener {
-            view.findNavController().navigate(R.id.nav_login_action_forgot_info_to_main)
+            view.findNavController().navigate(R.id.nav_login_action_request_sent_password_to_main)
         }
     }
 }
