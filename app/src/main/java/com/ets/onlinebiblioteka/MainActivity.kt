@@ -16,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.ets.onlinebiblioteka.util.GlobalData
 import com.google.android.material.navigation.NavigationView
 
 
@@ -28,12 +29,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
-
     private lateinit var fragmentBackActions: HashMap<Int, Int>
+
+    private var setLogOutBtnClickListener = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        GlobalData.loadSharedPreferences(applicationContext)
 
         fragmentBackActions = hashMapOf(
             R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi
@@ -50,6 +54,11 @@ class MainActivity : AppCompatActivity() {
                 navigationView.inflateMenu(R.menu.drawer_menu_main)
             } else {
                 navigationView.inflateMenu(R.menu.drawer_menu_profile)
+
+                if (!setLogOutBtnClickListener) {
+                    setLogOutBtnClickListener = true
+                    setLogOutBtnClickListener()
+                }
             }
         }
 
@@ -87,6 +96,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             super.onBackPressed()
+        }
+    }
+
+    private fun setLogOutBtnClickListener(){
+        navigationView.menu.findItem(R.id.menu_item_log_out).setOnMenuItemClickListener {
+            GlobalData.clearToken()
+            startActivity(Intent(this, LoginActivity::class.java))
+
+            true
         }
     }
 

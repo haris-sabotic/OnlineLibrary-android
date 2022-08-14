@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ets.onlinebiblioteka.util.ApiInterface
 import com.ets.onlinebiblioteka.models.User
+import com.ets.onlinebiblioteka.util.GlobalData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +28,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     private fun loadUser() {
-        val token = "80|CyJsVBQ4275pz582rixw8lyiLVJaGfLhfQfbWuJ7"
+        val token = GlobalData.getToken()
 
         val api = ApiInterface.create()
 
