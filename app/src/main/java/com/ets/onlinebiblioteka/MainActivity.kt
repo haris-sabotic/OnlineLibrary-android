@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fragmentBackActions: HashMap<Int, Int>
 
-    private var setLogOutBtnClickListener = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -70,11 +68,7 @@ class MainActivity : AppCompatActivity() {
                 navigationView.inflateMenu(R.menu.drawer_menu_main)
             } else {
                 navigationView.inflateMenu(R.menu.drawer_menu_profile)
-
-                if (!setLogOutBtnClickListener) {
-                    setLogOutBtnClickListener = true
-                    setLogOutBtnClickListener()
-                }
+                setLogOutBtnClickListener()
             }
         }
 
