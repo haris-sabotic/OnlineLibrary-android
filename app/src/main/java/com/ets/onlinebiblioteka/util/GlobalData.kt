@@ -31,13 +31,15 @@ object GlobalData {
         }
     }
 
-
-
     fun loadSharedPreferences(context: Context) {
         sharedPreferences = context.getSharedPreferences("OnlineLibrary", Context.MODE_PRIVATE)
     }
 
     fun getSharedPreferences(): SharedPreferences {
         return sharedPreferences
+    }
+
+    fun getImageUrl(name: String): String {
+        return "https://tim7.ictcortex.me/storage/image/${name}"
     }
 }

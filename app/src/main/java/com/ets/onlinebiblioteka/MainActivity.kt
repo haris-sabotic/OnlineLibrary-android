@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -18,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 import com.google.android.material.navigation.NavigationView
@@ -54,10 +56,17 @@ class MainActivity : AppCompatActivity() {
 
         val txtName = navHeader.findViewById<TextView>(R.id.nav_drawer_header_text_ime)
         val txtEmail = navHeader.findViewById<TextView>(R.id.nav_drawer_header_text_email)
+        val imgProfile = navHeader.findViewById<ImageView>(R.id.nav_drawer_header_img)
 
         viewModel.getUser().observe(this) {
             txtName.text = it.name
             txtEmail.text = it.email
+
+            Glide.with(this)
+                .load(GlobalData.getImageUrl(it.photo))
+                .centerCrop()
+                .placeholder(R.color.black)
+                .into(imgProfile)
         }
 
         navHeader.setOnClickListener {

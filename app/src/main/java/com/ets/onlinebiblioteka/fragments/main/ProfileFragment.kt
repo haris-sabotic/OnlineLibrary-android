@@ -10,7 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 
 class ProfileFragment : Fragment() {
@@ -38,6 +40,12 @@ class ProfileFragment : Fragment() {
             view.findViewById<TextView>(R.id.profile_text_jmbg).text = it.jmbg
             view.findViewById<TextView>(R.id.profile_text_email).text = it.email
             view.findViewById<TextView>(R.id.profile_text_korisnicko_ime).text = it.username
+
+            Glide.with(this)
+                .load(GlobalData.getImageUrl(it.photo))
+                .centerCrop()
+                .placeholder(R.color.black)
+                .into(view.findViewById(R.id.profile_img))
 
             view.findViewById<ProgressBar>(R.id.profile_progress_bar).visibility = View.GONE
         }
