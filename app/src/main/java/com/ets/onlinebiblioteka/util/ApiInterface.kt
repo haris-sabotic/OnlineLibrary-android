@@ -1,5 +1,6 @@
 package com.ets.onlinebiblioteka.util
 
+import com.ets.onlinebiblioteka.models.ForgotLogin
 import com.ets.onlinebiblioteka.models.Login
 import com.ets.onlinebiblioteka.models.User
 import retrofit2.Call
@@ -29,4 +30,9 @@ interface ApiInterface {
 
     @POST("login")
     fun login(@Query("username") username: String, @Query("password") password: String): Call<Login>
+
+    @POST("forgot-password")
+    fun forgotPassword(@Query("username") username: String): Call<ForgotLogin>
+    @POST("forgot-username")
+    fun forgotUsername(@Query("email") email: String): Call<ForgotLogin>
 }

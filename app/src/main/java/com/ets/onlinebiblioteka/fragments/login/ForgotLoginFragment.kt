@@ -5,14 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.viewmodels.ForgotLoginViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
 class ForgotLoginFragment : Fragment() {
+    private val viewModel: ForgotLoginViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -26,6 +29,8 @@ class ForgotLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val progressBar = view.findViewById<ProgressBar>(R.id.forgot_login_progress_bar)
 
         val txtInput = view.findViewById<TextInputLayout>(R.id.forgot_login_et_username_or_email)
 
@@ -43,15 +48,53 @@ class ForgotLoginFragment : Fragment() {
         val submitBtn = view.findViewById<Button>(R.id.forgot_login_btn_submit)
 
         submitBtn.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             when (radioGroup.checkedRadioButtonId) {
                 R.id.forgot_login_radio_password -> {
-                    view.findNavController()
-                        .navigate(R.id.nav_login_action_forgot_to_request_sent_password)
+                    viewModel.forgotPassword(txtInput.editText!!.text.toString())
                 }
                 R.id.forgot_login_radio_username -> {
-                    view.findNavController()
-                        .navigate(R.id.nav_login_action_forgot_to_request_sent_username)
+                    viewModel.forgotUsername(txtInput.editText!!.text.toString())
                 }
+            }
+        }
+
+        viewModel.msg().observe(viewLifecycleOwner) { msg ->
+            msg?.let {
+                progressBar.visibility = View.GONE
+                if (it == "success") {
+                    when (radioGroup.checkedRadioButtonId) {
+                        R.id.forgot_login_radio_password -> {
+                            view.findNavController()
+                                .navigate(R.id.nav_login_action_forgot_to_request_sent_password)
+                        }
+                        R.id.forgot_login_radio_username -> {
+                            view.findNavController()
+                                .navigate(R.id.nav_login_action_forgot_to_request_sent_username)
+                        }
+                    }
+                } else {
+                    var snackBarMsg = "Invalid username"
+                    if (radioGroup.checkedRadioButtonId == R.id.forgot_login_radio_username) {
+                        snackBarMsg = "Invalid email"
+                    }
+
+                    Snackbar.make(
+                        requireActivity().findViewById(android.R.id.content),
+                        snackBarMsg,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+        viewModel.failure().observe(viewLifecycleOwner) { failed ->
+            if (failed) {
+                Toast.makeText(
+                    requireContext(),
+                    "Sending login data failed",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
