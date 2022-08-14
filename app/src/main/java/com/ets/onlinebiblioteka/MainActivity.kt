@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.valueIterator
@@ -17,10 +19,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel: ProfileViewModel by viewModels()
+
     lateinit var navHostFragment: NavHostFragment
     lateinit var navController: NavController
 
@@ -46,7 +51,18 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
         setupDrawer()
 
-        navigationView.getHeaderView(0).findViewById<ConstraintLayout>(R.id.nav_drawer_header).setOnClickListener {
+        val navHeader = navigationView.getHeaderView(0)
+            .findViewById<ConstraintLayout>(R.id.nav_drawer_header)
+
+        val txtName = navHeader.findViewById<TextView>(R.id.nav_drawer_header_text_ime)
+        val txtEmail = navHeader.findViewById<TextView>(R.id.nav_drawer_header_text_email)
+
+        viewModel.getUser().observe(this) {
+            txtName.text = it.name
+            txtEmail.text = it.email
+        }
+
+        navHeader.setOnClickListener {
             val size = navigationView.menu.size
             navigationView.menu.clear()
 
