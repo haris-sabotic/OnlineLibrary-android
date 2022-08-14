@@ -70,9 +70,10 @@ class LoginFragment : Fragment() {
 
         viewModel.failure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
+                progressBar.visibility = View.GONE
                 Toast.makeText(
                     requireContext(),
-                    "Sending login data failed",
+                    "Sending data failed",
                     Toast.LENGTH_LONG
                 ).show()
             }
