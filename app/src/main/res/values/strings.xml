@@ -30,4 +30,13 @@
     <string name="jmbg">JMBG</string>
     <string name="korisnicko_ime">Korisničko ime</string>
     <string name="sifra">Šifra</string>
+    <string name="ime">Ime</string>
+    <string name="stara_sifra">Stara šifra</string>
+    <string name="nova_sifra">Nova šifra</string>
+    <string name="ukucajte_staru_sifru">Ukucajte staru šifru</string>
+    <string name="ukucajte_novu_sifru">Ukucajte novu šifru</string>
+    <string name="ponovo_ukucajte_novu_sifru">Ponovo ukucajte novu šifru</string>
+    <string name="ponisti">Poništi</string>
+    <string name="sacuvaj">Sačuvaj</string>
+    <string name="edit_profil">Edit profil</string>
 </resources>

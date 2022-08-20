@@ -31,6 +31,33 @@
         <action
             android:id="@+id/nav_action_moj_profil_to_moji_zahtjevi"
             app:destination="@id/menu_item_moji_zahtjevi" />
+        <action
+            android:id="@+id/nav_action_moj_profil_to_edit_profil"
+            app:destination="@id/menu_item_edit_profil" >
+            <argument
+                app:argType="string"
+                android:name="name" />
+            <argument
+                app:argType="string"
+                android:name="username" />
+            <argument
+                app:argType="string"
+                android:name="email" />
+            <argument
+                app:argType="string"
+                android:name="photo_url" />
+        </action>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/menu_item_edit_profil"
+        android:name="com.ets.onlinebiblioteka.fragments.main.EditProfileFragment"
+        android:label="@string/edit_profil"
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/nav_action_edit_profil_to_moj_profil"
+            app:destination="@id/menu_item_moj_profil" />
     </fragment>
 
 </navigation>

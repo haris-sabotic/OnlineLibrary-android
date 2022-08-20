@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.util.GlobalData
@@ -28,6 +29,12 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val nameText = view.findViewById<TextView>(R.id.profile_text_ime)
+        val jmbgText = view.findViewById<TextView>(R.id.profile_text_jmbg)
+        val emailText = view.findViewById<TextView>(R.id.profile_text_email)
+        val usernameText = view.findViewById<TextView>(R.id.profile_text_korisnicko_ime)
+        var photoUrl = ""
+
         viewModel.failure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
                 Toast.makeText(requireContext(), "Failed to load user data", Toast.LENGTH_SHORT).show()
@@ -36,13 +43,14 @@ class ProfileFragment : Fragment() {
         }
 
         viewModel.getUser().observe(viewLifecycleOwner) {
-            view.findViewById<TextView>(R.id.profile_text_ime).text = it.name
-            view.findViewById<TextView>(R.id.profile_text_jmbg).text = it.jmbg
-            view.findViewById<TextView>(R.id.profile_text_email).text = it.email
-            view.findViewById<TextView>(R.id.profile_text_korisnicko_ime).text = it.username
+            nameText.text = it.name
+            jmbgText.text = it.jmbg
+            emailText.text = it.email
+            usernameText.text = it.username
 
+            photoUrl = GlobalData.getImageUrl(it.photo)
             Glide.with(this)
-                .load(GlobalData.getImageUrl(it.photo))
+                .load(photoUrl)
                 .centerCrop()
                 .placeholder(R.color.black)
                 .into(view.findViewById(R.id.profile_img))
@@ -52,6 +60,17 @@ class ProfileFragment : Fragment() {
 
         view.findViewById<ImageView>(R.id.profile_btn_back).setOnClickListener {
             requireActivity().onBackPressed()
+        }
+
+        view.findViewById<ImageView>(R.id.profile_btn_edit).setOnClickListener {
+            val action = ProfileFragmentDirections.navActionMojProfilToEditProfil(
+                nameText.text.toString(),
+                usernameText.text.toString(),
+                emailText.text.toString(),
+                photoUrl
+            )
+
+            view.findNavController().navigate(action)
         }
     }
 }

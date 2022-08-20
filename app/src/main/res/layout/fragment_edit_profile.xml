@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.main.EditProfileFragment">
+
+    <ImageView
+        android:id="@+id/edit_profile_img"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/edit_profile_btn_back"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_profile_et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                style="@style/TextInputLayout" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/ime"
+                    android:textColorHint="#3392EA"
+                    android:background="@drawable/edit_text_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_profile_et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_et_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                style="@style/TextInputLayout" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/email"
+                    android:textColorHint="#3392EA"
+                    android:background="@drawable/edit_text_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_profile_et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_et_email"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                style="@style/TextInputLayout" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/korisnicko_ime"
+                    android:textColorHint="#3392EA"
+                    android:background="@drawable/edit_text_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_profile_et_old_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_et_username"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:passwordToggleEnabled="true"
+                style="@style/TextInputLayout" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/stara_sifra"
+                    android:textColorHint="#3392EA"
+                    android:background="@drawable/edit_text_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/edit_profile_text_old_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:text="@string/ukucajte_staru_sifru"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_et_old_pass"
+                app:layout_constraintLeft_toLeftOf="@id/edit_profile_et_old_pass" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_profile_et_new_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_text_old_pass"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:passwordToggleEnabled="true"
+                style="@style/TextInputLayout" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/nova_sifra"
+                    android:textColorHint="#3392EA"
+                    android:background="@drawable/edit_text_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/edit_profile_text_new_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:text="@string/ukucajte_novu_sifru"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_et_new_pass"
+                app:layout_constraintLeft_toLeftOf="@id/edit_profile_et_new_pass" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_profile_et_new_pass_again"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_text_new_pass"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:passwordToggleEnabled="true"
+                style="@style/TextInputLayout" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/nova_sifra"
+                    android:textColorHint="#3392EA"
+                    android:background="@drawable/edit_text_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/edit_profile_text_new_pass_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:text="@string/ponovo_ukucajte_novu_sifru"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_et_new_pass_again"
+                app:layout_constraintLeft_toLeftOf="@id/edit_profile_et_new_pass_again" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_profile_btn_ponisti"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text="@string/ponisti"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_text_new_pass_again"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/edit_profile_btn_sacuvaj" />
+
+
+
+            <Button
+                android:id="@+id/edit_profile_btn_sacuvaj"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text="@string/sacuvaj"
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile_text_new_pass_again"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/edit_profile_btn_ponisti" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/edit_profile_progress_bar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

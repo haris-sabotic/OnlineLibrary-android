@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity() {
         GlobalData.loadSharedPreferences(applicationContext)
 
         fragmentBackActions = hashMapOf(
-            R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi
+            R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi,
+            R.id.menu_item_edit_profil to R.id.nav_action_edit_profil_to_moj_profil,
         )
 
         setupNavigation()

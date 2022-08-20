@@ -1,5 +1,6 @@
 package com.ets.onlinebiblioteka.util
 
+import com.ets.onlinebiblioteka.models.EditUser
 import com.ets.onlinebiblioteka.models.ForgotLogin
 import com.ets.onlinebiblioteka.models.Login
 import com.ets.onlinebiblioteka.models.User
@@ -35,4 +36,10 @@ interface ApiInterface {
     fun forgotPassword(@Query("username") username: String): Call<ForgotLogin>
     @POST("forgot-username")
     fun forgotUsername(@Query("email") email: String): Call<ForgotLogin>
+
+    @POST("edit-user")
+    fun editUser(@Header("Authorization") token: String,
+                 @Query("name") name: String, @Query("email") email: String,
+                 @Query("username") username: String, @Query("oldPass") oldPass: String,
+                 @Query("newPass") newPass: String): Call<EditUser>
 }
