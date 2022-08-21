@@ -1,9 +1,6 @@
 package com.ets.onlinebiblioteka.util
 
-import com.ets.onlinebiblioteka.models.EditUser
-import com.ets.onlinebiblioteka.models.ForgotLogin
-import com.ets.onlinebiblioteka.models.Login
-import com.ets.onlinebiblioteka.models.User
+import com.ets.onlinebiblioteka.models.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -42,4 +39,8 @@ interface ApiInterface {
                  @Query("name") name: String, @Query("email") email: String,
                  @Query("username") username: String, @Query("oldPass") oldPass: String,
                  @Query("newPass") newPass: String): Call<EditUser>
+
+    @GET("zahtjevi")
+    fun mojiZahtjevi(@Header("Authorization") token: String,
+                     @Query("filter") filter: String): Call<ArrayList<Zahtjev>>
 }

@@ -30,6 +30,9 @@
     <string name="jmbg">JMBG</string>
     <string name="korisnicko_ime">Korisničko ime</string>
     <string name="sifra">Šifra</string>
+    <string name="zaduzene_knjige">Zadužene knjige</string>
+    <string name="vracene_knjige">Vraćene knjige</string>
+    <string name="rezervacije">Rezervacije</string>
     <string name="ime">Ime</string>
     <string name="stara_sifra">Stara šifra</string>
     <string name="nova_sifra">Nova šifra</string>
@@ -39,4 +42,8 @@
     <string name="ponisti">Poništi</string>
     <string name="sacuvaj">Sačuvaj</string>
     <string name="edit_profil">Edit profil</string>
+    <string name="nije_vracena">Nije vraćena</string>
+    <string name="zaduzivanje">Zaduživanje</string>
+    <string name="odbijeno">Odbijeno</string>
+    <string name="rezervacija">Rezervacija</string>
 </resources>

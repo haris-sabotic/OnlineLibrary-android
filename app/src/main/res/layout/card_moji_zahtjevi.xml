@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/card_moji_zahtjevi_img"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:src="@color/black" />
+
+        <TextView
+            android:id="@+id/card_moji_zahtjevi_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeadline6"
+            android:text="Tom Sojer"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/card_moji_zahtjevi_text_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="@color/gray"
+            android:text="by Pero Catić"
+            android:layout_marginHorizontal="15dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray"
+                android:text="Period rezervacije:"
+                android:layout_marginRight="5dp" />
+
+            <TextView
+                android:id="@+id/card_moji_zahtjevi_text_date_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray"
+                android:text="Apr 29"
+                android:layout_marginRight="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray"
+                android:text="-"
+                android:layout_marginHorizontal="5dp" />
+
+            <TextView
+                android:id="@+id/card_moji_zahtjevi_text_date_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/gray"
+                android:text="Sep 29, 2018"
+                android:layout_marginRight="2dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:text="Tip zahtjeva"
+            android:layout_marginHorizontal="15dp" />
+
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/card_moji_zahtjevi_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeWidth="1dp"
+            app:chipStrokeColor="@color/orange"
+            android:textColor="@color/orange"
+            android:text="Rezervacija"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="15dp" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

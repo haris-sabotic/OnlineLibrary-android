@@ -9,7 +9,11 @@
     <color name="almost_black">#DE000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue">#3392EA</color>
+    <color name="extra_light_blue">#EEF7FF</color>
     <color name="blue">#3385D1</color>
     <color name="light_gray">#CECECE</color>
     <color name="gray">#99000000</color>
+    <color name="orange">#FF9900</color>
+    <color name="red">#CF2A27</color>
+    <color name="green">#009E0F</color>
 </resources>
