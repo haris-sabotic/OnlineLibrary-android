@@ -43,4 +43,7 @@ interface ApiInterface {
     @GET("zahtjevi")
     fun mojiZahtjevi(@Header("Authorization") token: String,
                      @Query("filter") filter: String): Call<ArrayList<Zahtjev>>
+
+    @GET("aktivnosti")
+    fun aktivnosti(@Header("Authorization") token: String): Call<ArrayList<Aktivnost>>
 }

@@ -46,4 +46,6 @@
     <string name="zaduzivanje">Zaduživanje</string>
     <string name="odbijeno">Odbijeno</string>
     <string name="rezervacija">Rezervacija</string>
+    <string name="izdavanje_knjige">Izdavanje knjige</string>
+    <string name="rezervacija_knjige">Rezervacija knjige</string>
 </resources>
