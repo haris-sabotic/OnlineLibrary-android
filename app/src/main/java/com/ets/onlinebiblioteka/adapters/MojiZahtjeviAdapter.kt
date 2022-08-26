@@ -46,6 +46,7 @@ class MojiZahtjeviAdapter(
                 dateTo.setTextColor(ContextCompat.getColor(context, R.color.red))
                 dateTo.setText(R.string.nije_vracena)
             } else {
+                dateTo.setTextColor(ContextCompat.getColor(context, R.color.gray))
                 dateTo.text = item.dateTo.substring(0, 10)
             }
 
