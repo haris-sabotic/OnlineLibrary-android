@@ -1,15 +1,10 @@
 package com.ets.onlinebiblioteka.viewmodels
 
-import android.content.Intent
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ets.onlinebiblioteka.MainActivity
 import com.ets.onlinebiblioteka.models.Login
 import com.ets.onlinebiblioteka.util.ApiInterface
-import com.ets.onlinebiblioteka.util.GlobalData
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +29,8 @@ class LoginViewModel : ViewModel() {
                     response.body()?.let {
                         loginResponse.postValue(it)
                     }
+                } else {
+                    loginResponse.postValue(Login("failure", ""))
                 }
             }
 

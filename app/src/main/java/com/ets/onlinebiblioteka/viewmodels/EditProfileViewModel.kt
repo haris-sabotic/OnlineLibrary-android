@@ -46,13 +46,9 @@ class EditProfileViewModel : ViewModel() {
         api.editUser("Bearer $token", name, email, username, oldPass, newPass).enqueue(object : Callback<EditUser> {
             override fun onResponse(call: Call<EditUser>, response: Response<EditUser>) {
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        if (it.msg == "old password invalid") {
-                            status.postValue(EditProfileStatus.OLD_PASSWORD_INVALID)
-                        } else {
-                            status.postValue(EditProfileStatus.SUCCESS)
-                        }
-                    }
+                    status.postValue(EditProfileStatus.SUCCESS)
+                } else {
+                    status.postValue(EditProfileStatus.OLD_PASSWORD_INVALID)
                 }
             }
 

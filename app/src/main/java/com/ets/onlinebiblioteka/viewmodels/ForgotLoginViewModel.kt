@@ -30,6 +30,8 @@ class ForgotLoginViewModel : ViewModel() {
                     response.body()?.let {
                         msg.postValue(it.msg)
                     }
+                } else {
+                    msg.postValue("invalid username")
                 }
             }
 
@@ -46,6 +48,8 @@ class ForgotLoginViewModel : ViewModel() {
                     response.body()?.let {
                         msg.postValue(it.msg)
                     }
+                } else {
+                    msg.postValue("invalid email")
                 }
             }
 
