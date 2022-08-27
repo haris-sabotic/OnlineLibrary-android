@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.main.ZahtjevInfoFragment">
+
+    <ImageView
+        android:id="@+id/zahtjev_info_img"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tom Sojer"
+        style="@style/TextHeadline6"
+        android:layout_margin="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zahtjev_info_img" />
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_label_by"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="by "
+        android:textColor="@color/gray"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_title"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_title" />
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_author"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pero Catić"
+        android:textColor="@color/blue"
+        app:layout_constraintLeft_toRightOf="@id/zahtjev_info_text_label_by"
+        app:layout_constraintTop_toTopOf="@id/zahtjev_info_text_label_by" />
+
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/zahtjev_info_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipBackgroundColor="@color/white"
+        app:chipStrokeWidth="1dp"
+        app:chipStrokeColor="@color/orange"
+        android:textColor="@color/orange"
+        android:text="@string/rezervacija"
+        android:layout_marginRight="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/zahtjev_info_text_title"
+        app:layout_constraintBottom_toBottomOf="@id/zahtjev_info_text_author" />
+
+    <View
+        android:id="@+id/zahtjev_info_separator_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_author" />
+
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_label_detalji_zahtjeva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detalji_zahtjeva"
+        style="@style/TextHeadline6"
+        android:layout_margin="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_separator_top" />
+
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_label_period"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/period_rezervacije"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_label_detalji_zahtjeva"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_label_detalji_zahtjeva" />
+
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_date_from"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apr 29"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_label_period"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_label_period" />
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_date_hyphen"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" - "
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_label_period"
+        app:layout_constraintLeft_toRightOf="@id/zahtjev_info_text_date_from" />
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_date_to"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sep 29, 2018"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_label_period"
+        app:layout_constraintLeft_toRightOf="@id/zahtjev_info_text_date_hyphen" />
+
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_label_osoba"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/osoba_koja_je_izdala_knjigu"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_date_from"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_date_from" />
+
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_osoba"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valentina Kasćelan"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_label_osoba"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_label_osoba" />
+
+
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_label_id"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/id_transakcije"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_osoba"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_osoba" />
+
+
+    <TextView
+        android:id="@+id/zahtjev_info_text_id"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="93289109"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_label_id"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_label_id" />
+
+
+
+
+    <View
+        android:id="@+id/zahtjev_info_separator_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/zahtjev_info_btn_ponisti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_separator_bottom" >
+
+
+        <View
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:background="@drawable/ic_x"
+            android:layout_marginRight="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/zahtjev_info_separator_bottom" />
+
+        <TextView
+            android:id="@+id/zahtjev_info_text_ponisti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ponisti_rezervaciju"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/zahtjev_info_separator_bottom" />
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

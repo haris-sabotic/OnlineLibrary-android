@@ -48,4 +48,11 @@
     <string name="rezervacija">Rezervacija</string>
     <string name="izdavanje_knjige">Izdavanje knjige</string>
     <string name="rezervacija_knjige">Rezervacija knjige</string>
+    <string name="zahtjev_info">Zahtjev info</string>
+    <string name="ponisti_rezervaciju">Poništi rezervaciju</string>
+    <string name="izbrisi_transakciju">Izbriši transakciju</string>
+    <string name="id_transakcije">ID transakcije</string>
+    <string name="osoba_koja_je_izdala_knjigu">Osoba koja je izdala knjigu</string>
+    <string name="period_rezervacije">Period rezervacije</string>
+    <string name="detalji_zahtjeva">Detalji zahtjeva</string>
 </resources>

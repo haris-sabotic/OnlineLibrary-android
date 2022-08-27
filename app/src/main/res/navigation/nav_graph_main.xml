@@ -9,7 +9,30 @@
         android:id="@+id/menu_item_moji_zahtjevi"
         android:name="com.ets.onlinebiblioteka.fragments.main.MojiZahtjeviFragment"
         android:label="@string/moji_zahtjevi"
-        tools:layout="@layout/fragment_moji_zahtjevi" />
+        tools:layout="@layout/fragment_moji_zahtjevi" >
+        <action
+            android:id="@+id/nav_action_moji_zahtjevi_to_zahtjev_info"
+            app:destination="@id/menu_item_zahtjev_info" >
+            <argument
+                android:name="zahtjev"
+                app:argType="com.ets.onlinebiblioteka.models.Zahtjev" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_item_zahtjev_info"
+        android:name="com.ets.onlinebiblioteka.fragments.main.ZahtjevInfoFragment"
+        android:label="@string/zahtjev_info"
+        tools:layout="@layout/fragment_zahtjev_info" >
+        <action
+            android:id="@+id/nav_action_zahtjev_info_to_moji_zahtjevi"
+            app:destination="@id/menu_item_moji_zahtjevi" >
+            <argument
+                android:name="snackbar_message"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/menu_item_lista_zelja"

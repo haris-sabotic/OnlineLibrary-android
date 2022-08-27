@@ -2,6 +2,7 @@ package com.ets.onlinebiblioteka
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.ImageView
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
-    private lateinit var fragmentBackActions: HashMap<Int, Int>
+    private lateinit var fragmentBackActions: HashMap<Int, Int?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         fragmentBackActions = hashMapOf(
             R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi,
             R.id.menu_item_edit_profil to R.id.nav_action_edit_profil_to_moj_profil,
+            R.id.menu_item_zahtjev_info to null,
         )
 
         setupNavigation()

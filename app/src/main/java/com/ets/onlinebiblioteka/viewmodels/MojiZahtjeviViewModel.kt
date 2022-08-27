@@ -3,7 +3,6 @@ package com.ets.onlinebiblioteka.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ets.onlinebiblioteka.adapters.MojiZahtjeviAdapter
 import com.ets.onlinebiblioteka.models.Zahtjev
 import com.ets.onlinebiblioteka.util.ApiInterface
 import com.ets.onlinebiblioteka.util.GlobalData
@@ -15,6 +14,10 @@ class MojiZahtjeviViewModel : ViewModel() {
     private val items: MutableLiveData<ArrayList<Zahtjev>> = MutableLiveData(arrayListOf())
 
     private val failure: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    init {
+        loadItems("")
+    }
 
     fun failure(): LiveData<Boolean> {
         return failure

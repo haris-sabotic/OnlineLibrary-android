@@ -4,10 +4,7 @@ import com.ets.onlinebiblioteka.models.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiInterface {
     companion object {
@@ -46,4 +43,9 @@ interface ApiInterface {
 
     @GET("aktivnosti")
     fun aktivnosti(@Header("Authorization") token: String): Call<ArrayList<Aktivnost>>
+
+    @DELETE("izbrisi-transakciju")
+    fun izbrisiTransakciju(@Header("Authorization") token: String,
+                           @Query("id") id: String,
+                           @Query("type") type: String): Call<IzbrisiTransakciju>
 }

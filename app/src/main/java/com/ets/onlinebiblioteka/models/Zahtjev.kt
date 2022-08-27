@@ -1,5 +1,9 @@
 package com.ets.onlinebiblioteka.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Zahtjev(
     var id: String,
     var book: Book,
@@ -7,4 +11,4 @@ data class Zahtjev(
     var dateFrom: String,
     var dateTo: String,
     var type: String
-)
+) : Parcelable

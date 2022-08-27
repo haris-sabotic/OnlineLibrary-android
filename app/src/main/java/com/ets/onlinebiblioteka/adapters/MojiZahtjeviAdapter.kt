@@ -18,7 +18,8 @@ import com.google.android.material.chip.Chip
 
 class MojiZahtjeviAdapter(
     val items: ArrayList<Zahtjev>,
-    val context: Context
+    val context: Context,
+    val onClick: (Zahtjev) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var img = itemView.findViewById<ImageView>(R.id.card_moji_zahtjevi_img)
@@ -30,6 +31,10 @@ class MojiZahtjeviAdapter(
 
         fun bind(position: Int) {
             val item = items[position]
+
+            itemView.setOnClickListener {
+                onClick(item)
+            }
 
             Glide.with(context)
                 .load(GlobalData.getImageUrl(item.book.photo))

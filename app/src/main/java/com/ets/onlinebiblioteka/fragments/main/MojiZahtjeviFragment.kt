@@ -8,22 +8,28 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.adapters.MojiZahtjeviAdapter
-import com.ets.onlinebiblioteka.models.Zahtjev
-import com.ets.onlinebiblioteka.util.ApiInterface
-import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.MojiZahtjeviViewModel
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.android.material.snackbar.Snackbar
 
 class MojiZahtjeviFragment : Fragment() {
     private val viewModel: MojiZahtjeviViewModel by viewModels()
+
+    private var snackbarMessage: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            snackbarMessage = it.getString("snackbar_message")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +48,19 @@ class MojiZahtjeviFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        progressBar.visibility = View.VISIBLE
-        viewModel.loadItems("")
+        snackbarMessage?.let {
+            Snackbar.make(
+                requireView(),
+                it,
+                Snackbar.LENGTH_SHORT
+            ).setAction("OK") {
+            }.show()
+
+            progressBar.visibility = View.VISIBLE
+            viewModel.loadItems("")
+
+            snackbarMessage = null
+        }
 
         viewModel.failure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
@@ -57,7 +74,11 @@ class MojiZahtjeviFragment : Fragment() {
 
         viewModel.getItems().observe(viewLifecycleOwner) {
             progressBar.visibility = View.GONE
-            recyclerView.adapter = MojiZahtjeviAdapter(it, requireContext())
+            recyclerView.adapter = MojiZahtjeviAdapter(it, requireContext()
+            ) {
+                val action = MojiZahtjeviFragmentDirections.navActionMojiZahtjeviToZahtjevInfo(it)
+                view.findNavController().navigate(action)
+            }
         }
 
         chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
