@@ -39,6 +39,8 @@ class MojiZahtjeviAdapter(
             title.text = item.book.title
             if (item.book.authors.isNotEmpty()) {
                 author.text = "by ${item.book.authors[0]}"
+            } else {
+                author.text = ""
             }
 
             dateFrom.text = item.dateFrom.substring(0, 10)
