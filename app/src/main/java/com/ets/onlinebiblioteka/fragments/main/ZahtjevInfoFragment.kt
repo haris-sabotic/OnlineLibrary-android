@@ -1,12 +1,15 @@
 package com.ets.onlinebiblioteka.fragments.main
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +17,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.DialogCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -26,6 +28,7 @@ import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.ZahtjevInfoViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+
 
 class ZahtjevInfoFragment : Fragment() {
     private val viewModel: ZahtjevInfoViewModel by viewModels()
@@ -80,11 +83,39 @@ class ZahtjevInfoFragment : Fragment() {
             btnPonisti.alpha = 1.0F
         }
 
-        if (data.book.authors.isNotEmpty()) {
-            textAuthor.text = data.book.authors[0]
-        } else {
-            textAuthor.text = ""
+        val authorSpannableStr = SpannableStringBuilder("by ")
+        var i = 0
+        for (author in data.book.authors) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(p0: View) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Author: $author",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                    Log.d("ZahtjevInfoFragment", "Clicked $author")
+                }
+
+                override fun updateDrawState(ds: TextPaint) {
+                    super.updateDrawState(ds)
+                    ds.isUnderlineText = false
+                }
+            }
+
+            authorSpannableStr.append(
+                author,
+                clickableSpan,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            if (i != data.book.authors.size - 1) {
+                authorSpannableStr.append(", ")
+            }
+
+            i += 1
         }
+        textAuthor.movementMethod = LinkMovementMethod.getInstance()
+        textAuthor.highlightColor = Color.TRANSPARENT
+        textAuthor.text = authorSpannableStr
 
         Glide.with(this)
             .load(GlobalData.getImageUrl(data.book.photo))

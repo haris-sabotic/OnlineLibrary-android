@@ -24,25 +24,17 @@
         app:layout_constraintTop_toBottomOf="@+id/zahtjev_info_img" />
 
     <TextView
-        android:id="@+id/zahtjev_info_text_label_by"
-        style="@style/TextAppearance.MaterialComponents.Body2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="by "
-        android:textColor="@color/gray"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toLeftOf="@+id/zahtjev_info_text_title"
-        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_title" />
-
-    <TextView
         android:id="@+id/zahtjev_info_text_author"
         style="@style/TextAppearance.MaterialComponents.Body2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Pero Catić"
-        android:textColor="@color/blue"
-        app:layout_constraintLeft_toRightOf="@id/zahtjev_info_text_label_by"
-        app:layout_constraintTop_toTopOf="@id/zahtjev_info_text_label_by" />
+        android:textColor="@color/gray"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColorLink="@color/blue"
+        app:layout_constraintLeft_toLeftOf="@id/zahtjev_info_text_title"
+        app:layout_constraintRight_toLeftOf="@id/zahtjev_info_chip"
+        app:layout_constraintTop_toBottomOf="@id/zahtjev_info_text_title" />
 
 
     <com.google.android.material.chip.Chip
