@@ -83,4 +83,26 @@
             app:destination="@id/menu_item_moj_profil" />
     </fragment>
 
+    <fragment
+        android:id="@+id/menu_item_knjige"
+        android:name="com.ets.onlinebiblioteka.fragments.main.KnjigeFragment"
+        android:label="@string/knjige"
+        tools:layout="@layout/fragment_knjige">
+        <action
+            android:id="@+id/nav_action_knjige_to_filters"
+            app:destination="@id/menu_item_filters">
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_item_filters"
+        android:name="com.ets.onlinebiblioteka.fragments.main.FiltersFragment"
+        android:label="@string/filters"
+        tools:layout="@layout/fragment_filters">
+        <action
+            android:id="@+id/nav_action_filters_to_knjige"
+            app:destination="@id/menu_item_knjige">
+        </action>
+    </fragment>
+
 </navigation>

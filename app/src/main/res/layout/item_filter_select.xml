@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/filter_select_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/filter_select_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp" />
+
+        <ImageView
+            android:id="@+id/filter_select_btn_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_expand_arrow"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp" />
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/filter_select_chip_group_scroll_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbarSize="0dp" >
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filter_select_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            app:singleLine="true" />
+    </HorizontalScrollView>
+
+    <ProgressBar
+        android:id="@+id/filter_select_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/filter_select_btn_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_expand_arrow"
+            android:rotation="90"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp" />
+
+        <ImageView
+            android:id="@+id/filter_select_btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_expand_arrow"
+            android:rotation="270"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        android:layout_marginTop="5dp" />
+
+</LinearLayout>

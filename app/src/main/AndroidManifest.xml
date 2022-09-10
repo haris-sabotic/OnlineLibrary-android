@@ -18,9 +18,11 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.OnlineLibrary1"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

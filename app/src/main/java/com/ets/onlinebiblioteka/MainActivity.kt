@@ -2,7 +2,6 @@ package com.ets.onlinebiblioteka
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.ImageView
@@ -22,11 +21,12 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.ets.onlinebiblioteka.util.NavDrawerController
 import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavDrawerController {
     private val viewModel: ProfileViewModel by viewModels()
 
     lateinit var navHostFragment: NavHostFragment
@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
     private lateinit var fragmentBackActions: HashMap<Int, Int?>
+    private var nonTopLevelFragments = setOf(R.id.menu_item_filters)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -153,6 +154,8 @@ class MainActivity : AppCompatActivity() {
             topLevelDestinations.add(node.id)
         }
 
+        topLevelDestinations.removeAll(nonTopLevelFragments)
+
         val appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
             .setOpenableLayout(drawerLayout)
             .build()
@@ -161,10 +164,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home && nonTopLevelFragments.contains(navController.currentDestination!!.id)) {
+            onBackPressed()
+        }
+
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
         return super.onOptionsItemSelected(item)
     }
 
+    override fun setDrawerEnabled(enabled: Boolean) {
+        if (enabled) {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        } else {
+            drawerLayout.close()
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        }
+    }
 }

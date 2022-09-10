@@ -1,6 +1,7 @@
 package com.ets.onlinebiblioteka.util
 
 import com.ets.onlinebiblioteka.models.*
+import com.ets.onlinebiblioteka.models.filters.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -48,4 +49,23 @@ interface ApiInterface {
     fun izbrisiTransakciju(@Header("Authorization") token: String,
                            @Query("id") id: String,
                            @Query("type") type: String): Call<IzbrisiTransakciju>
+
+
+    @GET("kategorije")
+    fun getKategorije(@Query("page") page: Int): Call<Paginated<Kategorija>>
+
+    @GET("zanrovi")
+    fun getZanrovi(@Query("page") page: Int): Call<Paginated<Zanr>>
+
+    @GET("autori")
+    fun getAutori(@Query("page") page: Int): Call<Paginated<Autor>>
+
+    @GET("izdavaci")
+    fun getIzdavaci(@Query("page") page: Int): Call<Paginated<Izdavac>>
+
+    @GET("pisma")
+    fun getPisma(@Query("page") page: Int): Call<Paginated<Pismo>>
+
+    @GET("jezici")
+    fun getJezici(@Query("page") page: Int): Call<Paginated<Jezik>>
 }
