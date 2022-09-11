@@ -20,6 +20,8 @@ import com.google.android.material.chip.ChipGroup
 class FiltersFragment : Fragment() {
     private val viewModel: FiltersViewModel by viewModels()
 
+    var textQuery: String? = null
+
     private lateinit var root: LinearLayout
 
     private var totalSelectedChipCount: Int = 0
@@ -37,6 +39,10 @@ class FiltersFragment : Fragment() {
         setHasOptionsMenu(true)
 
         (requireActivity() as NavDrawerController).setDrawerEnabled(false)
+
+        arguments?.let {
+            textQuery = it.getString("TEXT_QUERY")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -92,7 +98,7 @@ class FiltersFragment : Fragment() {
             language
         )
 
-        val action = FiltersFragmentDirections.navActionFiltersToKnjige(selectedFilters)
+        val action = FiltersFragmentDirections.navActionFiltersToKnjige(selectedFilters, textQuery)
         findNavController().navigate(action)
 
         return super.onOptionsItemSelected(item)

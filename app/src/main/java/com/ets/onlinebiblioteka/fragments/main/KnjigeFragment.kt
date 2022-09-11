@@ -5,7 +5,6 @@ import android.util.TypedValue
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -23,12 +22,14 @@ class KnjigeFragment : Fragment() {
     private lateinit var filtersBtn: LinearLayout
     private lateinit var filtersBtnText: TextView
     private lateinit var filtersBtnIcon: View
+    private lateinit var resultsTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             viewModel.setSelectedFilters(it.getParcelable("SELECTED_FILTERS"))
+            viewModel.textQuery = it.getString("TEXT_QUERY")
         }
 
         setHasOptionsMenu(true)
@@ -41,7 +42,7 @@ class KnjigeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.nav_action_knjige_to_search_fragment)
         return super.onOptionsItemSelected(item)
     }
 
@@ -60,6 +61,14 @@ class KnjigeFragment : Fragment() {
         filtersBtn = view.findViewById(R.id.knjige_btn_filters)
         filtersBtnText = filtersBtn.findViewById(R.id.knjige_btn_filters_text)
         filtersBtnIcon = filtersBtn.findViewById(R.id.knjige_btn_filters_icon)
+        resultsTitle = view.findViewById(R.id.knjige_text_results_title)
+
+        resultsTitle.visibility = View.VISIBLE
+        if (viewModel.textQuery != null) {
+            resultsTitle.text = "Rezultati za \"${viewModel.textQuery}\""
+        } else {
+            resultsTitle.text = "Popularne knjige"
+        }
 
         viewModel.getSelectedFilters().observe(viewLifecycleOwner) { selectedFilters ->
             selectedFiltersChipGroup.removeAllViews()
@@ -70,7 +79,8 @@ class KnjigeFragment : Fragment() {
                 filtersBtnIcon.layoutParams.width = 8F.asDp()
                 filtersBtnIcon.layoutParams.height = 12F.asDp()
                 filtersBtn.setOnClickListener {
-                    findNavController().navigate(R.id.nav_action_knjige_to_filters)
+                    val action = KnjigeFragmentDirections.navActionKnjigeToFilters(viewModel.textQuery)
+                    findNavController().navigate(action)
                 }
             } else {
                 filtersBtnText.text = "Remove filters"

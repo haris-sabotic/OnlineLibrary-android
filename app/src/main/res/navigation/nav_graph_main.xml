@@ -91,6 +91,15 @@
         <action
             android:id="@+id/nav_action_knjige_to_filters"
             app:destination="@id/menu_item_filters">
+            <argument
+                android:name="TEXT_QUERY"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
+        <action
+            android:id="@+id/nav_action_knjige_to_search_fragment"
+            app:destination="@id/menu_item_search_fragment">
         </action>
         <action
             android:id="@+id/nav_action_knjige_to_moji_zahtjevi"
@@ -109,6 +118,27 @@
             <argument
                 android:name="SELECTED_FILTERS"
                 app:argType="com.ets.onlinebiblioteka.models.filters.SelectedFilters"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <argument
+                android:name="TEXT_QUERY"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_item_search_fragment"
+        android:name="com.ets.onlinebiblioteka.fragments.main.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/nav_action_search_fragment_to_knjige"
+            app:destination="@id/menu_item_knjige">
+            <argument
+                android:name="TEXT_QUERY"
+                app:argType="string"
                 app:nullable="true"
                 android:defaultValue="@null" />
         </action>

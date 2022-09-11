@@ -56,4 +56,6 @@
     <string name="period_rezervacije">Period rezervacije</string>
     <string name="detalji_zahtjeva">Detalji zahtjeva</string>
     <string name="filters">Filters</string>
+    <string name="search">Search</string>
+    <string name="pretrazi_knjige">Pretraži knjige</string>
 </resources>

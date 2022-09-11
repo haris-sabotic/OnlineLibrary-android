@@ -7,6 +7,7 @@ import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 
 class KnjigeViewModel : ViewModel() {
     private var selectedFilters: MutableLiveData<SelectedFilters?> = MutableLiveData(null)
+    var textQuery: String? = null
 
     fun getSelectedFilters(): LiveData<SelectedFilters?> {
         return selectedFilters
