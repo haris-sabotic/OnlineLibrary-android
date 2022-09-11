@@ -15,6 +15,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -37,7 +38,16 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
-    private lateinit var fragmentBackActions: HashMap<Int, Int?>
+    private var fragmentBackActions = hashMapOf(
+        R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi,
+        R.id.menu_item_edit_profil to R.id.nav_action_edit_profil_to_moj_profil,
+        R.id.menu_item_knjige to R.id.nav_action_knjige_to_moji_zahtjevi,
+    )
+    private var popupFragments = setOf(
+        R.id.menu_item_moj_profil,
+        R.id.menu_item_edit_profil,
+        R.id.menu_item_zahtjev_info
+    )
     private var nonTopLevelFragments = setOf(R.id.menu_item_filters)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +55,6 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         setContentView(R.layout.activity_main)
 
         GlobalData.loadSharedPreferences(applicationContext)
-
-        fragmentBackActions = hashMapOf(
-            R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi,
-            R.id.menu_item_edit_profil to R.id.nav_action_edit_profil_to_moj_profil,
-            R.id.menu_item_zahtjev_info to null,
-        )
 
         setupNavigation()
         setupDrawer()
@@ -86,7 +90,7 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         }
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if (fragmentBackActions.containsKey(destination.id)) {
+            if (popupFragments.contains(destination.id)) {
                 supportActionBar?.hide()
 
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)

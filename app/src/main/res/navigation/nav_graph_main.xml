@@ -92,6 +92,10 @@
             android:id="@+id/nav_action_knjige_to_filters"
             app:destination="@id/menu_item_filters">
         </action>
+        <action
+            android:id="@+id/nav_action_knjige_to_moji_zahtjevi"
+            app:destination="@id/menu_item_moji_zahtjevi">
+        </action>
     </fragment>
 
     <fragment
@@ -102,6 +106,11 @@
         <action
             android:id="@+id/nav_action_filters_to_knjige"
             app:destination="@id/menu_item_knjige">
+            <argument
+                android:name="SELECTED_FILTERS"
+                app:argType="com.ets.onlinebiblioteka.models.filters.SelectedFilters"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </action>
     </fragment>
 

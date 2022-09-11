@@ -6,8 +6,10 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
+import androidx.navigation.fragment.findNavController
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.models.Paginated
+import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.util.FilterModelController
 import com.ets.onlinebiblioteka.util.NavDrawerController
 import com.ets.onlinebiblioteka.viewmodels.FiltersViewModel
@@ -21,12 +23,13 @@ class FiltersFragment : Fragment() {
     private lateinit var root: LinearLayout
 
     private var totalSelectedChipCount: Int = 0
-    private var selectedKategorije = mutableSetOf<Int>()
-    private var selectedZanrovi = mutableSetOf<Int>()
-    private var selectedAutori = mutableSetOf<Int>()
-    private var selectedIzdavaci = mutableSetOf<Int>()
-    private var selectedPisma = mutableSetOf<Int>()
-    private var selectedJezici = mutableSetOf<Int>()
+    private var selectedDostupnost: String? = null
+    private var selectedKategorije = mutableSetOf<Pair<Int, String>>()
+    private var selectedZanrovi = mutableSetOf<Pair<Int, String>>()
+    private var selectedAutori = mutableSetOf<Pair<Int, String>>()
+    private var selectedIzdavaci = mutableSetOf<Pair<Int, String>>()
+    private var selectedPisma = mutableSetOf<Pair<Int, String>>()
+    private var selectedJezici = mutableSetOf<Pair<Int, String>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,55 @@ class FiltersFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(requireContext(), "Confirm", Toast.LENGTH_SHORT).show()
+        if (item.itemId != R.id.menu_item_confirm) {
+            return super.onOptionsItemSelected(item)
+        }
+
+        val categories = if (selectedKategorije.isNotEmpty()) {
+            selectedKategorije.toList()
+        } else {
+            listOf()
+        }
+        val genres = if (selectedZanrovi.isNotEmpty()) {
+            selectedZanrovi.toList()
+        } else {
+            listOf()
+        }
+        val authors = if (selectedAutori.isNotEmpty()) {
+            selectedAutori.toList()
+        } else {
+            listOf()
+        }
+
+        val publisher = if (selectedIzdavaci.isNotEmpty()) {
+            selectedIzdavaci.toList()[0]
+        } else {
+            null
+        }
+        val script = if (selectedPisma.isNotEmpty()) {
+            selectedPisma.toList()[0]
+        } else {
+            null
+        }
+        val language = if (selectedJezici.isNotEmpty()) {
+            selectedJezici.toList()[0]
+        } else {
+            null
+        }
+
+        val selectedFilters = SelectedFilters(
+            selectedDostupnost,
+            categories.toMutableList(),
+            genres.toMutableList(),
+            authors.toMutableList(),
+            publisher,
+            script,
+            language
+        )
+
+        val action = FiltersFragmentDirections.navActionFiltersToKnjige(selectedFilters)
+        findNavController().navigate(action)
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -67,7 +118,9 @@ class FiltersFragment : Fragment() {
             view,
             R.id.filters_chip_group_dostupnost,
             listOf("Izdato", "Rezervisano", "Na raspolaganju")
-        )
+        ) { v ->
+            selectedDostupnost = v
+        }
         setupFilter(
             "Kategorija",
             false,
@@ -112,7 +165,7 @@ class FiltersFragment : Fragment() {
         )
     }
 
-    fun setupChipGroup(view: View, chipGroupId: Int, chips: List<String>) {
+    fun setupChipGroup(view: View, chipGroupId: Int, chips: List<String>, onChecked: (String?) -> Unit) {
         val chipGroup = view.findViewById<ChipGroup>(chipGroupId)
 
         for (chipText in chips) {
@@ -126,10 +179,12 @@ class FiltersFragment : Fragment() {
                 text = chipText
                 chipGroup.addView(this)
 
-                setOnCheckedChangeListener { _, checked ->
+                setOnCheckedChangeListener { v, checked ->
                     if (checked) {
+                        onChecked(v.text.toString())
                         totalSelectedChipCount += 1
                     } else {
+                        onChecked(null)
                         totalSelectedChipCount -= 1
                     }
 
@@ -147,7 +202,7 @@ class FiltersFragment : Fragment() {
     fun <T> setupFilter(
         name: String,
         singleSelection: Boolean,
-        selectedChipsSet: MutableSet<Int>,
+        selectedChipsSet: MutableSet<Pair<Int, String>>,
         loadFun: (page: Int) -> Unit,
         getFun: () -> LiveData<Paginated<T>>
     ) {
@@ -248,16 +303,21 @@ class FiltersFragment : Fragment() {
                     chipGroup.addView(this)
 
                     // handle selection
-                    if (selectedChipsSet.contains(controller.getChipId())) {
-                        isChecked = true
+                    for (pair in selectedChipsSet) {
+                        if (pair.first == controller.getChipId()) {
+                            isChecked = true
+                            break
+                        }
                     }
                     setOnCheckedChangeListener { _, checked ->
                         if (checked) {
                             totalSelectedChipCount += 1
-                            selectedChipsSet.add(controller.getChipId())
+                            selectedChipsSet.add(Pair(controller.getChipId(), controller.getChipText()))
                         } else {
                             totalSelectedChipCount -= 1
-                            selectedChipsSet.remove(controller.getChipId())
+                            selectedChipsSet.removeIf { pair ->
+                                pair.first == controller.getChipId()
+                            }
                         }
 
                         // show/hide confirm button in action bar
