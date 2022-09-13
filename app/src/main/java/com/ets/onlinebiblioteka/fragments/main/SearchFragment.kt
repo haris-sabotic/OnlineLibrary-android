@@ -16,6 +16,7 @@ import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.adapters.AktivnostiAdapter
 import com.ets.onlinebiblioteka.adapters.SearchHistoryAdapter
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.ets.onlinebiblioteka.util.NavDrawerController
 import com.google.gson.Gson
 
 
@@ -31,6 +32,8 @@ class SearchFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        (requireActivity() as NavDrawerController).setDrawerEnabled(false)
 
         actionBar = (requireActivity() as AppCompatActivity).supportActionBar!!
         actionBar.setCustomView(R.layout.action_bar_search)

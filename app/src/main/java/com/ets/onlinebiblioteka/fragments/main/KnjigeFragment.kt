@@ -1,14 +1,22 @@
 package com.ets.onlinebiblioteka.fragments.main
 
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.adapters.BooksAdapter
 import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.viewmodels.KnjigeViewModel
 import com.google.android.material.chip.Chip
@@ -18,19 +26,21 @@ import kotlin.math.roundToInt
 class KnjigeFragment : Fragment() {
     private val viewModel: KnjigeViewModel by viewModels()
 
+    private var textQuery: String? = null
+
     private lateinit var selectedFiltersChipGroup: ChipGroup
     private lateinit var filtersBtn: LinearLayout
     private lateinit var filtersBtnText: TextView
     private lateinit var filtersBtnIcon: View
     private lateinit var resultsTitle: TextView
+    private lateinit var booksRecyclerView: RecyclerView
+    private lateinit var booksProgressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            viewModel.setSelectedFilters(it.getParcelable("SELECTED_FILTERS"))
-            viewModel.textQuery = it.getString("TEXT_QUERY")
-        }
+        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar!!
+        actionBar.setDisplayShowCustomEnabled(false)
 
         setHasOptionsMenu(true)
     }
@@ -57,21 +67,42 @@ class KnjigeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (arguments != null) {
+            textQuery = arguments!!.getString("TEXT_QUERY")
+
+            val filters: SelectedFilters? = arguments!!.getParcelable("SELECTED_FILTERS")
+            viewModel.setSelectedFilters(filters)
+        } else {
+            viewModel.search(textQuery)
+        }
+
+
         selectedFiltersChipGroup = view.findViewById(R.id.knjige_chip_group)
         filtersBtn = view.findViewById(R.id.knjige_btn_filters)
         filtersBtnText = filtersBtn.findViewById(R.id.knjige_btn_filters_text)
         filtersBtnIcon = filtersBtn.findViewById(R.id.knjige_btn_filters_icon)
         resultsTitle = view.findViewById(R.id.knjige_text_results_title)
+        booksRecyclerView = view.findViewById(R.id.knjige_recycler_view_books)
+        booksProgressBar = view.findViewById(R.id.knjige_progress_bar_books)
 
-        resultsTitle.visibility = View.VISIBLE
-        if (viewModel.textQuery != null) {
-            resultsTitle.text = "Rezultati za \"${viewModel.textQuery}\""
+        booksRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        if (textQuery != null) {
+            resultsTitle.text = "Rezultati za \"${textQuery}\""
         } else {
             resultsTitle.text = "Popularne knjige"
         }
 
+        var selectedFiltersInitialObserve = true
         viewModel.getSelectedFilters().observe(viewLifecycleOwner) { selectedFilters ->
             selectedFiltersChipGroup.removeAllViews()
+
+            if (!selectedFiltersInitialObserve) {
+                booksProgressBar.visibility = View.VISIBLE
+                viewModel.search(textQuery)
+            } else {
+                selectedFiltersInitialObserve = false
+            }
 
             if (selectedFilters == null || selectedFilters.isEmpty()) {
                 filtersBtnText.text = "Filters"
@@ -79,7 +110,7 @@ class KnjigeFragment : Fragment() {
                 filtersBtnIcon.layoutParams.width = 8F.asDp()
                 filtersBtnIcon.layoutParams.height = 12F.asDp()
                 filtersBtn.setOnClickListener {
-                    val action = KnjigeFragmentDirections.navActionKnjigeToFilters(viewModel.textQuery)
+                    val action = KnjigeFragmentDirections.navActionKnjigeToFilters(textQuery)
                     findNavController().navigate(action)
                 }
             } else {
@@ -128,6 +159,41 @@ class KnjigeFragment : Fragment() {
             }
         }
 
+        viewModel.getBooks().observe(viewLifecycleOwner) {
+            it?.let { books ->
+                booksProgressBar.visibility = View.GONE
+
+                booksRecyclerView.adapter = BooksAdapter(
+                    books.data,
+                    requireContext(),
+                    { itemIndex ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Clicked book ${books.data[itemIndex].title}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    },
+                    { available ->
+                        Toast.makeText(
+                            requireContext(),
+                            if (available) "Available" else "Unavailable",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
+            }
+        }
+
+        viewModel.getSearchFailure().observe(viewLifecycleOwner) { failed ->
+            if (failed) {
+                booksProgressBar.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to load books",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun setupSelectedFiltersAvailability(selectedFilters: SelectedFilters) {

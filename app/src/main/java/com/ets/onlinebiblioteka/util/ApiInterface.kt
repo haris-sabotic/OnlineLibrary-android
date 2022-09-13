@@ -68,4 +68,15 @@ interface ApiInterface {
 
     @GET("jezici")
     fun getJezici(@Query("page") page: Int): Call<Paginated<Jezik>>
+
+    @GET("search-books")
+    fun searchBooks(@Query("page") page: Int?,
+                    @Query("query") query: String?,
+                    @Query("availability") availability: String?,
+                    @Query("categories[]") categoryIds: List<Int>?,
+                    @Query("genres[]") genreIds: List<Int>?,
+                    @Query("authors[]") authorIds: List<Int>?,
+                    @Query("publisher") publisherId: Int?,
+                    @Query("script") scriptId: Int?,
+                    @Query("language") languageId: Int?): Call<Paginated<Book>>
 }
