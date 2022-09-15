@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.adapters.BooksAdapter
 import com.ets.onlinebiblioteka.models.filters.SelectedFilters
+import com.ets.onlinebiblioteka.util.ItemOffsetDecoration
 import com.ets.onlinebiblioteka.viewmodels.KnjigeViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -89,6 +90,7 @@ class KnjigeFragment : Fragment() {
         booksProgressBar = view.findViewById(R.id.knjige_progress_bar_books)
 
         booksRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        booksRecyclerView.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
 
         if (textQuery != null) {
             resultsTitle.text = "Rezultati za \"${textQuery}\""

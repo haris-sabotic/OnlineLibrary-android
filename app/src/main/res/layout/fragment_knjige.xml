@@ -94,7 +94,8 @@
         android:id="@+id/knjige_recycler_view_books"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:padding="@dimen/item_offset"
+        android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/knjige_text_results_title"
         app:layout_constraintBottom_toBottomOf="parent" />
 
