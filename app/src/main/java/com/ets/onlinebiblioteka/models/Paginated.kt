@@ -14,4 +14,7 @@ data class Paginated<T>(
 
     @SerializedName("prev_page_url")
     val prevPageUrl: String?,
+
+    @SerializedName("to")
+    val count: String?,
 )

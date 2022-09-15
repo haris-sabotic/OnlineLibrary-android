@@ -21,6 +21,7 @@ import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.viewmodels.KnjigeViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.snackbar.Snackbar
 import kotlin.math.roundToInt
 
 class KnjigeFragment : Fragment() {
@@ -33,6 +34,7 @@ class KnjigeFragment : Fragment() {
     private lateinit var filtersBtnText: TextView
     private lateinit var filtersBtnIcon: View
     private lateinit var resultsTitle: TextView
+    private lateinit var countText: TextView
     private lateinit var booksRecyclerView: RecyclerView
     private lateinit var booksProgressBar: ProgressBar
 
@@ -82,6 +84,7 @@ class KnjigeFragment : Fragment() {
         filtersBtnText = filtersBtn.findViewById(R.id.knjige_btn_filters_text)
         filtersBtnIcon = filtersBtn.findViewById(R.id.knjige_btn_filters_icon)
         resultsTitle = view.findViewById(R.id.knjige_text_results_title)
+        countText = view.findViewById(R.id.knjige_text_count)
         booksRecyclerView = view.findViewById(R.id.knjige_recycler_view_books)
         booksProgressBar = view.findViewById(R.id.knjige_progress_bar_books)
 
@@ -163,6 +166,21 @@ class KnjigeFragment : Fragment() {
             it?.let { books ->
                 booksProgressBar.visibility = View.GONE
 
+                // "23 knjige", "37 knjiga"
+                val count = books.count.toString()
+                countText.text = when (count[count.length - 1]) {
+                    '2', '3', '4' -> {
+                        if (count.endsWith("12") or
+                            count.endsWith("13") or
+                            count.endsWith("14")) {
+                            "Ukupno ${books.count} knjiga"
+                        } else {
+                            "Ukupno ${books.count} knjige"
+                        }
+                    }
+                    else -> "Ukupno ${books.count} knjiga"
+                }
+
                 booksRecyclerView.adapter = BooksAdapter(
                     books.data,
                     requireContext(),
@@ -174,11 +192,16 @@ class KnjigeFragment : Fragment() {
                         ).show()
                     },
                     { available ->
-                        Toast.makeText(
-                            requireContext(),
-                            if (available) "Available" else "Unavailable",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Snackbar.make(
+                            view,
+                            if (available) {
+                                "Knjiga je na raspolaganju"
+                            } else {
+                                "Knjiga je izdata, trenutno je nemamo u biblioteci"
+                            },
+                            Snackbar.LENGTH_SHORT
+                        ).setAction("OK") {
+                        }.show()
                     }
                 )
             }
