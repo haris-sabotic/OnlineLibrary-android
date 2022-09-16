@@ -4,21 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ets.onlinebiblioteka.R
-import com.ets.onlinebiblioteka.adapters.BooksAdapter
+import com.ets.onlinebiblioteka.models.ModelCardController
 import com.ets.onlinebiblioteka.models.filters.SelectedFilters
-import com.ets.onlinebiblioteka.util.ItemOffsetDecoration
 import com.ets.onlinebiblioteka.viewmodels.KnjigeViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -26,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlin.math.roundToInt
 
 class KnjigeFragment : Fragment() {
-    private val viewModel: KnjigeViewModel by viewModels()
+    private val viewModel: KnjigeViewModel by activityViewModels()
 
     private var textQuery: String? = null
 
@@ -36,8 +29,15 @@ class KnjigeFragment : Fragment() {
     private lateinit var filtersBtnIcon: View
     private lateinit var resultsTitle: TextView
     private lateinit var countText: TextView
-    private lateinit var booksRecyclerView: RecyclerView
-    private lateinit var booksProgressBar: ProgressBar
+
+    private lateinit var booksGridLayout: GridLayout
+    private lateinit var booksBtnMore: LinearLayout
+
+    private lateinit var categoriesGridLayout: GridLayout
+    private lateinit var categoriesBtnMore: LinearLayout
+
+    private lateinit var genresGridLayout: GridLayout
+    private lateinit var genresBtnMore: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,11 +86,22 @@ class KnjigeFragment : Fragment() {
         filtersBtnIcon = filtersBtn.findViewById(R.id.knjige_btn_filters_icon)
         resultsTitle = view.findViewById(R.id.knjige_text_results_title)
         countText = view.findViewById(R.id.knjige_text_count)
-        booksRecyclerView = view.findViewById(R.id.knjige_recycler_view_books)
-        booksProgressBar = view.findViewById(R.id.knjige_progress_bar_books)
 
-        booksRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        booksRecyclerView.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
+        booksGridLayout = view.findViewById(R.id.knjige_grid_layout_books)
+        booksBtnMore = view.findViewById(R.id.knjige_btn_more_books)
+
+        categoriesGridLayout = view.findViewById(R.id.knjige_grid_layout_kategorije)
+        categoriesBtnMore = view.findViewById(R.id.knjige_btn_more_kategorije)
+
+        genresGridLayout = view.findViewById(R.id.knjige_grid_layout_zanrovi)
+        genresBtnMore = view.findViewById(R.id.knjige_btn_more_zanrovi)
+
+        if (viewModel.getCategories().value == null) {
+            viewModel.loadCategories()
+        }
+        if (viewModel.getGenres().value == null) {
+            viewModel.loadGenres()
+        }
 
         if (textQuery != null) {
             resultsTitle.text = "Rezultati za \"${textQuery}\""
@@ -103,7 +114,6 @@ class KnjigeFragment : Fragment() {
             selectedFiltersChipGroup.removeAllViews()
 
             if (!selectedFiltersInitialObserve) {
-                booksProgressBar.visibility = View.VISIBLE
                 viewModel.search(textQuery)
             } else {
                 selectedFiltersInitialObserve = false
@@ -166,8 +176,6 @@ class KnjigeFragment : Fragment() {
 
         viewModel.getBooks().observe(viewLifecycleOwner) {
             it?.let { books ->
-                booksProgressBar.visibility = View.GONE
-
                 // "23 knjige", "37 knjiga"
                 val count = books.count.toString()
                 countText.text = when (count[count.length - 1]) {
@@ -183,13 +191,20 @@ class KnjigeFragment : Fragment() {
                     else -> "Ukupno ${books.count} knjiga"
                 }
 
-                booksRecyclerView.adapter = BooksAdapter(
+                if (books.nextPageUrl != null) {
+                    booksBtnMore.visibility = View.VISIBLE
+                } else {
+                    booksBtnMore.visibility = View.GONE
+                }
+
+                setupGrid(
+                    booksGridLayout,
+                    R.layout.card_book,
                     books.data,
-                    requireContext(),
-                    { itemIndex ->
+                    { item ->
                         Toast.makeText(
                             requireContext(),
-                            "Clicked book ${books.data[itemIndex].title}",
+                            "Clicked book ${item.title}",
                             Toast.LENGTH_SHORT
                         ).show()
                     },
@@ -211,13 +226,86 @@ class KnjigeFragment : Fragment() {
 
         viewModel.getSearchFailure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
-                booksProgressBar.visibility = View.GONE
                 Toast.makeText(
                     requireContext(),
                     "Failed to load books",
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        }
+
+        viewModel.getCategories().observe(viewLifecycleOwner) {
+            it?.let { categories ->
+                if (categories.nextPageUrl != null) {
+                    categoriesBtnMore.visibility = View.VISIBLE
+                }
+
+                setupGrid(
+                    categoriesGridLayout,
+                    R.layout.card_category_genre,
+                    categories.data,
+                    { item ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Clicked category ${item.name}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    },
+                    { available ->
+                    }
+                )
+            }
+        }
+
+        viewModel.getGenres().observe(viewLifecycleOwner) {
+            it?.let { genres ->
+                if (genres.nextPageUrl != null) {
+                    genresBtnMore.visibility = View.VISIBLE
+                }
+
+                setupGrid(
+                    genresGridLayout,
+                    R.layout.card_category_genre,
+                    genres.data,
+                    { item ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Clicked genre ${item.name}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    },
+                    { available ->
+                    }
+                )
+            }
+        }
+    }
+
+    private fun <T> setupGrid(
+        grid: GridLayout,
+        cardLayout: Int,
+        items: List<ModelCardController<T>>,
+        onCardClick: (item: T) -> Unit,
+        onAvailabilityIconClick: (available: Boolean) -> Unit
+    ) {
+        grid.removeAllViews()
+
+        var i = 0
+        for (item in items) {
+            Log.d("KnjigeFragment", item.toString())
+            val itemView = layoutInflater.inflate(cardLayout, null)
+
+            val params = GridLayout.LayoutParams()
+            if (items.size > 1) {
+                params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+                params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+                params.setGravity(Gravity.CENTER_HORIZONTAL)
+            }
+            grid.addView(itemView, params)
+
+            item.bind(requireContext(), itemView, onCardClick, onAvailabilityIconClick)
+
+            i += 1
         }
     }
 
