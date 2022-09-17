@@ -58,4 +58,6 @@
     <string name="filters">Filters</string>
     <string name="search">Search</string>
     <string name="pretrazi_knjige">Pretraži knjige</string>
+    <string name="na_raspolaganju">Na raspolaganju</string>
+    <string name="izdato">Izdato</string>
 </resources>

@@ -202,11 +202,8 @@ class KnjigeFragment : Fragment() {
                     R.layout.card_book,
                     books.data,
                     { item ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Clicked book ${item.title}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val action = KnjigeFragmentDirections.navActionKnjigeToBookDetails(item)
+                        findNavController().navigate(action)
                     },
                     { available ->
                         Snackbar.make(

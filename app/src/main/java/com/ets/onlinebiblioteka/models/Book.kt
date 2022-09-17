@@ -16,9 +16,15 @@ import kotlinx.parcelize.Parcelize
 data class Book(
     var id: Int,
     var title: String,
+    var summary: String,
     var authors: ArrayList<String>,
-    var photo: String,
-    var available: Boolean
+    var categories: ArrayList<String>,
+    var genres: ArrayList<String>,
+    var available: Boolean,
+    var quantity: Int,
+    var publisher: String,
+    var publishYear: String,
+    var photo: String
 ) : Parcelable, ModelCardController<Book> {
     override fun bind(
         context: Context,

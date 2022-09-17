@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
     private var popupFragments = setOf(
         R.id.menu_item_moj_profil,
         R.id.menu_item_edit_profil,
-        R.id.menu_item_zahtjev_info
+        R.id.menu_item_zahtjev_info,
+        R.id.menu_item_book_details
     )
     private var nonTopLevelFragments = setOf(R.id.menu_item_filters, R.id.menu_item_search_fragment)
 

@@ -105,6 +105,13 @@
             android:id="@+id/nav_action_knjige_to_moji_zahtjevi"
             app:destination="@id/menu_item_moji_zahtjevi">
         </action>
+        <action
+            android:id="@+id/nav_action_knjige_to_book_details"
+            app:destination="@id/menu_item_book_details">
+            <argument
+                android:name="BOOK_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.Book" />
+        </action>
     </fragment>
 
     <fragment
@@ -142,6 +149,14 @@
                 app:nullable="true"
                 android:defaultValue="@null" />
         </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_item_book_details"
+        android:name="com.ets.onlinebiblioteka.fragments.main.BookDetailsFragment"
+        android:label="Book details"
+        tools:layout="@layout/fragment_book_details">
+
     </fragment>
 
 </navigation>

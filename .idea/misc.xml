@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/ic_book_available.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/ic_book_unavailable.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/ic_cortex.xml" value="0.267" />
+        <entry key="app/src/main/res/drawable/ic_expand_arrow.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/ic_filters_button_arrow.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/ic_filters_button_x.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/ic_lista_zelja.xml" value="0.267" />
@@ -29,6 +30,7 @@
         <entry key="app/src/main/res/layout/chip_filter.xml" value="0.29884566053869177" />
         <entry key="app/src/main/res/layout/chip_selected_filter.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/fragment_aktivnosti.xml" value="0.3651041666666667" />
+        <entry key="app/src/main/res/layout/fragment_book_details.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_filters.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/fragment_forgot_login.xml" value="0.3651041666666667" />
