@@ -79,4 +79,7 @@ interface ApiInterface {
                     @Query("publisher") publisherId: Int?,
                     @Query("script") scriptId: Int?,
                     @Query("language") languageId: Int?): Call<Paginated<Book>>
+
+    @GET("book-spec/{book}")
+    fun bookSpecs(@Path("book") bookId: Int): Call<BookSpecs>
 }

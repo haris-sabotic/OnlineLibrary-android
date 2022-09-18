@@ -18,17 +18,21 @@
         <entry key="app/src/main/res/drawable/ic_lista_zelja.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/ic_moj_profil.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/ic_moji_zahtjevi.xml" value="0.267" />
+        <entry key="app/src/main/res/drawable/ic_reserve.xml" value="0.268" />
+        <entry key="app/src/main/res/drawable/ic_save.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/ic_triangle_down.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/ic_x.xml" value="0.232" />
         <entry key="app/src/main/res/drawable/text_input_layout_hint_color.xml" value="0.267" />
         <entry key="app/src/main/res/layout/action_bar_search.xml" value="0.29884566053869177" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3651041666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3651041666666667" />
+        <entry key="app/src/main/res/layout/bottom_sheet_book_specs.xml" value="0.29884566053869177" />
         <entry key="app/src/main/res/layout/card_book.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/card_category_genre.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/card_moji_zahtjevi.xml" value="0.3640625" />
         <entry key="app/src/main/res/layout/chip_filter.xml" value="0.29884566053869177" />
         <entry key="app/src/main/res/layout/chip_selected_filter.xml" value="0.2997007268063275" />
+        <entry key="app/src/main/res/layout/dialog_book_specs.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/fragment_aktivnosti.xml" value="0.3651041666666667" />
         <entry key="app/src/main/res/layout/fragment_book_details.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.33" />

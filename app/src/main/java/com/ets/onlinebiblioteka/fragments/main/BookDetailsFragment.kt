@@ -12,15 +12,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.models.Book
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.ets.onlinebiblioteka.viewmodels.BookDetailsViewModel
 import com.google.android.material.chip.Chip
 
 val MAX_DESCRIPTION_LENGTH = 260
 
 class BookDetailsFragment : Fragment() {
+    private val viewModel: BookDetailsViewModel by viewModels()
+
     private lateinit var bookData: Book
 
     private lateinit var btnBack: ImageView
@@ -39,6 +44,15 @@ class BookDetailsFragment : Fragment() {
     private lateinit var publisherText: TextView
     private lateinit var publishYearText: TextView
     private lateinit var btnSpecs: RelativeLayout
+    private lateinit var bottomSheetBookSpecs: ConstraintLayout
+    private lateinit var bookSpecsCloseBtn: ImageView
+    private lateinit var bookSpecsTextPageCount: TextView
+    private lateinit var bookSpecsTextScript: TextView
+    private lateinit var bookSpecsTextLanguage: TextView
+    private lateinit var bookSpecsTextBinding: TextView
+    private lateinit var bookSpecsTextFormat: TextView
+    private lateinit var bookSpecsTextIsbn: TextView
+    private lateinit var bookSpecsProgressBar: ProgressBar
 
     private var descriptionReadMoreShown = false
 
@@ -78,6 +92,15 @@ class BookDetailsFragment : Fragment() {
         publisherText = view.findViewById(R.id.book_details_text_publisher)
         publishYearText = view.findViewById(R.id.book_details_text_publish_year)
         btnSpecs = view.findViewById(R.id.book_details_btn_specs)
+        bottomSheetBookSpecs = view.findViewById(R.id.book_details_bottom_sheet_book_specs)
+        bookSpecsCloseBtn = view.findViewById(R.id.book_details_specs_btn_close)
+        bookSpecsTextPageCount = view.findViewById(R.id.book_details_specs_text_page_count)
+        bookSpecsTextScript = view.findViewById(R.id.book_details_specs_text_script)
+        bookSpecsTextLanguage = view.findViewById(R.id.book_details_specs_text_language)
+        bookSpecsTextBinding = view.findViewById(R.id.book_details_specs_text_binding)
+        bookSpecsTextFormat = view.findViewById(R.id.book_details_specs_text_format)
+        bookSpecsTextIsbn = view.findViewById(R.id.book_details_specs_text_isbn)
+        bookSpecsProgressBar = view.findViewById(R.id.book_details_specs_progress_bar)
 
         textTitle.text = bookData.title
 
@@ -174,6 +197,29 @@ class BookDetailsFragment : Fragment() {
                 btnReadMoreIcon.rotation = -90F
             }
         }
+
+        btnSpecs.setOnClickListener {
+            bottomSheetBookSpecs.visibility = View.VISIBLE
+            viewModel.loadSpecs(bookData.id)
+        }
+
+        bookSpecsCloseBtn.setOnClickListener {
+            bottomSheetBookSpecs.visibility = View.GONE
+        }
+
+        viewModel.getSpecs().observe(viewLifecycleOwner) {
+            it?.let { specs ->
+                bookSpecsProgressBar.visibility = View.GONE
+
+                bookSpecsTextPageCount.text = specs.pages
+                bookSpecsTextScript.text = specs.script
+                bookSpecsTextLanguage.text = specs.language
+                bookSpecsTextBinding.text = specs.binding
+                bookSpecsTextFormat.text = specs.format
+                bookSpecsTextIsbn.text = specs.isbn
+            }
+        }
+
 
 
         btnBack.setOnClickListener {
