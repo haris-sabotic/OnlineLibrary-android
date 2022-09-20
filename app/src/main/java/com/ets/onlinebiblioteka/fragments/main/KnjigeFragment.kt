@@ -276,6 +276,11 @@ class KnjigeFragment : Fragment() {
                 )
             }
         }
+
+        booksBtnMore.setOnClickListener {
+            val action = KnjigeFragmentDirections.navActionKnjigeToAllBooks(textQuery, viewModel.getSelectedFilters().value)
+            findNavController().navigate(action)
+        }
     }
 
     private fun <T> setupGrid(

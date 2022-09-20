@@ -1,9 +1,11 @@
 package com.ets.onlinebiblioteka.adapters
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,12 +13,13 @@ import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.models.Book
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.google.android.material.card.MaterialCardView
 
 
 class BooksAdapter(
-    val items: List<Book>,
+    val items: MutableList<Book>,
     val context: Context,
-    val onBookClick: (itemIndex: Int) -> Unit,
+    val onBookClick: (item: Book) -> Unit,
     val onAvailabilityIconClick: (available: Boolean) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,7 +27,7 @@ class BooksAdapter(
         private var textAuthor = itemView.findViewById<TextView>(R.id.card_book_text_author)
         private var img = itemView.findViewById<ImageView>(R.id.card_book_img)
         private var iconAvailability = itemView.findViewById<ImageView>(R.id.card_book_icon_availability)
-
+        private var card = itemView.findViewById<MaterialCardView>(R.id.card_book_card)
 
         fun bind(position: Int) {
             val item = items[position]
@@ -50,13 +53,15 @@ class BooksAdapter(
                 .placeholder(R.color.black)
                 .into(img)
 
-            itemView.setOnClickListener { onBookClick(position) }
+            card.setOnClickListener { onBookClick(item) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(context)
             .inflate(R.layout.card_book, parent, false)
+
+        view.layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT
 
         return ViewHolder(view)
     }
@@ -67,5 +72,11 @@ class BooksAdapter(
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun addMoreBooks(books: List<Book>) {
+        val pos = items.size
+        items.addAll(books)
+        notifyItemRangeChanged(pos, items.size)
     }
 }

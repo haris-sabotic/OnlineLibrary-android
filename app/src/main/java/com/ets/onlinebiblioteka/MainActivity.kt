@@ -49,7 +49,11 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         R.id.menu_item_zahtjev_info,
         R.id.menu_item_book_details
     )
-    private var nonTopLevelFragments = setOf(R.id.menu_item_filters, R.id.menu_item_search_fragment)
+    private var nonTopLevelFragments = setOf(
+        R.id.menu_item_filters,
+        R.id.menu_item_search_fragment,
+        R.id.menu_item_all_books
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

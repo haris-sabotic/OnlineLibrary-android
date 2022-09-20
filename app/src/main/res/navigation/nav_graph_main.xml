@@ -112,6 +112,20 @@
                 android:name="BOOK_DATA"
                 app:argType="com.ets.onlinebiblioteka.models.Book" />
         </action>
+        <action
+            android:id="@+id/nav_action_knjige_to_all_books"
+            app:destination="@id/menu_item_all_books">
+            <argument
+                android:name="TEXT_QUERY"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <argument
+                android:name="SELECTED_FILTERS"
+                app:argType="com.ets.onlinebiblioteka.models.filters.SelectedFilters"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
 
     <fragment
@@ -157,6 +171,21 @@
         android:label="Book details"
         tools:layout="@layout/fragment_book_details">
 
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/menu_item_all_books"
+        android:name="com.ets.onlinebiblioteka.fragments.main.AllBooksFragment"
+        android:label="@string/knjige"
+        tools:layout="@layout/fragment_all_books">
+        <action
+            android:id="@+id/nav_action_all_books_to_book_details"
+            app:destination="@id/menu_item_book_details">
+            <argument
+                android:name="BOOK_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.Book" />
+        </action>
     </fragment>
 
 </navigation>
