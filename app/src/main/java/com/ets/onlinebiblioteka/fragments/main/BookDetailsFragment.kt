@@ -1,5 +1,6 @@
 package com.ets.onlinebiblioteka.fragments.main
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
@@ -21,9 +23,10 @@ import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.BookDetailsViewModel
 import com.google.android.material.chip.Chip
 
-val MAX_DESCRIPTION_LENGTH = 260
 
 class BookDetailsFragment : Fragment() {
+    private val MAX_DESCRIPTION_LENGTH = 260
+
     private val viewModel: BookDetailsViewModel by viewModels()
 
     private lateinit var bookData: Book
@@ -126,8 +129,10 @@ class BookDetailsFragment : Fragment() {
             .into(img)
 
         if (!bookData.available) {
-            chipAvailability.setChipStrokeColorResource(R.color.red)
-            chipAvailability.setTextColor(R.color.red)
+            val color = ContextCompat.getColor(requireContext(), R.color.red)
+            chipAvailability.chipStrokeColor = ColorStateList.valueOf(color)
+            chipAvailability.setTextColor(color)
+
             chipAvailability.setText(R.string.izdato)
         }
 
