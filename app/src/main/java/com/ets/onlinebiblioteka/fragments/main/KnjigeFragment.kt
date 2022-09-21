@@ -242,11 +242,20 @@ class KnjigeFragment : Fragment() {
                     R.layout.card_category_genre,
                     categories.data,
                     { item ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Clicked category ${item.name}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val action = KnjigeFragmentDirections.navActionKnjigeToAllBooks(
+                            null,
+                            SelectedFilters(
+                                null,
+                                mutableListOf(Pair(item.getChipId(), item.getChipText())),
+                                mutableListOf(),
+                                mutableListOf(),
+                                null,
+                                null,
+                                null
+                            )
+                        )
+
+                        findNavController().navigate(action)
                     },
                     { available ->
                     }
@@ -265,11 +274,20 @@ class KnjigeFragment : Fragment() {
                     R.layout.card_category_genre,
                     genres.data,
                     { item ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Clicked genre ${item.name}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val action = KnjigeFragmentDirections.navActionKnjigeToAllBooks(
+                            null,
+                            SelectedFilters(
+                                null,
+                                mutableListOf(),
+                                mutableListOf(Pair(item.getChipId(), item.getChipText())),
+                                mutableListOf(),
+                                null,
+                                null,
+                                null
+                            )
+                        )
+
+                        findNavController().navigate(action)
                     },
                     { available ->
                     }
