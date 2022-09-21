@@ -6,9 +6,16 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Zahtjev(
     var id: String,
-    var book: Book,
+    var book: ZahtjevBook,
     var librarian: String,
     var dateFrom: String,
     var dateTo: String,
     var type: String
-) : Parcelable
+) : Parcelable {
+    @Parcelize
+    data class ZahtjevBook(
+        var title: String,
+        var authors: ArrayList<String>,
+        var photo: String
+    ) : Parcelable
+}
