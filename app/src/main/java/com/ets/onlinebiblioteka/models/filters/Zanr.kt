@@ -1,6 +1,7 @@
 package com.ets.onlinebiblioteka.models.filters
 
 import android.content.Context
+import android.os.Parcelable
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,14 +11,16 @@ import com.ets.onlinebiblioteka.models.ModelCardController
 import com.ets.onlinebiblioteka.util.FilterModelController
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.google.android.material.card.MaterialCardView
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Zanr(
     val id: Int,
 
     val name: String,
     val photo: String,
-    val description: String,
-) : FilterModelController, ModelCardController<Zanr> {
+    val description: String?,
+) : Parcelable, FilterModelController, ModelCardController<Zanr> {
     override fun getChipText(): String {
         return name
     }

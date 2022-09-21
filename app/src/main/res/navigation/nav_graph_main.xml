@@ -32,6 +32,21 @@
                 app:argType="string"
                 app:nullable="true" />
         </action>
+
+        <action
+            android:id="@+id/nav_action_zahtjev_info_to_all_books"
+            app:destination="@id/menu_item_all_books">
+            <argument
+                android:name="TEXT_QUERY"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <argument
+                android:name="SELECTED_FILTERS"
+                app:argType="com.ets.onlinebiblioteka.models.filters.SelectedFilters"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
 
     <fragment
@@ -170,7 +185,20 @@
         android:name="com.ets.onlinebiblioteka.fragments.main.BookDetailsFragment"
         android:label="Book details"
         tools:layout="@layout/fragment_book_details">
-
+        <action
+            android:id="@+id/nav_action_book_details_to_all_books"
+            app:destination="@id/menu_item_all_books">
+            <argument
+                android:name="TEXT_QUERY"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <argument
+                android:name="SELECTED_FILTERS"
+                app:argType="com.ets.onlinebiblioteka.models.filters.SelectedFilters"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
 
 

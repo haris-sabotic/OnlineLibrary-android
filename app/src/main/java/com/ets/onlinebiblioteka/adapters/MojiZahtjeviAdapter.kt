@@ -43,7 +43,7 @@ class MojiZahtjeviAdapter(
                 .into(img)
             title.text = item.book.title
             if (item.book.authors.isNotEmpty()) {
-                author.text = "by ${item.book.authors[0]}"
+                author.text = "by ${item.book.authors[0].name}"
             } else {
                 author.text = ""
             }

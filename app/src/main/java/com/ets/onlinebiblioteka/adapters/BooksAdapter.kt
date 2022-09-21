@@ -35,7 +35,7 @@ class BooksAdapter(
             textTitle.text = item.title
 
             if (item.authors.isNotEmpty()) {
-                textAuthor.text = "by ${item.authors[0]}"
+                textAuthor.text = "by ${item.authors[0].name}"
             } else {
                 textAuthor.text = ""
             }

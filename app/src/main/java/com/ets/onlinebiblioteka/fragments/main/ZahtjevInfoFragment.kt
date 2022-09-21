@@ -24,6 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.models.Zahtjev
+import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.ZahtjevInfoViewModel
 import com.google.android.material.chip.Chip
@@ -88,12 +89,20 @@ class ZahtjevInfoFragment : Fragment() {
         for (author in data.book.authors) {
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(p0: View) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Author: $author",
-                        Toast.LENGTH_SHORT)
-                        .show()
-                    Log.d("ZahtjevInfoFragment", "Clicked $author")
+                    val action = ZahtjevInfoFragmentDirections.navActionZahtjevInfoToAllBooks(
+                        null,
+                        SelectedFilters(
+                            null,
+                            mutableListOf(),
+                            mutableListOf(),
+                            mutableListOf(Pair(author.id, author.name)),
+                            null,
+                            null,
+                            null
+                        )
+                    )
+
+                    findNavController().navigate(action)
                 }
 
                 override fun updateDrawState(ds: TextPaint) {
@@ -103,7 +112,7 @@ class ZahtjevInfoFragment : Fragment() {
             }
 
             authorSpannableStr.append(
-                author,
+                author.name,
                 clickableSpan,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 

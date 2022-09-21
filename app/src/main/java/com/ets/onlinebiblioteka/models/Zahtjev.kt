@@ -1,6 +1,7 @@
 package com.ets.onlinebiblioteka.models
 
 import android.os.Parcelable
+import com.ets.onlinebiblioteka.models.filters.Autor
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -15,7 +16,7 @@ data class Zahtjev(
     @Parcelize
     data class ZahtjevBook(
         var title: String,
-        var authors: ArrayList<String>,
+        var authors: ArrayList<Autor>,
         var photo: String
     ) : Parcelable
 }

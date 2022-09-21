@@ -8,6 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.models.filters.Autor
+import com.ets.onlinebiblioteka.models.filters.Kategorija
+import com.ets.onlinebiblioteka.models.filters.Zanr
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.google.android.material.card.MaterialCardView
 import kotlinx.parcelize.Parcelize
@@ -17,9 +20,9 @@ data class Book(
     var id: Int,
     var title: String,
     var summary: String,
-    var authors: ArrayList<String>,
-    var categories: ArrayList<String>,
-    var genres: ArrayList<String>,
+    var authors: ArrayList<Autor>,
+    var categories: ArrayList<Kategorija>,
+    var genres: ArrayList<Zanr>,
     var available: Boolean,
     var quantity: Int,
     var publisher: String,
@@ -42,7 +45,7 @@ data class Book(
         textTitle.text = this.title
 
         if (this.authors.isNotEmpty()) {
-            textAuthor.text = "by ${this.authors[0]}"
+            textAuthor.text = "by ${this.authors[0].name}"
         } else {
             textAuthor.text = ""
         }

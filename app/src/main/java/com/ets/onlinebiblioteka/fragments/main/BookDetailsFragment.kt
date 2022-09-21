@@ -16,9 +16,12 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.models.Book
+import com.ets.onlinebiblioteka.models.filters.SelectedFilters
+import com.ets.onlinebiblioteka.util.FilterModelController
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.BookDetailsViewModel
 import com.google.android.material.chip.Chip
@@ -152,7 +155,20 @@ class BookDetailsFragment : Fragment() {
             textAuthor,
             bookData.authors,
             { item ->
-                Toast.makeText(requireContext(), "Text: $item", Toast.LENGTH_SHORT).show()
+                val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
+                    null,
+                    SelectedFilters(
+                        null,
+                        mutableListOf(),
+                        mutableListOf(),
+                        mutableListOf(Pair(item.getChipId(), item.getChipText())),
+                        null,
+                        null,
+                        null
+                    )
+                )
+
+                findNavController().navigate(action)
             },
             "by "
         )
@@ -161,21 +177,60 @@ class BookDetailsFragment : Fragment() {
             authorsText,
             bookData.authors,
             { item ->
-                Toast.makeText(requireContext(), "Text: $item", Toast.LENGTH_SHORT).show()
+                val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
+                    null,
+                    SelectedFilters(
+                        null,
+                        mutableListOf(),
+                        mutableListOf(),
+                        mutableListOf(Pair(item.getChipId(), item.getChipText())),
+                        null,
+                        null,
+                        null
+                    )
+                )
+
+                findNavController().navigate(action)
             }
         )
         setupListText(
             categoriesText,
             bookData.categories,
             { item ->
-                Toast.makeText(requireContext(), "Text: $item", Toast.LENGTH_SHORT).show()
+                val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
+                    null,
+                    SelectedFilters(
+                        null,
+                        mutableListOf(Pair(item.getChipId(), item.getChipText())),
+                        mutableListOf(),
+                        mutableListOf(),
+                        null,
+                        null,
+                        null
+                    )
+                )
+
+                findNavController().navigate(action)
             }
         )
         setupListText(
             genresText,
             bookData.genres,
             { item ->
-                Toast.makeText(requireContext(), "Text: $item", Toast.LENGTH_SHORT).show()
+                val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
+                    null,
+                    SelectedFilters(
+                        null,
+                        mutableListOf(),
+                        mutableListOf(Pair(item.getChipId(), item.getChipText())),
+                        mutableListOf(),
+                        null,
+                        null,
+                        null
+                    )
+                )
+
+                findNavController().navigate(action)
             }
         )
 
@@ -234,8 +289,8 @@ class BookDetailsFragment : Fragment() {
 
     private fun setupListText(
         textView: TextView,
-        list: List<String>,
-        onItemClick: (text: String) -> Unit,
+        list: List<FilterModelController>,
+        onItemClick: (id: FilterModelController) -> Unit,
         startText: String = ""
     ) {
         val spannableString = SpannableStringBuilder(startText)
@@ -253,7 +308,7 @@ class BookDetailsFragment : Fragment() {
             }
 
             spannableString.append(
-                item,
+                item.getChipText(),
                 clickableSpan,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 

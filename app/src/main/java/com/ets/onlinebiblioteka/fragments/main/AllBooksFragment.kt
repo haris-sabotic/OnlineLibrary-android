@@ -106,7 +106,8 @@ class AllBooksFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                if (!recyclerView.canScrollVertically(1) && canLoadMore) {
+                if (!recyclerView.canScrollVertically(1) && canLoadMore
+                    && progressBarBottom.visibility == View.GONE) {
                     progressBarBottom.visibility = View.VISIBLE
                     viewModel.loadBooks(page + 1, textQuery, selectedFilters)
                 }
