@@ -15,6 +15,7 @@ import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.viewmodels.KnjigeViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlin.math.roundToInt
 
@@ -38,6 +39,9 @@ class KnjigeFragment : Fragment() {
 
     private lateinit var genresGridLayout: GridLayout
     private lateinit var genresBtnMore: LinearLayout
+
+    private lateinit var scrollView: ScrollView
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +99,9 @@ class KnjigeFragment : Fragment() {
 
         genresGridLayout = view.findViewById(R.id.knjige_grid_layout_zanrovi)
         genresBtnMore = view.findViewById(R.id.knjige_btn_more_zanrovi)
+
+        scrollView = view.findViewById(R.id.knjige_scroll_view)
+        fab = view.findViewById(R.id.knjige_fab_up)
 
         if (viewModel.getCategories().value == null) {
             viewModel.loadCategories()
@@ -307,6 +314,10 @@ class KnjigeFragment : Fragment() {
         genresBtnMore.setOnClickListener {
             val action = KnjigeFragmentDirections.navActionKnjigeToAllCategoriesOrGenres("genres")
             findNavController().navigate(action)
+        }
+
+        fab.setOnClickListener {
+            scrollView.smoothScrollTo(0, 0)
         }
     }
 
