@@ -639,11 +639,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/book_details_separator_bottom_middle" >
         <ImageView
+            android:id="@+id/book_details_btn_save_icon"
             android:layout_width="15dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_save"
             android:layout_marginRight="5dp" />
         <TextView
+            android:id="@+id/book_details_btn_save_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sačuvaj"

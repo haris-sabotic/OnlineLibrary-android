@@ -53,7 +53,15 @@
         android:id="@+id/menu_item_lista_zelja"
         android:name="com.ets.onlinebiblioteka.fragments.main.ListaZeljaFragment"
         android:label="@string/lista_zelja"
-        tools:layout="@layout/fragment_lista_zelja" />
+        tools:layout="@layout/fragment_lista_zelja" >
+        <action
+            android:id="@+id/nav_action_lista_zelja_to_book_details"
+            app:destination="@id/menu_item_book_details">
+            <argument
+                android:name="BOOK_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.Book" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/menu_item_aktivnosti"

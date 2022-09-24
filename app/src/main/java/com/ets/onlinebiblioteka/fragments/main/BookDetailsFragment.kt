@@ -8,13 +8,13 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -25,6 +25,9 @@ import com.ets.onlinebiblioteka.util.FilterModelController
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.BookDetailsViewModel
 import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class BookDetailsFragment : Fragment() {
@@ -59,8 +62,12 @@ class BookDetailsFragment : Fragment() {
     private lateinit var bookSpecsTextFormat: TextView
     private lateinit var bookSpecsTextIsbn: TextView
     private lateinit var bookSpecsProgressBar: ProgressBar
+    private lateinit var btnSave: LinearLayout
+    private lateinit var btnSaveText: TextView
+    private lateinit var btnSaveIcon: ImageView
 
     private var descriptionReadMoreShown = false
+    private var bookSaved = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +75,15 @@ class BookDetailsFragment : Fragment() {
 
         arguments?.let {
             bookData = it.getParcelable<Book>("BOOK_DATA")!!
+        }
+
+        GlobalData.getSharedPreferences().getString(ListaZeljaFragment.SHARED_PREFS_KEY, null)?.let { s ->
+            val books = Gson().fromJson(
+                s,
+                object : TypeToken<MutableList<Book>>() {}.type
+            ) as MutableList<Book>
+
+            bookSaved = books.map { it.id == bookData.id }.contains(true)
         }
     }
 
@@ -107,8 +123,13 @@ class BookDetailsFragment : Fragment() {
         bookSpecsTextFormat = view.findViewById(R.id.book_details_specs_text_format)
         bookSpecsTextIsbn = view.findViewById(R.id.book_details_specs_text_isbn)
         bookSpecsProgressBar = view.findViewById(R.id.book_details_specs_progress_bar)
+        btnSave = view.findViewById(R.id.book_details_btn_save)
+        btnSaveText = view.findViewById(R.id.book_details_btn_save_text)
+        btnSaveIcon = view.findViewById(R.id.book_details_btn_save_icon)
 
         textTitle.text = bookData.title
+
+        setupSaveBtn(bookSaved)
 
         if (bookData.authors.isNotEmpty()) {
             textAuthor.text = "by ${bookData.authors[0]}"
@@ -117,7 +138,7 @@ class BookDetailsFragment : Fragment() {
         }
 
         quantityText.text = if (bookData.quantity.toString().endsWith('1')
-                                and !bookData.quantity.toString().endsWith("11")) {
+            and !bookData.quantity.toString().endsWith("11")) {
             "${bookData.quantity} komad"
         } else {
             "${bookData.quantity} komada"
@@ -281,6 +302,31 @@ class BookDetailsFragment : Fragment() {
         }
 
 
+        btnSave.setOnClickListener {
+            if (bookSaved) {
+                unsaveBook()
+
+                bookSaved = false
+                setupSaveBtn(bookSaved)
+            } else {
+                saveBook()
+
+                bookSaved = true
+                setupSaveBtn(bookSaved)
+
+                Snackbar.make(
+                    view,
+                    "Knjiga je sačuvana u listu želja!",
+                    Snackbar.LENGTH_LONG
+                ).setAction("Poništi!") {
+                    unsaveBook()
+
+                    bookSaved = false
+                    setupSaveBtn(bookSaved)
+                }.show()
+            }
+        }
+
 
         btnBack.setOnClickListener {
             requireActivity().onBackPressed()
@@ -321,6 +367,49 @@ class BookDetailsFragment : Fragment() {
         textView.movementMethod = LinkMovementMethod.getInstance()
         textView.highlightColor = Color.TRANSPARENT
         textView.text = spannableString
+    }
+
+    private fun setupSaveBtn(saved: Boolean) {
+        if (saved) {
+            btnSaveIcon.setImageResource(R.drawable.ic_saved)
+            btnSaveText.text = "Sačuvano"
+        } else {
+            btnSaveIcon.setImageResource(R.drawable.ic_save)
+            btnSaveText.text = "Sačuvaj"
+        }
+    }
+
+    private fun saveBook() {
+        var books = mutableListOf<Book>()
+
+        GlobalData.getSharedPreferences().getString(ListaZeljaFragment.SHARED_PREFS_KEY, null)?.let {
+            books = Gson().fromJson(
+                it,
+                object : TypeToken<MutableList<Book>>() {}.type
+            ) as MutableList<Book>
+        }
+
+        books.add(bookData)
+
+        GlobalData.getSharedPreferences().edit().putString(
+            ListaZeljaFragment.SHARED_PREFS_KEY,
+            Gson().toJson(books)
+        ).commit()
+    }
+    private fun unsaveBook() {
+        GlobalData.getSharedPreferences().getString(ListaZeljaFragment.SHARED_PREFS_KEY, null)?.let { s ->
+            val books = Gson().fromJson(
+                s,
+                object : TypeToken<MutableList<Book>>() {}.type
+            ) as MutableList<Book>
+
+            books.removeIf { it.id == bookData.id }
+
+            GlobalData.getSharedPreferences().edit().putString(
+                ListaZeljaFragment.SHARED_PREFS_KEY,
+                Gson().toJson(books)
+            ).commit()
+        }
     }
 
     private fun String.removeHtmlPTag(): String {

@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".fragments.main.ListaZeljaFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista_zelja_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Lista zelja" />
+        android:padding="@dimen/item_offset"
+        android:clipToPadding="false" />
 
 </FrameLayout>
