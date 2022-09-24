@@ -141,6 +141,15 @@
                 app:nullable="true"
                 android:defaultValue="@null" />
         </action>
+        <action
+            android:id="@+id/nav_action_knjige_to_all_categories_or_genres"
+            app:destination="@id/menu_item_all_categories_or_genres">
+            <argument
+                android:name="CATEGORIES_OR_GENRES"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="categories" />
+        </action>
     </fragment>
 
     <fragment
@@ -213,6 +222,27 @@
             <argument
                 android:name="BOOK_DATA"
                 app:argType="com.ets.onlinebiblioteka.models.Book" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_item_all_categories_or_genres"
+        android:name="com.ets.onlinebiblioteka.fragments.main.AllCategoriesOrGenresFragment"
+        android:label=""
+        tools:layout="@layout/fragment_all_categories_or_genres">
+        <action
+            android:id="@+id/nav_action_all_categories_or_genres_to_all_books"
+            app:destination="@id/menu_item_all_books">
+            <argument
+                android:name="TEXT_QUERY"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <argument
+                android:name="SELECTED_FILTERS"
+                app:argType="com.ets.onlinebiblioteka.models.filters.SelectedFilters"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </action>
     </fragment>
 

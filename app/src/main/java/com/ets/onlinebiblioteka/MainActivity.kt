@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
     private var nonTopLevelFragments = setOf(
         R.id.menu_item_filters,
         R.id.menu_item_search_fragment,
-        R.id.menu_item_all_books
+        R.id.menu_item_all_books,
+        R.id.menu_item_all_categories_or_genres
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -191,5 +192,9 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
             drawerLayout.close()
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
+    }
+
+    fun setTitle(title: String) {
+        supportActionBar?.title = title
     }
 }

@@ -299,6 +299,15 @@ class KnjigeFragment : Fragment() {
             val action = KnjigeFragmentDirections.navActionKnjigeToAllBooks(textQuery, viewModel.getSelectedFilters().value)
             findNavController().navigate(action)
         }
+
+        categoriesBtnMore.setOnClickListener {
+            val action = KnjigeFragmentDirections.navActionKnjigeToAllCategoriesOrGenres("categories")
+            findNavController().navigate(action)
+        }
+        genresBtnMore.setOnClickListener {
+            val action = KnjigeFragmentDirections.navActionKnjigeToAllCategoriesOrGenres("genres")
+            findNavController().navigate(action)
+        }
     }
 
     private fun <T> setupGrid(

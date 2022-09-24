@@ -7,15 +7,15 @@ import kotlinx.parcelize.Parcelize
 data class SelectedFilters(
     var availability: String?,
 
-    val categories: MutableList<Pair<Int, String>>,
-    val genres: MutableList<Pair<Int, String>>,
+    var categories: MutableList<Pair<Int, String>>,
+    var genres: MutableList<Pair<Int, String>>,
     val authors: MutableList<Pair<Int, String>>,
 
     var publisher: Pair<Int, String>?,
     var script: Pair<Int, String>?,
     var language: Pair<Int, String>?,
 
-) : Parcelable {
+    ) : Parcelable {
     fun isEmpty(): Boolean {
         return (categories.isEmpty() &&
                 genres.isEmpty() &&
