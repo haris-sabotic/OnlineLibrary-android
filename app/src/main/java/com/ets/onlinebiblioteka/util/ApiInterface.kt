@@ -82,4 +82,7 @@ interface ApiInterface {
 
     @GET("book-spec/{book}")
     fun bookSpecs(@Path("book") bookId: Int): Call<BookSpecs>
+
+    @GET("similar-books/{book}")
+    fun getSimilarBooks(@Path("book") bookId: Int): Call<ArrayList<Book>>
 }

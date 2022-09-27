@@ -216,6 +216,13 @@
                 app:nullable="true"
                 android:defaultValue="@null" />
         </action>
+        <action
+            android:id="@+id/nav_action_book_details_to_book_details"
+            app:destination="@id/menu_item_book_details">
+            <argument
+                android:name="BOOK_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.Book" />
+        </action>
     </fragment>
 
 

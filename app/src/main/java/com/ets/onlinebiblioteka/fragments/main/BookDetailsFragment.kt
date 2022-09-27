@@ -17,12 +17,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.adapters.BooksAdapter
 import com.ets.onlinebiblioteka.models.Book
 import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.util.FilterModelController
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.ets.onlinebiblioteka.util.ItemOffsetDecoration
 import com.ets.onlinebiblioteka.viewmodels.BookDetailsViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
@@ -65,6 +69,7 @@ class BookDetailsFragment : Fragment() {
     private lateinit var btnSave: LinearLayout
     private lateinit var btnSaveText: TextView
     private lateinit var btnSaveIcon: ImageView
+    private lateinit var recyclerSimilar: RecyclerView
 
     private var descriptionReadMoreShown = false
     private var bookSaved = false
@@ -126,6 +131,7 @@ class BookDetailsFragment : Fragment() {
         btnSave = view.findViewById(R.id.book_details_btn_save)
         btnSaveText = view.findViewById(R.id.book_details_btn_save_text)
         btnSaveIcon = view.findViewById(R.id.book_details_btn_save_icon)
+        recyclerSimilar = view.findViewById(R.id.book_details_recycler_view_similar_books)
 
         textTitle.text = bookData.title
 
@@ -327,6 +333,32 @@ class BookDetailsFragment : Fragment() {
             }
         }
 
+        viewModel.loadSimilarBooks(bookData.id)
+        recyclerSimilar.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        recyclerSimilar.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
+        viewModel.getSimilarBooks().observe(viewLifecycleOwner) {
+            recyclerSimilar.adapter = BooksAdapter(
+                it.toMutableList(),
+                requireContext(),
+                { item ->
+                    val action = BookDetailsFragmentDirections.navActionBookDetailsToBookDetails(item)
+                    findNavController().navigate(action)
+                },
+                { available ->
+                    Snackbar.make(
+                        view,
+                        if (available) {
+                            "Knjiga je na raspolaganju"
+                        } else {
+                            "Knjiga je izdata, trenutno je nemamo u biblioteci"
+                        },
+                        Snackbar.LENGTH_SHORT
+                    ).setAction("OK") {
+                    }.show()
+                },
+                false
+            )
+        }
 
         btnBack.setOnClickListener {
             requireActivity().onBackPressed()

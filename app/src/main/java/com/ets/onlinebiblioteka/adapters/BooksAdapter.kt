@@ -20,7 +20,8 @@ class BooksAdapter(
     val items: MutableList<Book>,
     val context: Context,
     val onBookClick: (item: Book) -> Unit,
-    val onAvailabilityIconClick: (available: Boolean) -> Unit
+    val onAvailabilityIconClick: (available: Boolean) -> Unit,
+    val wrapContentCardHeight: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var textTitle = itemView.findViewById<TextView>(R.id.card_book_text_title)
@@ -62,6 +63,10 @@ class BooksAdapter(
             .inflate(R.layout.card_book, parent, false)
 
         view.layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT
+
+        if (wrapContentCardHeight) {
+            view.layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+        }
 
         return ViewHolder(view)
     }

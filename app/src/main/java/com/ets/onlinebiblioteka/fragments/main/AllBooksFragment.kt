@@ -85,7 +85,8 @@ class AllBooksFragment : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).setAction("OK") {
                 }.show()
-            }
+            },
+            true
         )
 
         viewModel.getBooks().observe(viewLifecycleOwner) {

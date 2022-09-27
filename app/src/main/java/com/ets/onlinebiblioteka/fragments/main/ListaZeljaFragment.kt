@@ -63,7 +63,8 @@ class ListaZeljaFragment : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).setAction("OK") {
                 }.show()
-            }
+            },
+            true
         )
     }
 }
