@@ -2,19 +2,27 @@ package com.ets.onlinebiblioteka.util
 
 import com.ets.onlinebiblioteka.models.*
 import com.ets.onlinebiblioteka.models.filters.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+
 
 interface ApiInterface {
     companion object {
         private val BASE_URL = "https://tim7.ictcortex.me/api/"
 
         fun create(): ApiInterface {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
+
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
+                .client(client)
                 .build()
 
             return retrofit.create(ApiInterface::class.java)
@@ -85,4 +93,14 @@ interface ApiInterface {
 
     @GET("similar-books/{book}")
     fun getSimilarBooks(@Path("book") bookId: Int): Call<ArrayList<Book>>
+
+    @POST("rezervisi")
+    fun reserve(
+        @Header("Authorization") token: String,
+        @Query("id") bookId: Int,
+        @Query("dateFrom") dateFrom: String,
+        @Query("dateTo") dateTo: String,
+        @Query("phoneNumber") phoneNumber: String,
+    ): Call<ReserveResponse>
+
 }

@@ -23,15 +23,22 @@ import com.bumptech.glide.Glide
 import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.adapters.BooksAdapter
 import com.ets.onlinebiblioteka.models.Book
+import com.ets.onlinebiblioteka.models.User
 import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.util.FilterModelController
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.util.ItemOffsetDecoration
 import com.ets.onlinebiblioteka.viewmodels.BookDetailsViewModel
+import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 import com.google.android.material.chip.Chip
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class BookDetailsFragment : Fragment() {
@@ -66,10 +73,20 @@ class BookDetailsFragment : Fragment() {
     private lateinit var bookSpecsTextFormat: TextView
     private lateinit var bookSpecsTextIsbn: TextView
     private lateinit var bookSpecsProgressBar: ProgressBar
+    private lateinit var btnReserve: LinearLayout
     private lateinit var btnSave: LinearLayout
     private lateinit var btnSaveText: TextView
     private lateinit var btnSaveIcon: ImageView
     private lateinit var recyclerSimilar: RecyclerView
+    private lateinit var bottomSheetReserve: ConstraintLayout
+    private lateinit var reserveTitle: TextView
+    private lateinit var reserveCloseBtn: ImageView
+    private lateinit var reserveEtName: TextInputLayout
+    private lateinit var reserveEtEmail: TextInputLayout
+    private lateinit var reserveEtPhone: TextInputLayout
+    private lateinit var reserveEtDate: TextInputEditText
+    private lateinit var reserveBtn: Button
+    private lateinit var reserveProgressBar: ProgressBar
 
     private var descriptionReadMoreShown = false
     private var bookSaved = false
@@ -128,10 +145,20 @@ class BookDetailsFragment : Fragment() {
         bookSpecsTextFormat = view.findViewById(R.id.book_details_specs_text_format)
         bookSpecsTextIsbn = view.findViewById(R.id.book_details_specs_text_isbn)
         bookSpecsProgressBar = view.findViewById(R.id.book_details_specs_progress_bar)
+        btnReserve = view.findViewById(R.id.book_details_btn_reserve)
         btnSave = view.findViewById(R.id.book_details_btn_save)
         btnSaveText = view.findViewById(R.id.book_details_btn_save_text)
         btnSaveIcon = view.findViewById(R.id.book_details_btn_save_icon)
         recyclerSimilar = view.findViewById(R.id.book_details_recycler_view_similar_books)
+        reserveTitle = view.findViewById(R.id.book_details_reserve_text_label_title)
+        reserveCloseBtn = view.findViewById(R.id.book_details_reserve_btn_close)
+        reserveEtName = view.findViewById(R.id.book_details_reserve_et_name)
+        reserveEtEmail = view.findViewById(R.id.book_details_reserve_et_email)
+        reserveEtPhone = view.findViewById(R.id.book_details_reserve_et_tel)
+        reserveEtDate = view.findViewById(R.id.book_details_reserve_date)
+        reserveBtn = view.findViewById(R.id.book_details_reserve_button)
+        reserveProgressBar = view.findViewById(R.id.book_details_reserve_progress_bar)
+        bottomSheetReserve = view.findViewById(R.id.book_details_bottom_sheet_reserve)
 
         textTitle.text = bookData.title
 
@@ -164,6 +191,8 @@ class BookDetailsFragment : Fragment() {
             chipAvailability.setTextColor(color)
 
             chipAvailability.setText(R.string.izdato)
+
+            btnReserve.alpha = 0.6F
         }
 
         var summary = bookData.summary.trim().removeHtmlPTag()
@@ -358,6 +387,75 @@ class BookDetailsFragment : Fragment() {
                 },
                 false
             )
+        }
+
+
+        btnReserve.setOnClickListener {
+            if (!bookData.available) {
+                Snackbar.make(
+                    view,
+                    "Svi primjerci su izdati, ne možete rezervisati!",
+                    Snackbar.LENGTH_SHORT
+                ).setAction("OK") {
+                }.show()
+            } else {
+                bottomSheetReserve.visibility = View.VISIBLE
+            }
+        }
+
+        reserveCloseBtn.setOnClickListener {
+            bottomSheetReserve.visibility = View.GONE
+        }
+
+        GlobalData.getSharedPreferences().getString(ProfileViewModel.USER_DATA_SHARED_PREFS_KEY, null)?.let {
+            val data = Gson().fromJson(it, User::class.java)
+
+            reserveEtName.hint = data.name
+            reserveEtEmail.hint = data.email
+        }
+
+        var selectedDateFrom: String = ""
+        var selectedDateTo: String = ""
+
+        reserveEtDate.setOnClickListener {
+            val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText("PERIOD REZERVACIJE")
+                .build()
+
+            dateRangePicker.addOnPositiveButtonClickListener {
+                selectedDateFrom = SimpleDateFormat("yyyy-MM-dd").format(Date(it.first))
+                selectedDateTo = SimpleDateFormat("yyyy-MM-dd").format(Date(it.second))
+
+                val previewFrom = SimpleDateFormat("MMM dd, yyyy").format(Date(it.first))
+                val previewTo = SimpleDateFormat("MMM dd, yyyy").format(Date(it.second))
+                val parent = view.findViewById<TextInputLayout>(R.id.book_details_reserve_date_layout)
+                parent.hint = "$previewFrom - $previewTo"
+            }
+
+            dateRangePicker.show(parentFragmentManager, null)
+        }
+
+        reserveBtn.setOnClickListener {
+            reserveProgressBar.visibility = View.VISIBLE
+            if (selectedDateFrom.isNotEmpty() && selectedDateTo.isNotEmpty()) {
+                viewModel.reserveBook(bookData.id, selectedDateFrom, selectedDateTo, reserveEtPhone.editText!!.text.toString())
+            } else {
+                Toast.makeText(requireContext(), "Izaberite datum", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.getReserveResponse().observe(viewLifecycleOwner) { response ->
+            response?.let {
+                reserveProgressBar.visibility = View.GONE
+                bottomSheetReserve.visibility = View.GONE
+
+                Snackbar.make(
+                    view,
+                    "Rezervacija je uspješna!",
+                    Snackbar.LENGTH_SHORT
+                ).setAction("OK") {
+                }.show()
+            }
         }
 
         btnBack.setOnClickListener {

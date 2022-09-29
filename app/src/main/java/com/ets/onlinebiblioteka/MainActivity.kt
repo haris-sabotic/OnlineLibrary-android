@@ -62,6 +62,8 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
 
         GlobalData.loadSharedPreferences(applicationContext)
 
+        viewModel.loadUser()
+
         setupNavigation()
         setupDrawer()
 
@@ -72,15 +74,17 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         val txtEmail = navHeader.findViewById<TextView>(R.id.nav_drawer_header_text_email)
         val imgProfile = navHeader.findViewById<ImageView>(R.id.nav_drawer_header_img)
 
-        viewModel.getUser().observe(this) {
-            txtName.text = it.name
-            txtEmail.text = it.email
+        viewModel.getUser().observe(this) { user ->
+            user?.let {
+                txtName.text = it.name
+                txtEmail.text = it.email
 
-            Glide.with(this)
-                .load(GlobalData.getImageUrl(it.photo))
-                .centerCrop()
-                .placeholder(R.color.black)
-                .into(imgProfile)
+                Glide.with(this)
+                    .load(GlobalData.getImageUrl(it.photo))
+                    .centerCrop()
+                    .placeholder(R.color.black)
+                    .into(imgProfile)
+            }
         }
 
         navHeader.setOnClickListener {

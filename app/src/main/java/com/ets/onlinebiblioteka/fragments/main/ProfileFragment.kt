@@ -29,6 +29,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.loadUser()
+
         val nameText = view.findViewById<TextView>(R.id.profile_text_ime)
         val jmbgText = view.findViewById<TextView>(R.id.profile_text_jmbg)
         val emailText = view.findViewById<TextView>(R.id.profile_text_email)
@@ -42,20 +44,22 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        viewModel.getUser().observe(viewLifecycleOwner) {
-            nameText.text = it.name
-            jmbgText.text = it.jmbg
-            emailText.text = it.email
-            usernameText.text = it.username
+        viewModel.getUser().observe(viewLifecycleOwner) { user ->
+            user?.let {
+                nameText.text = it.name
+                jmbgText.text = it.jmbg
+                emailText.text = it.email
+                usernameText.text = it.username
 
-            photoUrl = GlobalData.getImageUrl(it.photo)
-            Glide.with(this)
-                .load(photoUrl)
-                .centerCrop()
-                .placeholder(R.color.black)
-                .into(view.findViewById(R.id.profile_img))
+                photoUrl = GlobalData.getImageUrl(it.photo)
+                Glide.with(this)
+                    .load(photoUrl)
+                    .centerCrop()
+                    .placeholder(R.color.black)
+                    .into(view.findViewById(R.id.profile_img))
 
-            view.findViewById<ProgressBar>(R.id.profile_progress_bar).visibility = View.GONE
+                view.findViewById<ProgressBar>(R.id.profile_progress_bar).visibility = View.GONE
+            }
         }
 
         view.findViewById<ImageView>(R.id.profile_btn_back).setOnClickListener {

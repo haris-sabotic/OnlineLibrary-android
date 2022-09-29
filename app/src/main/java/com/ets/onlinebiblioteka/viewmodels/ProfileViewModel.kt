@@ -6,20 +6,21 @@ import androidx.lifecycle.ViewModel
 import com.ets.onlinebiblioteka.util.ApiInterface
 import com.ets.onlinebiblioteka.models.User
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ProfileViewModel : ViewModel() {
-    private val user: MutableLiveData<User> by lazy {
-        MutableLiveData<User>().also {
-            loadUser()
-        }
+    companion object {
+        val USER_DATA_SHARED_PREFS_KEY = "USER_DATA"
     }
+
+    private val user: MutableLiveData<User?> = MutableLiveData(null)
 
     private val failure: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    fun getUser(): LiveData<User> {
+    fun getUser(): LiveData<User?> {
         return user
     }
 
@@ -27,7 +28,14 @@ class ProfileViewModel : ViewModel() {
         return failure
     }
 
-    private fun loadUser() {
+    fun loadUser() {
+        GlobalData.getSharedPreferences().getString(USER_DATA_SHARED_PREFS_KEY, null)?.let {
+            val data = Gson().fromJson(it, User::class.java)
+
+            user.postValue(data)
+            return
+        }
+
         val token = GlobalData.getToken()
 
         val api = ApiInterface.create()
@@ -36,6 +44,10 @@ class ProfileViewModel : ViewModel() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
+                        GlobalData.getSharedPreferences().edit().putString(
+                            USER_DATA_SHARED_PREFS_KEY,
+                            Gson().toJson(it)
+                        ).commit()
                         user.postValue(it)
                     }
                 }
