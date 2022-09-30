@@ -261,4 +261,10 @@
         </action>
     </fragment>
 
+    <fragment
+        android:id="@+id/menu_item_settings"
+        android:name="com.ets.onlinebiblioteka.fragments.main.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
