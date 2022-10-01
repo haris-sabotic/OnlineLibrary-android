@@ -28,7 +28,10 @@ class SearchFragment : Fragment() {
 
     private var searchHistory = ArrayDeque<String>()
     private val MAX_HISTORY_SIZE = 10
-    private val HISTORY_SHARED_PREFS_KEY = "SEARCH_HISTORY"
+
+    companion object {
+        val HISTORY_SHARED_PREFS_KEY = "SEARCH_HISTORY"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

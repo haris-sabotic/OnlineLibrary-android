@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.util.GlobalData
 
 class SettingsFragment : Fragment() {
     override fun onCreateView(
@@ -28,6 +26,8 @@ class SettingsFragment : Fragment() {
         val btnNotifikacijeIcon = view.findViewById<ImageView>(R.id.settings_btn_expand)
         val notifikacijePreview = view.findViewById<TextView>(R.id.settings_dropdown_notifikacije_preview)
         val notifikacijeExpanded = view.findViewById<LinearLayout>(R.id.settings_dropdown_notifikacije_expanded)
+        val btnDeleteIstorijaPretrazivanja = view.findViewById<Button>(R.id.settings_btn_delete_istorija_pretrazivanja)
+        val btnDeleteListaZelja = view.findViewById<Button>(R.id.settings_btn_delete_lista_zelja)
 
         btnNotifikacije.setOnClickListener {
             if (isNotifikacijeExpanded) {
@@ -41,6 +41,36 @@ class SettingsFragment : Fragment() {
                 btnNotifikacijeIcon.rotation = 180F
                 isNotifikacijeExpanded = true
             }
+        }
+
+        btnDeleteIstorijaPretrazivanja.setOnClickListener {
+            GlobalData.getSharedPreferences()
+                .edit()
+                .remove(SearchFragment.HISTORY_SHARED_PREFS_KEY)
+                .commit()
+
+            btnDeleteIstorijaPretrazivanja.isEnabled = false
+
+            Toast.makeText(
+                requireContext(),
+                "Istorija pretraživanja uspješno obrisana",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        btnDeleteListaZelja.setOnClickListener {
+            GlobalData.getSharedPreferences()
+                .edit()
+                .remove(ListaZeljaFragment.SHARED_PREFS_KEY)
+                .commit()
+
+            btnDeleteListaZelja.isEnabled = false
+
+            Toast.makeText(
+                requireContext(),
+                "Lista želja uspješno obrisana",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
