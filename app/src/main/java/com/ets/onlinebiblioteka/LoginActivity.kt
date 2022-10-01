@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 
 class LoginActivity : AppCompatActivity() {
     lateinit var navHostFragment: NavHostFragment
@@ -19,6 +20,13 @@ class LoginActivity : AppCompatActivity() {
 
         GlobalData.getToken()?.let {
             startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        // Clear login data cached from previous login
+        GlobalData.getSharedPreferences().getString(ProfileViewModel.USER_DATA_SHARED_PREFS_KEY, null)?.let {
+            GlobalData.getSharedPreferences().edit()
+                .remove(ProfileViewModel.USER_DATA_SHARED_PREFS_KEY)
+                .commit()
         }
 
         navHostFragment =
