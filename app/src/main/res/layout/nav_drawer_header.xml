@@ -4,7 +4,8 @@
     android:id="@+id/nav_drawer_header"
     android:background="@color/light_blue"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp" >
 
     <View
         android:layout_width="0dp"
@@ -27,12 +28,14 @@
 
     <TextView
         android:id="@+id/nav_drawer_header_text_ime"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/TextHeadline6"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintLeft_toLeftOf="@id/nav_drawer_header_img"
+        app:layout_constraintRight_toLeftOf="@id/nav_drawer_header_icon_arrow"
         app:layout_constraintTop_toBottomOf="@id/nav_drawer_header_img" />
 
     <TextView
@@ -48,6 +51,7 @@
 
 
     <ImageView
+        android:id="@+id/nav_drawer_header_icon_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_triangle"
