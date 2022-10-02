@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -45,6 +46,7 @@ class MojiZahtjeviFragment : Fragment() {
         val fab = view.findViewById<FloatingActionButton>(R.id.moji_zahtjevi_fab_up)
         val chipGroup = view.findViewById<ChipGroup>(R.id.moji_zahtjevi_chip_group)
         val progressBar = view.findViewById<ProgressBar>(R.id.moji_zahtjevi_progress_bar)
+        val textNemaZahtjeva = view.findViewById<TextView>(R.id.moji_zahtjevi_text_nema_zahtjeva)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -74,6 +76,12 @@ class MojiZahtjeviFragment : Fragment() {
 
         viewModel.getItems().observe(viewLifecycleOwner) {
             progressBar.visibility = View.GONE
+            textNemaZahtjeva.visibility = if (it.size == 0) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
             recyclerView.adapter = MojiZahtjeviAdapter(it, requireContext()
             ) {
                 val action = MojiZahtjeviFragmentDirections.navActionMojiZahtjeviToZahtjevInfo(it)
