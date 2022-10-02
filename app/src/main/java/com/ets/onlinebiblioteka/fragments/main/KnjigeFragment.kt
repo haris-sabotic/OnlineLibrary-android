@@ -43,6 +43,7 @@ class KnjigeFragment : Fragment() {
 
     private lateinit var scrollView: ScrollView
     private lateinit var fab: FloatingActionButton
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +76,8 @@ class KnjigeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar = view.findViewById(R.id.knjige_progress_bar)
+
         if (arguments != null) {
             textQuery = arguments!!.getString("TEXT_QUERY")
 
@@ -82,6 +85,7 @@ class KnjigeFragment : Fragment() {
             viewModel.setSelectedFilters(filters)
         } else {
             viewModel.search(textQuery)
+            progressBar.visibility = View.VISIBLE
         }
 
 
@@ -125,6 +129,7 @@ class KnjigeFragment : Fragment() {
             btnClearQuery.visibility = View.GONE
             textQuery = null
             viewModel.search(textQuery)
+            progressBar.visibility = View.VISIBLE
         }
 
         var selectedFiltersInitialObserve = true
@@ -133,6 +138,7 @@ class KnjigeFragment : Fragment() {
 
             if (!selectedFiltersInitialObserve) {
                 viewModel.search(textQuery)
+                progressBar.visibility = View.VISIBLE
             } else {
                 selectedFiltersInitialObserve = false
             }
@@ -194,6 +200,8 @@ class KnjigeFragment : Fragment() {
 
         viewModel.getBooks().observe(viewLifecycleOwner) {
             it?.let { books ->
+                progressBar.visibility = View.GONE
+
                 // "23 knjige", "37 knjiga"
                 val count = books.count.toString()
                 countText.text = when (count[count.length - 1]) {
