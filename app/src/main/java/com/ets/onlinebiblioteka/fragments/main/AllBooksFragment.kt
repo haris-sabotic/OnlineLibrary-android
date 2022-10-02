@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,6 +29,7 @@ class AllBooksFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var progressBarBottom: ProgressBar
+    private lateinit var textNoBooks: TextView
 
     private var page = 1
     private var canLoadMore = true
@@ -64,6 +66,7 @@ class AllBooksFragment : Fragment() {
         recyclerView = view.findViewById(R.id.all_books_recycler_view)
         progressBar = view.findViewById(R.id.all_books_progress_bar)
         progressBarBottom = view.findViewById(R.id.all_books_progress_bar_bottom)
+        textNoBooks = view.findViewById(R.id.all_books_text_no_books)
 
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
@@ -100,6 +103,13 @@ class AllBooksFragment : Fragment() {
                 (recyclerView.adapter as BooksAdapter).addMoreBooks(books.data)
 
                 viewModel.clearBooks()
+
+                textNoBooks.visibility =
+                    if ((recyclerView.adapter as BooksAdapter).items.size == 0) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
             }
         }
 
