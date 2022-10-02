@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.main.SearchFragment">
+
+    <TextView
+        android:id="@+id/search_text_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skorija pretraživanja"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler_view_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</FrameLayout>
+</LinearLayout>

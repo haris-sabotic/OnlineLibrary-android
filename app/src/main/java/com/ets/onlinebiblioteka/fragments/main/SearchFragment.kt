@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -84,8 +85,16 @@ class SearchFragment : Fragment() {
             activity!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
 
+        val textCaption = view.findViewById<TextView>(R.id.search_text_caption)
+
         editText.addTextChangedListener { text ->
-            (recyclerView.adapter as SearchHistoryAdapter).search(text.toString())
+            (recyclerView.adapter as SearchHistoryAdapter).search(text.toString()) { n ->
+                textCaption.text = if (n == searchHistory.size) {
+                    "Skorija pretraživanja"
+                } else {
+                    "Rezultati"
+                }
+            }
         }
 
         searchBtn.setOnClickListener { search() }

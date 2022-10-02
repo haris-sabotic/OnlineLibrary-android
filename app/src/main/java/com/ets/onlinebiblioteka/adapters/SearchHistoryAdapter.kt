@@ -71,7 +71,7 @@ class SearchHistoryAdapter(
         return items.size
     }
 
-    fun search(query: String) {
+    fun search(query: String, onItemNumChanged: (n: Int) -> Unit) {
         filteredItems.clear()
 
         if(query.isEmpty()) {
@@ -89,6 +89,7 @@ class SearchHistoryAdapter(
             }
         }
 
+        onItemNumChanged(filteredItems.size)
         notifyDataSetChanged()
     }
 }
