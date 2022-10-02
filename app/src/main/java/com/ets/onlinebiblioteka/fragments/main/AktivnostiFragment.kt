@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,7 @@ class AktivnostiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.aktivnosti_recycler_view)
+        val textNoActivities = view.findViewById<TextView>(R.id.aktivnosti_text_no_activities)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.loadItems()
@@ -41,6 +43,12 @@ class AktivnostiFragment : Fragment() {
         }
 
         viewModel.getItems().observe(viewLifecycleOwner) {
+            textNoActivities.visibility = if (it.size == 0) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
             recyclerView.adapter = AktivnostiAdapter(it, requireContext())
         }
     }
