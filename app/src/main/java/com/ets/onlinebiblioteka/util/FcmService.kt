@@ -48,7 +48,6 @@ class FcmService : FirebaseMessagingService() {
         if (message.from == "/topics/$TOPIC_NOVA_KNJIGA" &&
             GlobalData.getSharedPreferences().getBoolean(TOPIC_NOVA_KNJIGA, true)) {
             val book = message.data.toBook()
-            val imageUrl = GlobalData.getImageUrl(book.photo.ifEmpty { "black.png" })
             val title = book.title
 
             val intent = Intent(this, LoginActivity::class.java).apply {
@@ -57,29 +56,17 @@ class FcmService : FirebaseMessagingService() {
             }
             val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
+            val builder = NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_app)
+                .setContentTitle("Nova knjiga")
+                .setContentText("Knjiga po imenu $title je dodata u bazu podataka.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
 
-
-            Glide.with(this)
-                .asBitmap()
-                .load(imageUrl)
-                .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                        val builder = NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
-                            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(resource))
-                            .setSmallIcon(R.mipmap.ic_app)
-                            .setContentTitle("Nova knjiga")
-                            .setContentText("Knjiga po imenu $title je dodata u bazu podataka.")
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setContentIntent(pendingIntent)
-                            .setAutoCancel(true)
-
-                        with(NotificationManagerCompat.from(applicationContext)) {
-                            notify(0, builder.build())
-                        }
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) { }
-                })
+            with(NotificationManagerCompat.from(applicationContext)) {
+                notify(0, builder.build())
+            }
         }
 
 
