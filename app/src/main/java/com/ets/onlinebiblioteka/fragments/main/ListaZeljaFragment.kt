@@ -45,6 +45,7 @@ class ListaZeljaFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.lista_zelja_recycler_view)
         val textNoBooks = view.findViewById<TextView>(R.id.lista_zelja_text_no_books)
 
+        // show text saying there's no books if there are none
         textNoBooks.visibility = if (books.size == 0) {
             View.VISIBLE
         } else {
@@ -52,15 +53,17 @@ class ListaZeljaFragment : Fragment() {
         }
 
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
+        recyclerView.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset)) // space items evenly
         recyclerView.adapter = BooksAdapter(
             books.reversed().toMutableList(),
             requireContext(),
             { item ->
+                // show book details on click
                 val action = ListaZeljaFragmentDirections.navActionListaZeljaToBookDetails(item)
                 findNavController().navigate(action)
             },
             { available ->
+                // show message when you click on the book availability icon
                 Snackbar.make(
                     view,
                     if (available) {

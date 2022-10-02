@@ -124,6 +124,7 @@ class KnjigeFragment : Fragment() {
             btnClearQuery.visibility = View.GONE
         }
 
+        // clear search query and search books again
         btnClearQuery.setOnClickListener {
             resultsTitle.text = "Popularne knjige"
             btnClearQuery.visibility = View.GONE
@@ -443,6 +444,7 @@ class KnjigeFragment : Fragment() {
         }
     }
 
+    // convert float to dp units
     private fun Float.asDp(): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,

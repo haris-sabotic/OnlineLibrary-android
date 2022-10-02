@@ -70,6 +70,7 @@ class AuthorDetailsFragment : Fragment() {
         textName.text = authorData.name
 
 
+        // load summary from author data
         var summary = if (authorData.biography == null) {
             "Autor nema opis"
         } else {
@@ -86,12 +87,14 @@ class AuthorDetailsFragment : Fragment() {
 
         textDescription.text = summary
 
+        // Knjige od autora <b>${author name}</b>
         textLabelMoreBooks.text = SpannableStringBuilder("Knjige od autora ").append(
             "\"${authorData.name}\"",
             StyleSpan(android.graphics.Typeface.BOLD),
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
+        // show more/less when you click the button
         btnReadMore.setOnClickListener {
             if (descriptionReadMoreShown) {
                 var summary = if (authorData.biography == null) {
@@ -127,16 +130,18 @@ class AuthorDetailsFragment : Fragment() {
 
         viewModel.loadMoreBooks(authorData.id)
         recyclerMoreBooks.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        recyclerMoreBooks.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
+        recyclerMoreBooks.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset)) // space items evenly
         viewModel.getMoreBooks().observe(viewLifecycleOwner) {
             recyclerMoreBooks.adapter = BooksAdapter(
                 it.toMutableList(),
                 requireContext(),
                 { item ->
+                    // open up book details on click
                     val action = AuthorDetailsFragmentDirections.navActionAuthorDetailsToBookDetails(item)
                     findNavController().navigate(action)
                 },
                 { available ->
+                    // show message when clicking the book availability icon
                     Snackbar.make(
                         view,
                         if (available) {
@@ -153,7 +158,8 @@ class AuthorDetailsFragment : Fragment() {
         }
     }
 
-
+    // <p>text goes here</p> -> text goes here
+    // some author biographies get stored in the database with html p tags around them
     private fun String.removeHtmlPTag(): String {
         if (startsWith("<p>")) {
             var new = removeRange(0, "<p>".length)

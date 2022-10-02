@@ -32,8 +32,6 @@ class ZahtjevInfoViewModel : ViewModel() {
                     call: Call<IzbrisiTransakciju>,
                     response: Response<IzbrisiTransakciju>
                 ) {
-                    Log.d("ZAHTJEV_INFO_VIEWMODEL", "onResponse")
-                    Log.d("ZAHTJEV_INFO_VIEWMODEL", response.toString())
                     response.body()?.let {
                         msg.postValue(it.msg)
                     }

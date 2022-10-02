@@ -18,6 +18,7 @@ class AuthorDetailsViewModel : ViewModel() {
     }
 
     fun loadMoreBooks(authorId: Int, page: Int = 0) {
+        // search for all books with this author
         ApiInterface.create().searchBooks(
             page,
             null,

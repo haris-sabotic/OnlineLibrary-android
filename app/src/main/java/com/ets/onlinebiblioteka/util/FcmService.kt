@@ -45,17 +45,20 @@ class FcmService : FirebaseMessagingService() {
         createNotificationChannel()
         GlobalData.loadSharedPreferences(applicationContext)
 
+        // show message from topic if it's been enabled in settings
         if (message.from == "/topics/$TOPIC_NOVA_KNJIGA" &&
             GlobalData.getSharedPreferences().getBoolean(TOPIC_NOVA_KNJIGA, true)) {
             val book = message.data.toBook()
             val title = book.title
 
+            // open app and show the new book when you click the notification
             val intent = Intent(this, LoginActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 putExtra(TOPIC_NOVA_KNJIGA , book)
             }
             val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
+            // set up notification
             val builder = NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_app)
                 .setContentTitle("Nova knjiga")
@@ -64,6 +67,7 @@ class FcmService : FirebaseMessagingService() {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
 
+            // show notification
             with(NotificationManagerCompat.from(applicationContext)) {
                 notify(0, builder.build())
             }
@@ -89,6 +93,7 @@ class FcmService : FirebaseMessagingService() {
         }
     }
 
+    // utility function to convert the data map firebase returns to a book model
     private fun Map<String, String>.toBook(): Book {
         return Book(
             id = this["id"]!!.toInt(),

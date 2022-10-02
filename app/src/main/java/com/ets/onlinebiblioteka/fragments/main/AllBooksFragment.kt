@@ -39,10 +39,12 @@ class AllBooksFragment : Fragment() {
 
         (requireActivity() as NavDrawerController).setDrawerEnabled(false)
 
+        // load search query and filters passed from previous fragment
         arguments?.let {
             textQuery = it.getString("TEXT_QUERY")
             selectedFilters = it.getParcelable("SELECTED_FILTERS")
 
+            // load books right away
             viewModel.loadBooks(1, textQuery, selectedFilters)
         }
     }
@@ -51,6 +53,7 @@ class AllBooksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // reload books when going back to this fragment over the backstack
         if (arguments == null) {
             viewModel.loadBooks(1, textQuery, selectedFilters)
         } else {
@@ -74,10 +77,12 @@ class AllBooksFragment : Fragment() {
             mutableListOf(),
             requireContext(),
             { item ->
+                // open up book details on click
                 val action = AllBooksFragmentDirections.navActionAllBooksToBookDetails(item)
                 findNavController().navigate(action)
             },
             { available ->
+                // show message when clicking the book availability icon
                 Snackbar.make(
                     view,
                     if (available) {
@@ -104,6 +109,7 @@ class AllBooksFragment : Fragment() {
 
                 viewModel.clearBooks()
 
+                // show text saying there's no books if there are none
                 textNoBooks.visibility =
                     if ((recyclerView.adapter as BooksAdapter).items.size == 0) {
                         View.VISIBLE
@@ -113,6 +119,7 @@ class AllBooksFragment : Fragment() {
             }
         }
 
+        // load more books when you scroll to the bottom(if possible)
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)

@@ -40,6 +40,7 @@ class FiltersFragment : Fragment() {
 
         (requireActivity() as NavDrawerController).setDrawerEnabled(false)
 
+        // get text query from previous fragment(SearchFragment) so that you can pass it back unchanged
         arguments?.let {
             textQuery = it.getString("TEXT_QUERY")
         }
@@ -56,6 +57,9 @@ class FiltersFragment : Fragment() {
             return super.onOptionsItemSelected(item)
         }
 
+        // when you press the confirm button
+
+        // prepare category, genre and author filters
         val categories = if (selectedKategorije.isNotEmpty()) {
             selectedKategorije.toList()
         } else {
@@ -72,6 +76,7 @@ class FiltersFragment : Fragment() {
             listOf()
         }
 
+        // prepare publisher, script and language filters
         val publisher = if (selectedIzdavaci.isNotEmpty()) {
             selectedIzdavaci.toList()[0]
         } else {
@@ -98,6 +103,7 @@ class FiltersFragment : Fragment() {
             language
         )
 
+        // go back to previous screen with the selected filters
         val action = FiltersFragmentDirections.navActionFiltersToKnjige(selectedFilters, textQuery)
         findNavController().navigate(action)
 
@@ -120,6 +126,7 @@ class FiltersFragment : Fragment() {
 
         root = view.findViewById(R.id.filters_root)
 
+        // set up availability filters
         setupChipGroup(
             view,
             R.id.filters_chip_group_dostupnost,
@@ -127,6 +134,8 @@ class FiltersFragment : Fragment() {
         ) { v ->
             selectedDostupnost = v
         }
+
+        // set up every other filter
         setupFilter(
             "Kategorija",
             false,
@@ -174,6 +183,7 @@ class FiltersFragment : Fragment() {
     fun setupChipGroup(view: View, chipGroupId: Int, chips: List<String>, onChecked: (String?) -> Unit) {
         val chipGroup = view.findViewById<ChipGroup>(chipGroupId)
 
+        // add new chip for every item to the chip group dynamically
         for (chipText in chips) {
             val chip = layoutInflater.inflate(
                 R.layout.chip_filter,
@@ -248,6 +258,7 @@ class FiltersFragment : Fragment() {
             loadFun(1)
         }
 
+        // go back to previous page in expanded mode
         btnPrev.setOnClickListener {
             getFun().value?.let { liveData ->
                 if (liveData.prevPageUrl != null) {
@@ -257,6 +268,7 @@ class FiltersFragment : Fragment() {
             }
         }
 
+        // go to next page in expanded mode
         btnNext.setOnClickListener {
             getFun().value?.let { liveData ->
                 if (liveData.nextPageUrl != null) {
@@ -295,6 +307,7 @@ class FiltersFragment : Fragment() {
                 itemRoot.addView(chipGroup, itemRoot.indexOfChild(scrollView))
             }
 
+            // add new chip for every item to the chip group dynamically
             for (filter in it.data) {
                 val chip = layoutInflater.inflate(
                     R.layout.chip_filter,

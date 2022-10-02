@@ -41,14 +41,20 @@ class MojiZahtjeviAdapter(
                 .centerCrop()
                 .placeholder(R.color.black)
                 .into(img)
+
             title.text = item.book.title
+
+            // only show first author(if it exists)
             if (item.book.authors.isNotEmpty()) {
                 author.text = "by ${item.book.authors[0].name}"
             } else {
                 author.text = ""
             }
 
+            // only show the yyyy-mm-dd part of the date
             dateFrom.text = item.dateFrom.substring(0, 10)
+            // only show the yyyy-mm-dd part of the date and set a custom message with a different
+            // color if the date is empty
             if (item.dateTo == "") {
                 dateTo.setTextColor(ContextCompat.getColor(context, R.color.red))
                 dateTo.setText(R.string.nije_vracena)
@@ -57,6 +63,7 @@ class MojiZahtjeviAdapter(
                 dateTo.text = item.dateTo.substring(0, 10)
             }
 
+            // setup chip text and style
             when(item.type) {
                 "reservation rejected" -> {
                     val color = ContextCompat.getColor(context, R.color.red)

@@ -27,6 +27,7 @@ class MojiZahtjeviFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // load snackbar message to show from the previous fragment
         arguments?.let {
             snackbarMessage = it.getString("snackbar_message")
         }
@@ -50,6 +51,7 @@ class MojiZahtjeviFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // show snackbar message from previous fragment and reload items
         snackbarMessage?.let {
             Snackbar.make(
                 requireView(),
@@ -76,6 +78,7 @@ class MojiZahtjeviFragment : Fragment() {
 
         viewModel.getItems().observe(viewLifecycleOwner) {
             progressBar.visibility = View.GONE
+            // show text saying there's nothing to show if there isn't
             textNemaZahtjeva.visibility = if (it.size == 0) {
                 View.VISIBLE
             } else {
@@ -89,6 +92,7 @@ class MojiZahtjeviFragment : Fragment() {
             }
         }
 
+        // reload items when you select a filter
         chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
             progressBar.visibility = View.VISIBLE
             if (checkedIds.contains(R.id.moji_zahtjevi_chip_rezervacije)) {
@@ -102,6 +106,7 @@ class MojiZahtjeviFragment : Fragment() {
             }
         }
 
+        // scroll to the top
         fab.setOnClickListener {
             recyclerView.smoothScrollToPosition(0)
         }

@@ -27,12 +27,14 @@ class AllCategoriesOrGenresViewModel : ViewModel() {
 
     fun loadData(page: Int, categoriesOrGenres: String) {
         if (categoriesOrGenres == "categories") {
+            // load all categories
             ApiInterface.create().getKategorije(page).enqueue(object : Callback<Paginated<Kategorija>> {
                 override fun onResponse(
                     call: Call<Paginated<Kategorija>>,
                     response: Response<Paginated<Kategorija>>
                 ) {
                     response.body()?.let {
+                        // transform to category model
                         data.postValue(Paginated(
                             it.currentPage,
                             it.data.map { k ->
@@ -48,6 +50,7 @@ class AllCategoriesOrGenresViewModel : ViewModel() {
                 override fun onFailure(call: Call<Paginated<Kategorija>>, t: Throwable) { }
             })
         } else if (categoriesOrGenres == "genres") {
+            // load all genres
             ApiInterface.create().getZanrovi(page).enqueue(object : Callback<Paginated<Zanr>> {
                 override fun onResponse(
                     call: Call<Paginated<Zanr>>,
@@ -55,6 +58,7 @@ class AllCategoriesOrGenresViewModel : ViewModel() {
                 ) {
                     response.body()?.let {
                         data.postValue(Paginated(
+                            // transform to genre model
                             it.currentPage,
                             it.data.map { k ->
                                 CategoryOrGenre(k.id, k.name, k.photo, k.description)

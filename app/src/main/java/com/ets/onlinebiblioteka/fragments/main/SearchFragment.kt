@@ -87,6 +87,7 @@ class SearchFragment : Fragment() {
 
         val textCaption = view.findViewById<TextView>(R.id.search_text_caption)
 
+        // change caption text
         editText.addTextChangedListener { text ->
             (recyclerView.adapter as SearchHistoryAdapter).search(text.toString()) { n ->
                 textCaption.text = if (n == searchHistory.size) {
@@ -97,6 +98,7 @@ class SearchFragment : Fragment() {
             }
         }
 
+        // submit search when you click done on the keyboard or click the search button
         searchBtn.setOnClickListener { search() }
         editText.setOnEditorActionListener { _, _, _ ->
             search()
@@ -113,10 +115,12 @@ class SearchFragment : Fragment() {
     private fun search() {
         val text: String = editText.text.toString()
         if (text.isNotEmpty()) {
+            // add to search history if the max limit hasn't been reached
             searchHistory.addFirst(text)
             if (searchHistory.size > MAX_HISTORY_SIZE) {
                 searchHistory.removeLast()
             }
+            // save search history to shared preferences
             GlobalData.getSharedPreferences().edit().putString(
                 HISTORY_SHARED_PREFS_KEY,
                 Gson().toJson(searchHistory)
@@ -124,6 +128,7 @@ class SearchFragment : Fragment() {
 
             actionBar.setDisplayShowCustomEnabled(false)
 
+            // hide keyboard
             val inputMethodManager: InputMethodManager =
                 activity!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(activity!!.currentFocus!!.windowToken, 0)

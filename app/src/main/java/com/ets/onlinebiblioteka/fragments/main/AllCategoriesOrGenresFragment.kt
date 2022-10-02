@@ -36,11 +36,13 @@ class AllCategoriesOrGenresFragment : Fragment() {
         (requireActivity() as NavDrawerController).setDrawerEnabled(false)
 
         arguments?.let {
+            // whether to load categories or genres
             categoriesOrGenres = it.getString("CATEGORIES_OR_GENRES")!!
 
             viewModel.loadData(1, categoriesOrGenres)
         }
 
+        // set title according to whether categories or genres are loading
         (requireActivity() as MainActivity).setTitle(
             if (categoriesOrGenres == "categories") {
                 "Kategorije"
@@ -54,6 +56,7 @@ class AllCategoriesOrGenresFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // reload data when going back to this fragment over the backstack
         if (arguments == null) {
             viewModel.loadData(1, categoriesOrGenres)
         } else {
@@ -76,18 +79,23 @@ class AllCategoriesOrGenresFragment : Fragment() {
             mutableListOf(),
             requireContext()
         ) { item ->
+            // show all books of the category or genre the user clicked
+
+            // create empty selected filters object
             val selectedFilters = SelectedFilters(
                 null,
                 mutableListOf(), mutableListOf(), mutableListOf(),
                 null, null, null
             )
 
+            // add current item as a category or genre
             if (categoriesOrGenres == "categories") {
                 selectedFilters.categories = mutableListOf(Pair(item.id, item.name))
             } else if (categoriesOrGenres == "genres") {
                 selectedFilters.genres = mutableListOf(Pair(item.id, item.name))
             }
 
+            // show all books
             val action =
                 AllCategoriesOrGenresFragmentDirections.navActionAllCategoriesOrGenresToAllBooks(
                     null, selectedFilters
@@ -110,6 +118,7 @@ class AllCategoriesOrGenresFragment : Fragment() {
             }
         }
 
+        // load more data when you scroll to the bottom
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)

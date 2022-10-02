@@ -78,6 +78,7 @@ class KnjigeViewModel : ViewModel() {
         val call: Call<Paginated<Book>>
         val filters = selectedFilters.value
 
+        // create api call with page, search query and selected filters
         if (filters == null) {
             call = ApiInterface.create().searchBooks(
                 1,
@@ -94,12 +95,14 @@ class KnjigeViewModel : ViewModel() {
             call = ApiInterface.create().searchBooks(
                 1,
                 textQuery,
+                // transform chip names to identifiers used by the api
                 when (filters.availability) {
                     "Izdato" -> "rented"
                     "Rezervisano" -> "reserved"
                     "Na raspolaganju" -> "available"
                     else -> null
                 },
+                // get only IDs from every (ID, name) pair
                 filters.categories.map { it.first },
                 filters.genres.map { it.first },
                 filters.authors.map { it.first },

@@ -30,6 +30,7 @@ class EditProfileViewModel : ViewModel() {
     }
 
     fun editUser(name: String, email: String, username: String, oldPass: String, newPass: String, newPassAgain: String) {
+        // validation
         if (newPass != newPassAgain) {
             status.postValue(EditProfileStatus.PASSWORD_CONFIRMATION_INVALID)
             return
@@ -39,7 +40,6 @@ class EditProfileViewModel : ViewModel() {
             status.postValue(EditProfileStatus.EMPTY_FIELDS)
             return
         }
-
 
         val token = GlobalData.getToken()
         val api = ApiInterface.create()

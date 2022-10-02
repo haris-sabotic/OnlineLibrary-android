@@ -42,12 +42,14 @@ class AktivnostiAdapter(
 
             val text = "${item.librarian} vam je izdao/la knjigu ${item.book}"
             val str = SpannableStringBuilder(text)
+            // mark librarian name as bold
             str.setSpan(
                 StyleSpan(Typeface.BOLD),
                 0,
                 item.librarian.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
+            // mark book title as bold
             str.setSpan(
                 StyleSpan(Typeface.BOLD),
                 text.length - item.book.length,

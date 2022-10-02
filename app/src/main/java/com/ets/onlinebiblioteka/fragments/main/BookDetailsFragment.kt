@@ -97,10 +97,12 @@ class BookDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // load book data passed from previous fragment
         arguments?.let {
             bookData = it.getParcelable<Book>("BOOK_DATA")!!
         }
 
+        // Check if book is saved in the wishlist
         GlobalData.getSharedPreferences().getString(ListaZeljaFragment.SHARED_PREFS_KEY, null)?.let { s ->
             val books = Gson().fromJson(
                 s,
@@ -122,6 +124,7 @@ class BookDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // :(
         btnBack = view.findViewById(R.id.book_details_btn_back)
         img = view.findViewById(R.id.book_details_img)
         textTitle = view.findViewById(R.id.book_details_text_title)
@@ -167,12 +170,14 @@ class BookDetailsFragment : Fragment() {
 
         setupSaveBtn(bookSaved)
 
+        // show only first author at first(then all the other ones later on)
         if (bookData.authors.isNotEmpty()) {
             textAuthor.text = "by ${bookData.authors[0]}"
         } else {
             textAuthor.text = ""
         }
 
+        // 1 komad, 53 komada
         quantityText.text = if (bookData.quantity.toString().endsWith('1')
             and !bookData.quantity.toString().endsWith("11")) {
             "${bookData.quantity} komad"
@@ -188,6 +193,7 @@ class BookDetailsFragment : Fragment() {
             .placeholder(R.color.black)
             .into(img)
 
+        // change chip and reserve button style if book is unavailable
         if (!bookData.available) {
             val color = ContextCompat.getColor(requireContext(), R.color.red)
             chipAvailability.chipStrokeColor = ColorStateList.valueOf(color)
@@ -210,10 +216,12 @@ class BookDetailsFragment : Fragment() {
 
         textDescription.text = summary
 
+        // show all authors as clickable links
         setupListText(
             textAuthor,
             bookData.authors,
             { item ->
+                // show author details on click
                 val action = BookDetailsFragmentDirections.navActionBookDetailsToAuthorDetails(item as Autor)
 
                 findNavController().navigate(action)
@@ -221,19 +229,23 @@ class BookDetailsFragment : Fragment() {
             "by "
         )
 
+        // show all authors(below) as clickable links
         setupListText(
             authorsText,
             bookData.authors,
             { item ->
+                // show author details on click
                 val action = BookDetailsFragmentDirections.navActionBookDetailsToAuthorDetails(item as Autor)
 
                 findNavController().navigate(action)
             }
         )
+        // show all categories as clickable links
         setupListText(
             categoriesText,
             bookData.categories,
             { item ->
+                // show all books of the category the user clicked
                 val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
                     null,
                     SelectedFilters(
@@ -250,10 +262,12 @@ class BookDetailsFragment : Fragment() {
                 findNavController().navigate(action)
             }
         )
+        // show all genres as clickable links
         setupListText(
             genresText,
             bookData.genres,
             { item ->
+                // show all books of the genre the user clicked
                 val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
                     null,
                     SelectedFilters(
@@ -271,6 +285,7 @@ class BookDetailsFragment : Fragment() {
             }
         )
 
+        // show more/less when you click the button
         btnReadMore.setOnClickListener {
             if (descriptionReadMoreShown) {
                 var summary = bookData.summary.trim().removeHtmlPTag()
@@ -295,15 +310,18 @@ class BookDetailsFragment : Fragment() {
             }
         }
 
+        // open book specification
         btnSpecs.setOnClickListener {
             bottomSheetBookSpecs.visibility = View.VISIBLE
             viewModel.loadSpecs(bookData.id)
         }
 
+        // close book specification
         bookSpecsCloseBtn.setOnClickListener {
             bottomSheetBookSpecs.visibility = View.GONE
         }
 
+        // bind book specification data
         viewModel.getSpecs().observe(viewLifecycleOwner) {
             it?.let { specs ->
                 bookSpecsProgressBar.visibility = View.GONE
@@ -318,6 +336,7 @@ class BookDetailsFragment : Fragment() {
         }
 
 
+        // save/unsave book to wishlist
         btnSave.setOnClickListener {
             if (bookSaved) {
                 unsaveBook()
@@ -343,10 +362,12 @@ class BookDetailsFragment : Fragment() {
             }
         }
 
+        // show similar books
         viewModel.loadSimilarBooks(bookData.id)
         recyclerSimilar.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        recyclerSimilar.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
+        recyclerSimilar.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset)) // space items evenly
         viewModel.getSimilarBooks().observe(viewLifecycleOwner) {
+            // show text saying there's no books if there are none
             textNoSimilarBooks.visibility = if (it.size == 0) {
                 View.VISIBLE
             } else {
@@ -357,10 +378,12 @@ class BookDetailsFragment : Fragment() {
                 it.toMutableList(),
                 requireContext(),
                 { item ->
+                    // show book details on click
                     val action = BookDetailsFragmentDirections.navActionBookDetailsToBookDetails(item)
                     findNavController().navigate(action)
                 },
                 { available ->
+                    // show message when you click the book availability icon
                     Snackbar.make(
                         view,
                         if (available) {
@@ -377,6 +400,8 @@ class BookDetailsFragment : Fragment() {
         }
 
 
+        // show reserve bottom sheet when you click the reserve button, or say you can't reserve
+        // the book if it's unavailable
         btnReserve.setOnClickListener {
             if (!bookData.available) {
                 Snackbar.make(
@@ -390,10 +415,12 @@ class BookDetailsFragment : Fragment() {
             }
         }
 
+        // close reserve bottom sheet
         reserveCloseBtn.setOnClickListener {
             bottomSheetReserve.visibility = View.GONE
         }
 
+        // fill in user name and email in the reserve bottom sheet
         GlobalData.getSharedPreferences().getString(ProfileViewModel.USER_DATA_SHARED_PREFS_KEY, null)?.let {
             val data = Gson().fromJson(it, User::class.java)
 
@@ -401,6 +428,7 @@ class BookDetailsFragment : Fragment() {
             reserveEtEmail.hint = data.email
         }
 
+        // date range selector
         var selectedDateFrom: String = ""
         var selectedDateTo: String = ""
 
@@ -410,9 +438,11 @@ class BookDetailsFragment : Fragment() {
                 .build()
 
             dateRangePicker.addOnPositiveButtonClickListener {
+                // format date for sending to the api
                 selectedDateFrom = SimpleDateFormat("yyyy-MM-dd").format(Date(it.first))
                 selectedDateTo = SimpleDateFormat("yyyy-MM-dd").format(Date(it.second))
 
+                // format date for previewing it in the reserve bottom sheet
                 val previewFrom = SimpleDateFormat("MMM dd, yyyy").format(Date(it.first))
                 val previewTo = SimpleDateFormat("MMM dd, yyyy").format(Date(it.second))
                 val parent = view.findViewById<TextInputLayout>(R.id.book_details_reserve_date_layout)
@@ -422,6 +452,7 @@ class BookDetailsFragment : Fragment() {
             dateRangePicker.show(parentFragmentManager, null)
         }
 
+        // reserve book or say you need to select a date
         reserveBtn.setOnClickListener {
             reserveProgressBar.visibility = View.VISIBLE
             if (selectedDateFrom.isNotEmpty() && selectedDateTo.isNotEmpty()) {
@@ -431,6 +462,7 @@ class BookDetailsFragment : Fragment() {
             }
         }
 
+        // notify the user that he's successfully reserved this book
         viewModel.getReserveResponse().observe(viewLifecycleOwner) { response ->
             response?.let {
                 reserveProgressBar.visibility = View.GONE
@@ -459,6 +491,7 @@ class BookDetailsFragment : Fragment() {
         val spannableString = SpannableStringBuilder(startText)
         var i = 0
         for (item in list) {
+            // run onItemClick lambda when you click the text
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(p0: View) {
                     onItemClick(item)
@@ -466,6 +499,7 @@ class BookDetailsFragment : Fragment() {
 
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
+                    // remove text underline(shown by default)
                     ds.isUnderlineText = false
                 }
             }
@@ -481,12 +515,14 @@ class BookDetailsFragment : Fragment() {
 
             i += 1
         }
+        // set up style to show the text color properly
         textView.movementMethod = LinkMovementMethod.getInstance()
         textView.highlightColor = Color.TRANSPARENT
         textView.text = spannableString
     }
 
     private fun setupSaveBtn(saved: Boolean) {
+        // toggle text and icon
         if (saved) {
             btnSaveIcon.setImageResource(R.drawable.ic_saved)
             btnSaveText.text = "Sačuvano"
@@ -499,6 +535,7 @@ class BookDetailsFragment : Fragment() {
     private fun saveBook() {
         var books = mutableListOf<Book>()
 
+        // load all books
         GlobalData.getSharedPreferences().getString(ListaZeljaFragment.SHARED_PREFS_KEY, null)?.let {
             books = Gson().fromJson(
                 it,
@@ -506,22 +543,27 @@ class BookDetailsFragment : Fragment() {
             ) as MutableList<Book>
         }
 
+        // add current book
         books.add(bookData)
 
+        // save again
         GlobalData.getSharedPreferences().edit().putString(
             ListaZeljaFragment.SHARED_PREFS_KEY,
             Gson().toJson(books)
         ).commit()
     }
     private fun unsaveBook() {
+        // load all books
         GlobalData.getSharedPreferences().getString(ListaZeljaFragment.SHARED_PREFS_KEY, null)?.let { s ->
             val books = Gson().fromJson(
                 s,
                 object : TypeToken<MutableList<Book>>() {}.type
             ) as MutableList<Book>
 
+            // remove current book
             books.removeIf { it.id == bookData.id }
 
+            // save again
             GlobalData.getSharedPreferences().edit().putString(
                 ListaZeljaFragment.SHARED_PREFS_KEY,
                 Gson().toJson(books)
@@ -529,6 +571,8 @@ class BookDetailsFragment : Fragment() {
         }
     }
 
+    // <p>text goes here</p> -> text goes here
+    // some book descriptions get stored in the database with html p tags around them
     private fun String.removeHtmlPTag(): String {
         if (startsWith("<p>")) {
             var new = removeRange(0, "<p>".length)

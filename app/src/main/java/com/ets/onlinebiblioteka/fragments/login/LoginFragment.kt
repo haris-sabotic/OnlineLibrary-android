@@ -43,6 +43,7 @@ class LoginFragment : Fragment() {
             view.findNavController().navigate(R.id.nav_login_action_main_to_forgot)
         }
 
+        // open registration page in browser
         textRegister.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
@@ -71,6 +72,7 @@ class LoginFragment : Fragment() {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 } else {
+                    // save token(just for the current session, or in sharedPreferences)
                     GlobalData.setToken(it.token, checkRememberMe.isChecked)
 
                     startActivity(Intent(requireContext(), MainActivity::class.java))

@@ -29,12 +29,15 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun loadUser() {
+        // if user data is already cached, just use that
         GlobalData.getSharedPreferences().getString(USER_DATA_SHARED_PREFS_KEY, null)?.let {
             val data = Gson().fromJson(it, User::class.java)
 
             user.postValue(data)
             return
         }
+
+        // ...load it from the api otherwise
 
         val token = GlobalData.getToken()
 
@@ -44,10 +47,12 @@ class ProfileViewModel : ViewModel() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
+                        // cache loaded user data
                         GlobalData.getSharedPreferences().edit().putString(
                             USER_DATA_SHARED_PREFS_KEY,
                             Gson().toJson(it)
                         ).commit()
+
                         user.postValue(it)
                     }
                 }

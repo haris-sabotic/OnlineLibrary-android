@@ -25,6 +25,7 @@ class AllBooksViewModel : ViewModel() {
     fun loadBooks(page: Int, textQuery: String?, filters: SelectedFilters?) {
         val call: Call<Paginated<Book>>
 
+        // create api call with page, search query and selected filters
         if (filters == null) {
             call = ApiInterface.create().searchBooks(
                 page,
@@ -41,12 +42,14 @@ class AllBooksViewModel : ViewModel() {
             call = ApiInterface.create().searchBooks(
                 page,
                 textQuery,
+                // transform chip names to identifiers used by the api
                 when (filters.availability) {
                     "Izdato" -> "rented"
                     "Rezervisano" -> "reserved"
                     "Na raspolaganju" -> "available"
                     else -> null
                 },
+                // get only IDs from every (ID, name) pair
                 filters.categories.map { it.first },
                 filters.genres.map { it.first },
                 filters.authors.map { it.first },

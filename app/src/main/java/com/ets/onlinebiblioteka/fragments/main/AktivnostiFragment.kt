@@ -43,6 +43,7 @@ class AktivnostiFragment : Fragment() {
         }
 
         viewModel.getItems().observe(viewLifecycleOwner) {
+            // show text saying there's no activities if there are none
             textNoActivities.visibility = if (it.size == 0) {
                 View.VISIBLE
             } else {

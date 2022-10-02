@@ -36,8 +36,10 @@ class SettingsFragment : Fragment() {
         val btnDeleteListaZelja = view.findViewById<Button>(R.id.settings_btn_delete_lista_zelja)
         val switchNovaKnjiga = view.findViewById<SwitchMaterial>(R.id.settings_switch_nova)
 
+        // load switch state
         switchNovaKnjiga.isChecked = viewModel.getNovaKnjiga()
 
+        // expand/hide notification toggles
         btnNotifikacije.setOnClickListener {
             if (isNotifikacijeExpanded) {
                 notifikacijeExpanded.visibility = View.GONE
@@ -52,6 +54,7 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        // erase search history
         btnDeleteIstorijaPretrazivanja.setOnClickListener {
             GlobalData.getSharedPreferences()
                 .edit()
@@ -67,6 +70,7 @@ class SettingsFragment : Fragment() {
             ).show()
         }
 
+        // erase wishlist
         btnDeleteListaZelja.setOnClickListener {
             GlobalData.getSharedPreferences()
                 .edit()

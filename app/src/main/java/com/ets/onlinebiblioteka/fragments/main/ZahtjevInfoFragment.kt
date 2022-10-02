@@ -70,6 +70,8 @@ class ZahtjevInfoFragment : Fragment() {
 
         var btnDisabled = false
 
+        // show only the yyyy-mm-dd part of the date and a custom message with a different color
+        // if there's no date
         textDateFrom.text = data.dateFrom.substring(0, 10)
         if (data.dateTo == "") {
             textDateTo.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
@@ -84,6 +86,7 @@ class ZahtjevInfoFragment : Fragment() {
             btnPonisti.alpha = 1.0F
         }
 
+        // show all authors as clickable links
         val authorSpannableStr = SpannableStringBuilder("by ")
         var i = 0
         for (author in data.book.authors) {
@@ -97,6 +100,7 @@ class ZahtjevInfoFragment : Fragment() {
 
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
+                    // remove text underline
                     ds.isUnderlineText = false
                 }
             }
@@ -106,6 +110,7 @@ class ZahtjevInfoFragment : Fragment() {
                 clickableSpan,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+            // add comma between author names
             if (i != data.book.authors.size - 1) {
                 authorSpannableStr.append(", ")
             }
@@ -124,6 +129,7 @@ class ZahtjevInfoFragment : Fragment() {
 
         var ponistiOrIzbrisi = "ponisti"
 
+        // set up chip style and text
         when (data.type) {
             "reservation rejected" -> {
                 val color = ContextCompat.getColor(requireContext(), R.color.red)
@@ -164,6 +170,7 @@ class ZahtjevInfoFragment : Fragment() {
             }
         }
 
+        // show message on request deleted
         viewModel.getMsg().observe(viewLifecycleOwner) {
             it?.let {
                 val message = if (ponistiOrIzbrisi == "ponisti") {
@@ -178,8 +185,10 @@ class ZahtjevInfoFragment : Fragment() {
             }
         }
 
+        // delete request
         btnPonisti.setOnClickListener {
             if (btnDisabled) {
+                // can't delete if book hasn't been returnes
                 Snackbar.make(
                     view,
                     "Ne možete obrisati transakciju, knjiga nije vraćena",
@@ -187,6 +196,7 @@ class ZahtjevInfoFragment : Fragment() {
                 ).setAction("OK") {
                 }.setAnchorView(view.findViewById(R.id.zahtjev_info_separator_bottom)).show()
             } else {
+                // dialog asking for confirmation to delete
                 val title = if (ponistiOrIzbrisi == "ponisti") {
                     "Poništi rezervaciju"
                 } else {

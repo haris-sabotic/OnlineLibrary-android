@@ -41,11 +41,13 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
 
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
+    // fragments with custom actions on back pressed
     private var fragmentBackActions = hashMapOf(
         R.id.menu_item_moj_profil to R.id.nav_action_moj_profil_to_moji_zahtjevi,
         R.id.menu_item_edit_profil to R.id.nav_action_edit_profil_to_moj_profil,
         R.id.menu_item_knjige to R.id.nav_action_knjige_to_moji_zahtjevi,
     )
+    // fragments with no action bar and a light gray status bar
     private var popupFragments = setOf(
         R.id.menu_item_moj_profil,
         R.id.menu_item_edit_profil,
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         R.id.menu_item_book_details,
         R.id.menu_item_author_details,
     )
+    // fragments with an arrow instead of a hamburger icon in the action bar
     private var nonTopLevelFragments = setOf(
         R.id.menu_item_filters,
         R.id.menu_item_search_fragment,
@@ -78,6 +81,7 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         val txtEmail = navHeader.findViewById<TextView>(R.id.nav_drawer_header_text_email)
         val imgProfile = navHeader.findViewById<ImageView>(R.id.nav_drawer_header_img)
 
+        // load user data in the navigation drawer
         viewModel.getUser().observe(this) { user ->
             user?.let {
                 txtName.text = it.name
@@ -91,6 +95,7 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
             }
         }
 
+        // switch between main and profile menus
         navHeader.setOnClickListener {
             val size = navigationView.menu.size
             navigationView.menu.clear()
@@ -103,6 +108,7 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
             }
         }
 
+        // handle popup fragments
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             if (popupFragments.contains(destination.id)) {
                 supportActionBar?.hide()
@@ -122,9 +128,8 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         }
 
 
-
-
         intent.extras?.let { extras ->
+            // if the app was opened from a notification with the topic nova knjiga, show book details
             extras.getParcelable<Book>(FcmService.TOPIC_NOVA_KNJIGA)?.let { book ->
                 val action = MojiZahtjeviFragmentDirections.navActionMojiZahtjeviToBookDetails(book)
                 navController.navigate(action)
@@ -133,23 +138,28 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
     }
 
     override fun onBackPressed() {
+        // close drawer if it was open
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else if (navController.currentDestination!!.id == R.id.menu_item_moji_zahtjevi) {
+            // close app
             val homeIntent = Intent(Intent.ACTION_MAIN)
             homeIntent.addCategory(Intent.CATEGORY_HOME)
             homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(homeIntent)
         } else {
+            // follow custom fragment back action
             fragmentBackActions[navController.currentDestination!!.id]?.let {
                 navController.navigate(it)
                 return;
             }
 
+            // normally navigate backwards otherwise
             super.onBackPressed()
         }
     }
 
+    // erase user token and go to login activity
     private fun setLogOutBtnClickListener(){
         navigationView.menu.findItem(R.id.menu_item_log_out).setOnMenuItemClickListener {
             GlobalData.clearToken()
@@ -177,11 +187,13 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
+        // all top level destinations
         val topLevelDestinations: MutableSet<Int> = HashSet()
         for (node in navController.graph.nodes.valueIterator()) {
             topLevelDestinations.add(node.id)
         }
 
+        // minus the non-top level destinations
         topLevelDestinations.removeAll(nonTopLevelFragments)
 
         val appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
@@ -192,6 +204,7 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // if the back arrow was pressed on a non-top level fragment, go back
         if (item.itemId == android.R.id.home && nonTopLevelFragments.contains(navController.currentDestination!!.id)) {
             onBackPressed()
         }

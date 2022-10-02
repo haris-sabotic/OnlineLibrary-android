@@ -32,6 +32,7 @@ class EditProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // load user data from previous fragment
         arguments?.let {
             name = it.getString("name").toString()
             username = it.getString("username").toString()
@@ -51,6 +52,7 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // go back when you discard your changes or click the back button
         view.findViewById<ImageView>(R.id.edit_profile_btn_back).setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -84,6 +86,7 @@ class EditProfileFragment : Fragment() {
         }
 
 
+        // send edit user request when you click the button to save your changes
         view.findViewById<Button>(R.id.edit_profile_btn_sacuvaj).setOnClickListener {
             progressBar.visibility = View.VISIBLE
             viewModel.editUser(
@@ -99,6 +102,7 @@ class EditProfileFragment : Fragment() {
         viewModel.getStatus().observe(viewLifecycleOwner) { status ->
             progressBar.visibility = View.GONE
             status?.let {
+                // handle all status messages
                 when (it) {
                     EditProfileViewModel.EditProfileStatus.OLD_PASSWORD_INVALID -> {
                         Snackbar.make(
@@ -122,12 +126,14 @@ class EditProfileFragment : Fragment() {
                         ).show()
                     }
                     EditProfileViewModel.EditProfileStatus.SUCCESS -> {
+                        // remove cached user data, so that it can be reloaded
                         with (GlobalData.getSharedPreferences().edit()) {
                             remove(ProfileViewModel.USER_DATA_SHARED_PREFS_KEY)
                             commit()
                         }
                         (requireActivity() as MainActivity).reloadUserData()
 
+                        // go back to profile details fragment
                         view.findNavController().navigate(R.id.nav_action_edit_profil_to_moj_profil)
                     }
                 }

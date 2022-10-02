@@ -35,12 +35,14 @@ class BooksAdapter(
 
             textTitle.text = item.title
 
+            // Only show first author(if it exists)
             if (item.authors.isNotEmpty()) {
                 textAuthor.text = "by ${item.authors[0].name}"
             } else {
                 textAuthor.text = ""
             }
 
+            // set icon showing whether the book is available or not
             if (item.available) {
                 iconAvailability.setImageResource(R.drawable.ic_book_available)
             } else {

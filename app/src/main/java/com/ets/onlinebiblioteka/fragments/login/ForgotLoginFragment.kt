@@ -63,6 +63,7 @@ class ForgotLoginFragment : Fragment() {
             msg?.let {
                 progressBar.visibility = View.GONE
                 if (it == "success") {
+                    // go to next screen after success
                     when (radioGroup.checkedRadioButtonId) {
                         R.id.forgot_login_radio_password -> {
                             view.findNavController()
@@ -74,6 +75,7 @@ class ForgotLoginFragment : Fragment() {
                         }
                     }
                 } else {
+                    // show error message otherwise
                     var snackBarMsg = "Invalid username"
                     if (radioGroup.checkedRadioButtonId == R.id.forgot_login_radio_username) {
                         snackBarMsg = "Invalid email"

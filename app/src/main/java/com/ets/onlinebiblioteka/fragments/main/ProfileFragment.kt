@@ -44,6 +44,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        // bind loaded user data
         viewModel.getUser().observe(viewLifecycleOwner) { user ->
             user?.let {
                 nameText.text = it.name
@@ -62,10 +63,12 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        // go back
         view.findViewById<ImageView>(R.id.profile_btn_back).setOnClickListener {
             requireActivity().onBackPressed()
         }
 
+        // go to edit user fragment
         view.findViewById<ImageView>(R.id.profile_btn_edit).setOnClickListener {
             val action = ProfileFragmentDirections.navActionMojProfilToEditProfil(
                 nameText.text.toString(),

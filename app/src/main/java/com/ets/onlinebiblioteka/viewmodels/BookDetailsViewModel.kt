@@ -31,7 +31,6 @@ class BookDetailsViewModel : ViewModel() {
     }
 
     fun reserveBook(bookId: Int, dateFrom: String, dateTo: String, phoneNumber: String) {
-        Log.d("BookDetailsViewModel", "$bookId $dateFrom $dateTo $phoneNumber")
         ApiInterface.create().reserve("Bearer ${GlobalData.getToken()!!}", bookId, dateFrom, dateTo, phoneNumber).enqueue(object : Callback<ReserveResponse> {
             override fun onResponse(
                 call: Call<ReserveResponse>,
