@@ -1,13 +1,14 @@
 package com.ets.onlinebiblioteka.fragments.login
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isNotEmpty
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.ets.onlinebiblioteka.MainActivity
@@ -36,9 +37,18 @@ class LoginFragment : Fragment() {
         val etUsername: TextInputLayout = view.findViewById(R.id.login_et_username)
         val etPassword: TextInputLayout = view.findViewById(R.id.login_et_password)
         val checkRememberMe: CheckBox = view.findViewById(R.id.login_check_zapamti_me)
+        val textRegister: TextView = view.findViewById(R.id.login_text_nemas_nalog)
 
         forgotLoginText.setOnClickListener {
             view.findNavController().navigate(R.id.nav_login_action_main_to_forgot)
+        }
+
+        textRegister.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://tim7.ictcortex.me/register")
+            )
+            startActivity(intent)
         }
 
         loginBtn.setOnClickListener {
