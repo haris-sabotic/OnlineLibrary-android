@@ -100,6 +100,17 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/knjige_separator_top" />
 
+            <ImageView
+                android:id="@+id/knjige_btn_clear_search_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_x"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/knjige_text_results_title"
+                app:layout_constraintBottom_toBottomOf="@id/knjige_text_results_title"
+                android:padding="10dp"
+                android:layout_marginRight="15dp" />
+
             <GridLayout
                 android:id="@+id/knjige_grid_layout_books"
                 android:layout_width="match_parent"

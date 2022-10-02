@@ -29,6 +29,7 @@ class KnjigeFragment : Fragment() {
     private lateinit var filtersBtnText: TextView
     private lateinit var filtersBtnIcon: View
     private lateinit var resultsTitle: TextView
+    private lateinit var btnClearQuery: ImageView
     private lateinit var countText: TextView
 
     private lateinit var booksGridLayout: GridLayout
@@ -89,6 +90,7 @@ class KnjigeFragment : Fragment() {
         filtersBtnText = filtersBtn.findViewById(R.id.knjige_btn_filters_text)
         filtersBtnIcon = filtersBtn.findViewById(R.id.knjige_btn_filters_icon)
         resultsTitle = view.findViewById(R.id.knjige_text_results_title)
+        btnClearQuery = view.findViewById(R.id.knjige_btn_clear_search_query)
         countText = view.findViewById(R.id.knjige_text_count)
 
         booksGridLayout = view.findViewById(R.id.knjige_grid_layout_books)
@@ -112,8 +114,17 @@ class KnjigeFragment : Fragment() {
 
         if (textQuery != null) {
             resultsTitle.text = "Rezultati za \"${textQuery}\""
+            btnClearQuery.visibility = View.VISIBLE
         } else {
             resultsTitle.text = "Popularne knjige"
+            btnClearQuery.visibility = View.GONE
+        }
+
+        btnClearQuery.setOnClickListener {
+            resultsTitle.text = "Popularne knjige"
+            btnClearQuery.visibility = View.GONE
+            textQuery = null
+            viewModel.search(textQuery)
         }
 
         var selectedFiltersInitialObserve = true
