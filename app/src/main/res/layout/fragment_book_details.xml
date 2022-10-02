@@ -353,6 +353,17 @@
                 android:padding="@dimen/item_offset"
                 android:clipToPadding="false" />
 
+            <TextView
+                android:id="@+id/book_details_text_no_similar_books"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="70dp"
+                android:text="Nema sličnih knjiga"
+                android:textAlignment="center"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_marginHorizontal="15dp"
+                app:layout_constraintTop_toBottomOf="@id/book_details_text_label_similar" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

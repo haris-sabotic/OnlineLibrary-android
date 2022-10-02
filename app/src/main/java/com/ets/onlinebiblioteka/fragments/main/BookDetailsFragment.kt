@@ -79,6 +79,7 @@ class BookDetailsFragment : Fragment() {
     private lateinit var btnSaveText: TextView
     private lateinit var btnSaveIcon: ImageView
     private lateinit var recyclerSimilar: RecyclerView
+    private lateinit var textNoSimilarBooks: TextView
     private lateinit var bottomSheetReserve: ConstraintLayout
     private lateinit var reserveTitle: TextView
     private lateinit var reserveCloseBtn: ImageView
@@ -151,6 +152,7 @@ class BookDetailsFragment : Fragment() {
         btnSaveText = view.findViewById(R.id.book_details_btn_save_text)
         btnSaveIcon = view.findViewById(R.id.book_details_btn_save_icon)
         recyclerSimilar = view.findViewById(R.id.book_details_recycler_view_similar_books)
+        textNoSimilarBooks = view.findViewById(R.id.book_details_text_no_similar_books)
         reserveTitle = view.findViewById(R.id.book_details_reserve_text_label_title)
         reserveCloseBtn = view.findViewById(R.id.book_details_reserve_btn_close)
         reserveEtName = view.findViewById(R.id.book_details_reserve_et_name)
@@ -345,6 +347,12 @@ class BookDetailsFragment : Fragment() {
         recyclerSimilar.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         recyclerSimilar.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))
         viewModel.getSimilarBooks().observe(viewLifecycleOwner) {
+            textNoSimilarBooks.visibility = if (it.size == 0) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
             recyclerSimilar.adapter = BooksAdapter(
                 it.toMutableList(),
                 requireContext(),
