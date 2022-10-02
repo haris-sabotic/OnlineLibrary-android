@@ -23,13 +23,13 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.loadUser()
+
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.loadUser()
 
         val nameText = view.findViewById<TextView>(R.id.profile_text_ime)
         val jmbgText = view.findViewById<TextView>(R.id.profile_text_jmbg)

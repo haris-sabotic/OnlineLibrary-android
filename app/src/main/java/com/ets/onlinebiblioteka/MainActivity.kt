@@ -201,4 +201,8 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
     fun setTitle(title: String) {
         supportActionBar?.title = title
     }
+
+    fun reloadUserData() {
+        viewModel.loadUser()
+    }
 }

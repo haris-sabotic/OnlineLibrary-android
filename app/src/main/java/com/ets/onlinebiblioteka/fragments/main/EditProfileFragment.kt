@@ -12,8 +12,11 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.ets.onlinebiblioteka.MainActivity
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.EditProfileViewModel
+import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -119,6 +122,12 @@ class EditProfileFragment : Fragment() {
                         ).show()
                     }
                     EditProfileViewModel.EditProfileStatus.SUCCESS -> {
+                        with (GlobalData.getSharedPreferences().edit()) {
+                            remove(ProfileViewModel.USER_DATA_SHARED_PREFS_KEY)
+                            commit()
+                        }
+                        (requireActivity() as MainActivity).reloadUserData()
+
                         view.findNavController().navigate(R.id.nav_action_edit_profil_to_moj_profil)
                     }
                 }
