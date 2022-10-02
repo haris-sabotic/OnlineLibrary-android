@@ -17,6 +17,14 @@
                 android:name="zahtjev"
                 app:argType="com.ets.onlinebiblioteka.models.Zahtjev" />
         </action>
+
+        <action
+            android:id="@+id/nav_action_moji_zahtjevi_to_book_details"
+            app:destination="@id/menu_item_book_details" >
+            <argument
+                android:name="BOOK_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.Book" />
+        </action>
     </fragment>
 
     <fragment

@@ -1,1 +1,5 @@
 /build
+/debug
+/release
+*.jks
+google-services.json

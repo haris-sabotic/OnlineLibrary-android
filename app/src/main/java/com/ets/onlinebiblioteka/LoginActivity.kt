@@ -1,10 +1,11 @@
 package com.ets.onlinebiblioteka
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.ets.onlinebiblioteka.models.Book
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
 
@@ -19,7 +20,11 @@ class LoginActivity : AppCompatActivity() {
         GlobalData.loadSharedPreferences(applicationContext)
 
         GlobalData.getToken()?.let {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java).apply {
+                intent.extras?.let {
+                    putExtras(it)
+                }
+            })
         }
 
         // Clear login data cached from previous login

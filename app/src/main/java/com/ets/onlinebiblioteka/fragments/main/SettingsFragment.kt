@@ -6,10 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.viewModels
 import com.ets.onlinebiblioteka.R
+import com.ets.onlinebiblioteka.util.FcmService
 import com.ets.onlinebiblioteka.util.GlobalData
+import com.ets.onlinebiblioteka.viewmodels.SettingsViewModel
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsFragment : Fragment() {
+    private val viewModel: SettingsViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +34,9 @@ class SettingsFragment : Fragment() {
         val notifikacijeExpanded = view.findViewById<LinearLayout>(R.id.settings_dropdown_notifikacije_expanded)
         val btnDeleteIstorijaPretrazivanja = view.findViewById<Button>(R.id.settings_btn_delete_istorija_pretrazivanja)
         val btnDeleteListaZelja = view.findViewById<Button>(R.id.settings_btn_delete_lista_zelja)
+        val switchNovaKnjiga = view.findViewById<SwitchMaterial>(R.id.settings_switch_nova)
+
+        switchNovaKnjiga.isChecked = viewModel.getNovaKnjiga()
 
         btnNotifikacije.setOnClickListener {
             if (isNotifikacijeExpanded) {
@@ -71,6 +80,11 @@ class SettingsFragment : Fragment() {
                 "Lista želja uspješno obrisana",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+
+
+        switchNovaKnjiga.setOnCheckedChangeListener { _, checked ->
+            viewModel.toggleNovaKnjiga(checked)
         }
     }
 }

@@ -21,6 +21,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.ets.onlinebiblioteka.fragments.main.MojiZahtjeviFragmentDirections
+import com.ets.onlinebiblioteka.models.Book
+import com.ets.onlinebiblioteka.util.FcmService
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.util.NavDrawerController
 import com.ets.onlinebiblioteka.viewmodels.ProfileViewModel
@@ -114,6 +117,16 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
 
                 window.statusBarColor = resources.getColor(R.color.blue, theme)
                 window.insetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
+            }
+        }
+
+
+
+
+        intent.extras?.let { extras ->
+            extras.getParcelable<Book>(FcmService.TOPIC_NOVA_KNJIGA)?.let { book ->
+                val action = MojiZahtjeviFragmentDirections.navActionMojiZahtjeviToBookDetails(book)
+                navController.navigate(action)
             }
         }
     }
