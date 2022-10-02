@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,6 +84,9 @@ class SearchFragment : Fragment() {
             activity!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
 
+        editText.addTextChangedListener { text ->
+            (recyclerView.adapter as SearchHistoryAdapter).search(text.toString())
+        }
 
         searchBtn.setOnClickListener { search() }
         editText.setOnEditorActionListener { _, _, _ ->
