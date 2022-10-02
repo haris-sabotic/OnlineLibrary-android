@@ -24,6 +24,7 @@ import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.adapters.BooksAdapter
 import com.ets.onlinebiblioteka.models.Book
 import com.ets.onlinebiblioteka.models.User
+import com.ets.onlinebiblioteka.models.filters.Autor
 import com.ets.onlinebiblioteka.models.filters.SelectedFilters
 import com.ets.onlinebiblioteka.util.FilterModelController
 import com.ets.onlinebiblioteka.util.GlobalData
@@ -211,18 +212,7 @@ class BookDetailsFragment : Fragment() {
             textAuthor,
             bookData.authors,
             { item ->
-                val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
-                    null,
-                    SelectedFilters(
-                        null,
-                        mutableListOf(),
-                        mutableListOf(),
-                        mutableListOf(Pair(item.getChipId(), item.getChipText())),
-                        null,
-                        null,
-                        null
-                    )
-                )
+                val action = BookDetailsFragmentDirections.navActionBookDetailsToAuthorDetails(item as Autor)
 
                 findNavController().navigate(action)
             },
@@ -233,18 +223,7 @@ class BookDetailsFragment : Fragment() {
             authorsText,
             bookData.authors,
             { item ->
-                val action = BookDetailsFragmentDirections.navActionBookDetailsToAllBooks(
-                    null,
-                    SelectedFilters(
-                        null,
-                        mutableListOf(),
-                        mutableListOf(),
-                        mutableListOf(Pair(item.getChipId(), item.getChipText())),
-                        null,
-                        null,
-                        null
-                    )
-                )
+                val action = BookDetailsFragmentDirections.navActionBookDetailsToAuthorDetails(item as Autor)
 
                 findNavController().navigate(action)
             }

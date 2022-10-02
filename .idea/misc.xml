@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/layout/fragment_aktivnosti.xml" value="0.3651041666666667" />
         <entry key="app/src/main/res/layout/fragment_all_books.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/fragment_all_categories_or_genres.xml" value="0.2997007268063275" />
+        <entry key="app/src/main/res/layout/fragment_author_details.xml" value="0.2997007268063275" />
         <entry key="app/src/main/res/layout/fragment_book_details.xml" value="0.4128053917438922" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_filters.xml" value="0.2997007268063275" />

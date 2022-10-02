@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity(), NavDrawerController {
         R.id.menu_item_moj_profil,
         R.id.menu_item_edit_profil,
         R.id.menu_item_zahtjev_info,
-        R.id.menu_item_book_details
+        R.id.menu_item_book_details,
+        R.id.menu_item_author_details,
     )
     private var nonTopLevelFragments = setOf(
         R.id.menu_item_filters,

@@ -231,6 +231,13 @@
                 android:name="BOOK_DATA"
                 app:argType="com.ets.onlinebiblioteka.models.Book" />
         </action>
+        <action
+            android:id="@+id/nav_action_book_details_to_author_details"
+            app:destination="@id/menu_item_author_details">
+            <argument
+                android:name="AUTHOR_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.filters.Autor" />
+        </action>
     </fragment>
 
 
@@ -274,5 +281,19 @@
         android:name="com.ets.onlinebiblioteka.fragments.main.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/menu_item_author_details"
+        android:name="com.ets.onlinebiblioteka.fragments.main.AuthorDetailsFragment"
+        android:label="O autoru"
+        tools:layout="@layout/fragment_author_details" >
+        <action
+            android:id="@+id/nav_action_author_details_to_book_details"
+            app:destination="@id/menu_item_book_details">
+            <argument
+                android:name="BOOK_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.Book" />
+        </action>
+    </fragment>
 
 </navigation>
