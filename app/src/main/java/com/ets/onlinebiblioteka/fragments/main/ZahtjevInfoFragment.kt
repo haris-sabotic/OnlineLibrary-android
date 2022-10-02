@@ -89,18 +89,8 @@ class ZahtjevInfoFragment : Fragment() {
         for (author in data.book.authors) {
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(p0: View) {
-                    val action = ZahtjevInfoFragmentDirections.navActionZahtjevInfoToAllBooks(
-                        null,
-                        SelectedFilters(
-                            null,
-                            mutableListOf(),
-                            mutableListOf(),
-                            mutableListOf(Pair(author.id, author.name)),
-                            null,
-                            null,
-                            null
-                        )
-                    )
+                    // show author details on click
+                    val action = ZahtjevInfoFragmentDirections.navActionZahtjevInfoToAuthorDetails(author)
 
                     findNavController().navigate(action)
                 }

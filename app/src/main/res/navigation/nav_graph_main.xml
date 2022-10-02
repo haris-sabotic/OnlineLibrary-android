@@ -39,21 +39,15 @@
                 android:name="snackbar_message"
                 app:argType="string"
                 app:nullable="true" />
+
         </action>
 
         <action
-            android:id="@+id/nav_action_zahtjev_info_to_all_books"
-            app:destination="@id/menu_item_all_books">
+            android:id="@+id/nav_action_zahtjev_info_to_author_details"
+            app:destination="@id/menu_item_author_details">
             <argument
-                android:name="TEXT_QUERY"
-                app:argType="string"
-                app:nullable="true"
-                android:defaultValue="@null" />
-            <argument
-                android:name="SELECTED_FILTERS"
-                app:argType="com.ets.onlinebiblioteka.models.filters.SelectedFilters"
-                app:nullable="true"
-                android:defaultValue="@null" />
+                android:name="AUTHOR_DATA"
+                app:argType="com.ets.onlinebiblioteka.models.filters.Autor" />
         </action>
     </fragment>
 
