@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +43,13 @@ class ListaZeljaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.lista_zelja_recycler_view)
+        val textNoBooks = view.findViewById<TextView>(R.id.lista_zelja_text_no_books)
+
+        textNoBooks.visibility = if (books.size == 0) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
 
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.addItemDecoration(ItemOffsetDecoration(requireContext(), R.dimen.item_offset))

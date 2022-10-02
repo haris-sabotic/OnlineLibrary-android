@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.main.ListaZeljaFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -11,5 +12,15 @@
         android:layout_height="match_parent"
         android:padding="@dimen/item_offset"
         android:clipToPadding="false" />
+
+    <TextView
+        android:id="@+id/lista_zelja_text_no_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nema knjiga"
+        android:textAlignment="center"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_marginHorizontal="15dp"
+        android:layout_gravity="center" />
 
 </FrameLayout>
