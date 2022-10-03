@@ -245,51 +245,6 @@
         android:background="@color/light_gray"
         app:layout_constraintTop_toBottomOf="@id/settings_data" />
 
-
-    <LinearLayout
-        android:id="@+id/settings_language"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@id/settings_data"
-        android:orientation="vertical"
-        android:paddingLeft="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp" >
-        <TextView
-            style="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_language" />
-
-        <RadioGroup
-            android:id="@+id/settings_radio_group_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
-            <RadioButton
-                android:id="@+id/settings_radio_group_language_serbian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/serbian" />
-            <RadioButton
-                android:id="@+id/settings_radio_group_language_english"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/english" />
-        </RadioGroup>
-    </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@id/settings_language" />
-
     <LinearLayout
         android:id="@+id/settings_version"
         android:layout_width="match_parent"
@@ -297,7 +252,7 @@
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@id/settings_language"
+        app:layout_constraintTop_toBottomOf="@id/settings_data"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         app:layout_constraintLeft_toLeftOf="parent"

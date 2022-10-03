@@ -35,7 +35,6 @@ class SettingsFragment : Fragment() {
         val btnDeleteIstorijaPretrazivanja = view.findViewById<Button>(R.id.settings_btn_delete_istorija_pretrazivanja)
         val btnDeleteListaZelja = view.findViewById<Button>(R.id.settings_btn_delete_lista_zelja)
         val switchNovaKnjiga = view.findViewById<SwitchMaterial>(R.id.settings_switch_nova)
-        val radioGroupLanguage = view.findViewById<RadioGroup>(R.id.settings_radio_group_language)
 
         // load switch state
         switchNovaKnjiga.isChecked = viewModel.getNovaKnjiga()
@@ -85,10 +84,6 @@ class SettingsFragment : Fragment() {
                 R.string.lista_zelja_uspjesno_obrisana,
                 Toast.LENGTH_SHORT
             ).show()
-        }
-
-        radioGroupLanguage.setOnCheckedChangeListener { _, i ->
-
         }
 
         switchNovaKnjiga.setOnCheckedChangeListener { _, checked ->
