@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:text="Nema aktivnosti"
+        android:text="@string/nema_aktivnosti"
         android:textAlignment="center"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_marginHorizontal="15dp"

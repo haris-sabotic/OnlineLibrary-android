@@ -10,7 +10,7 @@
         android:id="@+id/search_text_caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skorija pretraživanja"
+        android:text="@string/skorija_pretrazivanja"
         style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"

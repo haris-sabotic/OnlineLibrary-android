@@ -17,7 +17,7 @@
         android:id="@+id/lista_zelja_text_no_books"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nema knjiga"
+        android:text="@string/nema_knjiga"
         android:textAlignment="center"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_marginHorizontal="15dp"

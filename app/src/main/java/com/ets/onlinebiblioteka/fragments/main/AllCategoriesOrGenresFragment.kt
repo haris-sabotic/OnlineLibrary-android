@@ -45,9 +45,9 @@ class AllCategoriesOrGenresFragment : Fragment() {
         // set title according to whether categories or genres are loading
         (requireActivity() as MainActivity).setTitle(
             if (categoriesOrGenres == "categories") {
-                "Kategorije"
+                R.string.kategorije
             } else {
-                "Žanrovi"
+                R.string.zanrovi
             }
         )
     }

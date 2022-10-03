@@ -51,15 +51,10 @@ class SearchFragment : Fragment() {
         actionBar.setDisplayShowCustomEnabled(true)
 
         GlobalData.getSharedPreferences().getString(HISTORY_SHARED_PREFS_KEY, null)?.let {
-            Log.d("HISTORY_ITEM", "...")
             searchHistory = Gson().fromJson(
                 it,
                 ArrayDeque::class.java
             ) as ArrayDeque<String>
-        }
-
-        for (item in searchHistory) {
-            Log.d("HISTORY_ITEM", item)
         }
     }
 
@@ -91,9 +86,9 @@ class SearchFragment : Fragment() {
         editText.addTextChangedListener { text ->
             (recyclerView.adapter as SearchHistoryAdapter).search(text.toString()) { n ->
                 textCaption.text = if (n == searchHistory.size) {
-                    "Skorija pretraživanja"
+                    resources.getString(R.string.skorija_pretrazivanja)
                 } else {
-                    "Rezultati"
+                    resources.getString(R.string.rezultati)
                 }
             }
         }

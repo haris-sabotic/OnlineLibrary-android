@@ -45,7 +45,7 @@ data class Book(
         textTitle.text = this.title
 
         if (this.authors.isNotEmpty()) {
-            textAuthor.text = "by ${this.authors[0].name}"
+            textAuthor.text = "${context.getString(R.string.od)} ${this.authors[0].name}"
         } else {
             textAuthor.text = ""
         }

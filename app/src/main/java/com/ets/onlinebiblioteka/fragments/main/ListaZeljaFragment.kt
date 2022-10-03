@@ -67,9 +67,9 @@ class ListaZeljaFragment : Fragment() {
                 Snackbar.make(
                     view,
                     if (available) {
-                        "Knjiga je na raspolaganju"
+                        R.string.knjiga_je_na_raspolaganju
                     } else {
-                        "Knjiga je izdata, trenutno je nemamo u biblioteci"
+                        R.string.knjiga_je_izdata_trenutno_je_nemamo_u_biblioteci
                     },
                     Snackbar.LENGTH_SHORT
                 ).setAction("OK") {

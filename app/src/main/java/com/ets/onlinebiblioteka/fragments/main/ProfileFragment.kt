@@ -39,7 +39,7 @@ class ProfileFragment : Fragment() {
 
         viewModel.failure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
-                Toast.makeText(requireContext(), "Failed to load user data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.ucitavanje_podataka_neuspjesno, Toast.LENGTH_SHORT).show()
                 requireActivity().onBackPressed()
             }
         }

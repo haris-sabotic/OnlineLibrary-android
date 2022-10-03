@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
                 if (it.msg == "failure") {
                     Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
-                        "Invalid login data",
+                        R.string.nevalidan_podaci_o_korisniki,
                         Snackbar.LENGTH_SHORT
                     ).show()
                 } else {
@@ -85,7 +85,7 @@ class LoginFragment : Fragment() {
                 progressBar.visibility = View.GONE
                 Toast.makeText(
                     requireContext(),
-                    "Sending data failed",
+                    R.string.slanje_podataka_neuspjesno,
                     Toast.LENGTH_LONG
                 ).show()
             }

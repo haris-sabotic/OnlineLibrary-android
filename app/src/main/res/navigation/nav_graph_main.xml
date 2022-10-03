@@ -273,13 +273,13 @@
     <fragment
         android:id="@+id/menu_item_settings"
         android:name="com.ets.onlinebiblioteka.fragments.main.SettingsFragment"
-        android:label="@string/settings"
+        android:label="@string/podesavanja"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/menu_item_author_details"
         android:name="com.ets.onlinebiblioteka.fragments.main.AuthorDetailsFragment"
-        android:label="O autoru"
+        android:label="@string/o_autoru"
         tools:layout="@layout/fragment_author_details" >
         <action
             android:id="@+id/nav_action_author_details_to_book_details"

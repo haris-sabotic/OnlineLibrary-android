@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:text="Dostupnost"
+                android:text="@string/dostupnost"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp" />
 

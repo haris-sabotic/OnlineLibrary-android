@@ -84,7 +84,7 @@ class KnjigeFragment : Fragment() {
             val filters: SelectedFilters? = arguments!!.getParcelable("SELECTED_FILTERS")
             viewModel.setSelectedFilters(filters)
         } else {
-            viewModel.search(textQuery)
+            viewModel.search(resources, textQuery)
             progressBar.visibility = View.VISIBLE
         }
 
@@ -117,19 +117,19 @@ class KnjigeFragment : Fragment() {
         }
 
         if (textQuery != null) {
-            resultsTitle.text = "Rezultati za \"${textQuery}\""
+            resultsTitle.text = "${resources.getString(R.string.rezultati_za)} \"${textQuery}\""
             btnClearQuery.visibility = View.VISIBLE
         } else {
-            resultsTitle.text = "Popularne knjige"
+            resultsTitle.text = resources.getString(R.string.popularne_knjige)
             btnClearQuery.visibility = View.GONE
         }
 
         // clear search query and search books again
         btnClearQuery.setOnClickListener {
-            resultsTitle.text = "Popularne knjige"
+            resultsTitle.text = resources.getString(R.string.popularne_knjige)
             btnClearQuery.visibility = View.GONE
             textQuery = null
-            viewModel.search(textQuery)
+            viewModel.search(resources, textQuery)
             progressBar.visibility = View.VISIBLE
         }
 
@@ -138,14 +138,14 @@ class KnjigeFragment : Fragment() {
             selectedFiltersChipGroup.removeAllViews()
 
             if (!selectedFiltersInitialObserve) {
-                viewModel.search(textQuery)
+                viewModel.search(resources, textQuery)
                 progressBar.visibility = View.VISIBLE
             } else {
                 selectedFiltersInitialObserve = false
             }
 
             if (selectedFilters == null || selectedFilters.isEmpty()) {
-                filtersBtnText.text = "Filters"
+                filtersBtnText.text = resources.getString(R.string.filters)
                 filtersBtnIcon.setBackgroundResource(R.drawable.ic_filters_button_arrow)
                 filtersBtnIcon.layoutParams.width = 8F.asDp()
                 filtersBtnIcon.layoutParams.height = 12F.asDp()
@@ -154,7 +154,7 @@ class KnjigeFragment : Fragment() {
                     findNavController().navigate(action)
                 }
             } else {
-                filtersBtnText.text = "Remove filters"
+                filtersBtnText.text = resources.getString(R.string.ukloni_filtere)
                 filtersBtnIcon.setBackgroundResource(R.drawable.ic_x)
                 filtersBtnIcon.layoutParams.width = 14F.asDp()
                 filtersBtnIcon.layoutParams.height = 14F.asDp()
@@ -210,12 +210,12 @@ class KnjigeFragment : Fragment() {
                         if (count.endsWith("12") or
                             count.endsWith("13") or
                             count.endsWith("14")) {
-                            "Ukupno ${books.count} knjiga"
+                            "${resources.getString(R.string.ukupno__)} ${books.count} ${resources.getString(R.string.knjiga)}"
                         } else {
-                            "Ukupno ${books.count} knjige"
+                            "${resources.getString(R.string.ukupno__)} ${books.count} ${resources.getString(R.string.__knjige)}"
                         }
                     }
-                    else -> "Ukupno ${books.count} knjiga"
+                    else -> "${resources.getString(R.string.ukupno__)} ${books.count} ${resources.getString(R.string.knjiga)}"
                 }
 
                 if (books.nextPageUrl != null) {
@@ -236,9 +236,9 @@ class KnjigeFragment : Fragment() {
                         Snackbar.make(
                             view,
                             if (available) {
-                                "Knjiga je na raspolaganju"
+                                R.string.knjiga_je_na_raspolaganju
                             } else {
-                                "Knjiga je izdata, trenutno je nemamo u biblioteci"
+                                R.string.knjiga_je_izdata_trenutno_je_nemamo_u_biblioteci
                             },
                             Snackbar.LENGTH_SHORT
                         ).setAction("OK") {
@@ -252,7 +252,7 @@ class KnjigeFragment : Fragment() {
             if (failed) {
                 Toast.makeText(
                     requireContext(),
-                    "Failed to load books",
+                    R.string.ucitavanje_podataka_neuspjesno,
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -352,7 +352,6 @@ class KnjigeFragment : Fragment() {
 
         var i = 0
         for (item in items) {
-            Log.d("KnjigeFragment", item.toString())
             val itemView = layoutInflater.inflate(cardLayout, null)
 
             val params = GridLayout.LayoutParams()

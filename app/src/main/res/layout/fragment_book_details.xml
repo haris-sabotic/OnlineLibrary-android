@@ -88,7 +88,7 @@
                 android:id="@+id/book_details_text_label_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="@string/opis"
                 style="@style/TextHeadline6"
                 app:layout_constraintTop_toBottomOf="@id/book_details_separator_one"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -130,7 +130,7 @@
                     android:id="@+id/book_details_text_read_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pročitaj više"
+                    android:text="@string/procitaj_vise"
                     style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/blue" />
@@ -149,7 +149,7 @@
                 android:id="@+id/book_details_text_label_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Detalji o ovoj knjizi"
+                android:text="@string/detalji_o_ovoj_knjizi"
                 style="@style/TextHeadline6"
                 app:layout_constraintTop_toBottomOf="@id/book_details_separator_two"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -170,7 +170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:text="Dostupno stanje"
+                        android:text="@string/dostupno_stanje"
                         style="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/gray" />
 
@@ -189,7 +189,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:text="Kategorije"
+                        android:text="@string/kategorije"
                         style="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/gray" />
 
@@ -209,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:text="Žanrovi"
+                        android:text="@string/zanrovi"
                         style="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/gray" />
 
@@ -229,7 +229,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:text="Autori"
+                        android:text="@string/autori"
                         style="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/gray" />
 
@@ -249,7 +249,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:text="Izdavač"
+                        android:text="@string/izdavac"
                         style="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/gray" />
 
@@ -269,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:text="Godina izdavanja"
+                        android:text="@string/godina_izdavanja"
                         style="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/gray" />
 
@@ -337,7 +337,7 @@
                 android:id="@+id/book_details_text_label_similar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Slične knjige"
+                android:text="@string/slicne_knjige"
                 style="@style/TextHeadline6"
                 app:layout_constraintTop_toBottomOf="@id/book_details_separator_four"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -358,7 +358,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="70dp"
-                android:text="Nema sličnih knjiga"
+                android:text="@string/nema_slicnih_knjiga"
                 android:textAlignment="center"
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_marginHorizontal="15dp"
@@ -396,7 +396,7 @@
             android:id="@+id/book_details_specs_text_label_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Specifikacije"
+            android:text="@string/specifikacije"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -418,7 +418,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Broj strana"
+            android:text="@string/broj_strana"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/gray"
             android:layout_marginTop="25dp"
@@ -448,7 +448,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pismo"
+            android:text="@string/pismo"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/gray"
             android:layout_marginTop="15dp"
@@ -478,7 +478,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jezik"
+            android:text="@string/jezik"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/gray"
             android:layout_marginTop="15dp"
@@ -508,7 +508,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Povez"
+            android:text="@string/povez"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/gray"
             android:layout_marginTop="15dp"
@@ -538,7 +538,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Format"
+            android:text="@string/format"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/gray"
             android:layout_marginTop="15dp"
@@ -568,7 +568,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ISBN"
+            android:text="@string/isbn"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/gray"
             android:layout_marginTop="15dp"
@@ -642,7 +642,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rezerviši"
+            android:text="@string/rezervisi"
             android:textSize="18sp"
             android:textColor="@color/blue"
             android:layout_marginLeft="5dp" />
@@ -670,7 +670,7 @@
             android:id="@+id/book_details_btn_save_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sačuvaj"
+            android:text="@string/sacuvaj"
             android:textSize="18sp"
             android:textColor="@color/blue"
             android:layout_marginLeft="5dp" />
@@ -698,7 +698,7 @@
             android:id="@+id/book_details_reserve_text_label_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rezervacija"
+            android:text="@string/rezervacija"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -723,7 +723,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:hint="Ime i Prezime"
+            android:hint="@string/ime_i_prezime"
             android:layout_marginTop="50dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -742,7 +742,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:hint="E-mail"
+            android:hint="@string/email"
             android:layout_marginTop="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -760,7 +760,7 @@
             android:id="@+id/book_details_reserve_et_tel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mobilni telefon"
+            android:hint="@string/mobilni_telefon"
             android:textColorHint="#000000"
             android:layout_marginTop="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -804,7 +804,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             style="@style/Button"
-            android:text="Rezerviši"
+            android:text="@string/rezervisi"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/book_details_reserve_date_layout" />

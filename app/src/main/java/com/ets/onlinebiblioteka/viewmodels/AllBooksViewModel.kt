@@ -1,8 +1,10 @@
 package com.ets.onlinebiblioteka.viewmodels
 
+import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.models.Book
 import com.ets.onlinebiblioteka.models.Paginated
 import com.ets.onlinebiblioteka.models.filters.SelectedFilters
@@ -22,7 +24,7 @@ class AllBooksViewModel : ViewModel() {
         books.postValue(null)
     }
 
-    fun loadBooks(page: Int, textQuery: String?, filters: SelectedFilters?) {
+    fun loadBooks(resources: Resources, page: Int, textQuery: String?, filters: SelectedFilters?) {
         val call: Call<Paginated<Book>>
 
         // create api call with page, search query and selected filters
@@ -44,9 +46,9 @@ class AllBooksViewModel : ViewModel() {
                 textQuery,
                 // transform chip names to identifiers used by the api
                 when (filters.availability) {
-                    "Izdato" -> "rented"
-                    "Rezervisano" -> "reserved"
-                    "Na raspolaganju" -> "available"
+                    resources.getString(R.string.izdato) -> "rented"
+                    resources.getString(R.string.rezervisano) -> "reserved"
+                    resources.getString(R.string.na_raspolaganju) -> "available"
                     else -> null
                 },
                 // get only IDs from every (ID, name) pair

@@ -172,7 +172,7 @@ class BookDetailsFragment : Fragment() {
 
         // show only first author at first(then all the other ones later on)
         if (bookData.authors.isNotEmpty()) {
-            textAuthor.text = "by ${bookData.authors[0]}"
+            textAuthor.text = "${resources.getString(R.string.od)} ${bookData.authors[0]}"
         } else {
             textAuthor.text = ""
         }
@@ -180,9 +180,9 @@ class BookDetailsFragment : Fragment() {
         // 1 komad, 53 komada
         quantityText.text = if (bookData.quantity.toString().endsWith('1')
             and !bookData.quantity.toString().endsWith("11")) {
-            "${bookData.quantity} komad"
+            "${bookData.quantity} ${resources.getString(R.string.komad)}"
         } else {
-            "${bookData.quantity} komada"
+            "${bookData.quantity} ${resources.getString(R.string.komada)}"
         }
 
         publishYearText.text = bookData.publishYear
@@ -299,13 +299,13 @@ class BookDetailsFragment : Fragment() {
                 textDescription.text = summary
                 descriptionReadMoreShown = false
 
-                btnReadMoreText.text = "Pročitaj više"
+                btnReadMoreText.text = resources.getString(R.string.procitaj_vise)
                 btnReadMoreIcon.rotation = 90F
             } else {
                 textDescription.text = bookData.summary.trim().removeHtmlPTag()
                 descriptionReadMoreShown = true
 
-                btnReadMoreText.text = "Pročitaj manje"
+                btnReadMoreText.text = resources.getString(R.string.procitaj_manje)
                 btnReadMoreIcon.rotation = -90F
             }
         }
@@ -351,9 +351,9 @@ class BookDetailsFragment : Fragment() {
 
                 Snackbar.make(
                     view,
-                    "Knjiga je sačuvana u listu želja!",
+                    R.string.knjiga_je_sacuvana_u_listu_zelja,
                     Snackbar.LENGTH_LONG
-                ).setAction("Poništi!") {
+                ).setAction(resources.getString(R.string.ponisti)) {
                     unsaveBook()
 
                     bookSaved = false
@@ -387,9 +387,9 @@ class BookDetailsFragment : Fragment() {
                     Snackbar.make(
                         view,
                         if (available) {
-                            "Knjiga je na raspolaganju"
+                            R.string.knjiga_je_na_raspolaganju
                         } else {
-                            "Knjiga je izdata, trenutno je nemamo u biblioteci"
+                            R.string.knjiga_je_izdata_trenutno_je_nemamo_u_biblioteci
                         },
                         Snackbar.LENGTH_SHORT
                     ).setAction("OK") {
@@ -406,7 +406,7 @@ class BookDetailsFragment : Fragment() {
             if (!bookData.available) {
                 Snackbar.make(
                     view,
-                    "Svi primjerci su izdati, ne možete rezervisati!",
+                    R.string.svi_primjerci_su_izdati_ne_mozete_rezervisati,
                     Snackbar.LENGTH_SHORT
                 ).setAction("OK") {
                 }.show()
@@ -434,7 +434,7 @@ class BookDetailsFragment : Fragment() {
 
         reserveEtDate.setOnClickListener {
             val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
-                .setTitleText("PERIOD REZERVACIJE")
+                .setTitleText(resources.getString(R.string.uppercase__period_rezervacije))
                 .build()
 
             dateRangePicker.addOnPositiveButtonClickListener {
@@ -458,7 +458,7 @@ class BookDetailsFragment : Fragment() {
             if (selectedDateFrom.isNotEmpty() && selectedDateTo.isNotEmpty()) {
                 viewModel.reserveBook(bookData.id, selectedDateFrom, selectedDateTo, reserveEtPhone.editText!!.text.toString())
             } else {
-                Toast.makeText(requireContext(), "Izaberite datum", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.izaberite_datum, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -470,7 +470,7 @@ class BookDetailsFragment : Fragment() {
 
                 Snackbar.make(
                     view,
-                    "Rezervacija je uspješna!",
+                    R.string.rezervacija_je_uspjesna,
                     Snackbar.LENGTH_SHORT
                 ).setAction("OK") {
                 }.show()
@@ -525,10 +525,10 @@ class BookDetailsFragment : Fragment() {
         // toggle text and icon
         if (saved) {
             btnSaveIcon.setImageResource(R.drawable.ic_saved)
-            btnSaveText.text = "Sačuvano"
+            btnSaveText.text = resources.getString(R.string.sacuvano)
         } else {
             btnSaveIcon.setImageResource(R.drawable.ic_save)
-            btnSaveText.text = "Sačuvaj"
+            btnSaveText.text = resources.getString(R.string.sacuvaj)
         }
     }
 

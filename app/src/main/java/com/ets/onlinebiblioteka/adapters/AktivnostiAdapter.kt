@@ -40,7 +40,7 @@ class AktivnostiAdapter(
 
             textDate.text = item.date.substring(0, 10)
 
-            val text = "${item.librarian} vam je izdao/la knjigu ${item.book}"
+            val text = "${item.librarian} ${R.string.vam_je_izdao_knjigu} ${item.book}"
             val str = SpannableStringBuilder(text)
             // mark librarian name as bold
             str.setSpan(

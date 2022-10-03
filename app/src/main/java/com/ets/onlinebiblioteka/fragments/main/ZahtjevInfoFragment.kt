@@ -29,6 +29,7 @@ import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.ZahtjevInfoViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 
 class ZahtjevInfoFragment : Fragment() {
@@ -165,7 +166,7 @@ class ZahtjevInfoFragment : Fragment() {
 
         viewModel.failure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
-                Toast.makeText(requireContext(), "Failed to send data", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), R.string.slanje_podataka_neuspjesno, Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -174,9 +175,9 @@ class ZahtjevInfoFragment : Fragment() {
         viewModel.getMsg().observe(viewLifecycleOwner) {
             it?.let {
                 val message = if (ponistiOrIzbrisi == "ponisti") {
-                    "Rezervacija uspješno poništena!"
+                    resources.getString(R.string.rezervacija_uspjesno_ponistena)
                 } else {
-                    "Transakcija uspješno obrisana!"
+                    resources.getString(R.string.transakcija_uspjesno_obrisana)
                 }
 
                 val action = ZahtjevInfoFragmentDirections
@@ -191,32 +192,32 @@ class ZahtjevInfoFragment : Fragment() {
                 // can't delete if book hasn't been returnes
                 Snackbar.make(
                     view,
-                    "Ne možete obrisati transakciju, knjiga nije vraćena",
+                    R.string.ne_mozete_obrisati_transakciju_knjiga_nije_vracena,
                     Snackbar.LENGTH_SHORT
                 ).setAction("OK") {
                 }.setAnchorView(view.findViewById(R.id.zahtjev_info_separator_bottom)).show()
             } else {
                 // dialog asking for confirmation to delete
                 val title = if (ponistiOrIzbrisi == "ponisti") {
-                    "Poništi rezervaciju"
+                    resources.getString(R.string.ponisti_rezervaciju)
                 } else {
-                    "Izbriši transakciju"
+                    resources.getString(R.string.izbrisi_transakciju)
                 }
                 val message = if (ponistiOrIzbrisi == "ponisti") {
-                    "Da li ste sigurni da želite da poništite ovu rezervaciju?"
+                    resources.getString(R.string.da_li_ste_sigurni_da_zelite_da_ponistite_ovu_rezervaciju)
                 } else {
-                    "Da li ste sigurni da želite da obrišete ovu transakciju?"
+                    resources.getString(R.string.da_li_ste_sigurni_da_zelite_da_obrisete_ovu_transakciju)
                 }
                 val btnText = if(ponistiOrIzbrisi == "ponisti") {
-                    "PONIŠTI"
+                    resources.getString(R.string.uppercase__ponisti)
                 } else {
-                    "IZBRIŠI"
+                    resources.getString(R.string.uppercase__obrisi)
                 }
 
                 AlertDialog.Builder(requireContext())
                     .setTitle(title)
                     .setMessage(message)
-                    .setNegativeButton("NAZAD" ) { _, _ -> }
+                    .setNegativeButton(resources.getString(R.string.uppercase__nazad)) { _, _ -> }
                     .setPositiveButton(btnText ) { _, _ ->
                         viewModel.izbrisi(data.id, data.type)
                     }.create().show()

@@ -130,49 +130,49 @@ class FiltersFragment : Fragment() {
         setupChipGroup(
             view,
             R.id.filters_chip_group_dostupnost,
-            listOf("Izdato", "Rezervisano", "Na raspolaganju")
+            listOf(resources.getString(R.string.izdato), resources.getString(R.string.rezervisano), resources.getString(R.string.na_raspolaganju))
         ) { v ->
             selectedDostupnost = v
         }
 
         // set up every other filter
         setupFilter(
-            "Kategorija",
+            resources.getString(R.string.kategorija),
             false,
             selectedKategorije,
             viewModel::loadKategorije,
             viewModel::getKategorije
         )
         setupFilter(
-            "Zanr",
+            resources.getString(R.string.zanr),
             false,
             selectedZanrovi,
             viewModel::loadZanrovi,
             viewModel::getZanrovi
         )
         setupFilter(
-            "Autor",
+            resources.getString(R.string.autor),
             false,
             selectedAutori,
             viewModel::loadAutori,
             viewModel::getAutori
         )
         setupFilter(
-            "Izdavac",
+            resources.getString(R.string.izdavac),
             true,
             selectedIzdavaci,
             viewModel::loadIzdavaci,
             viewModel::getIzdavaci
         )
         setupFilter(
-            "Pismo",
+            resources.getString(R.string.pismo),
             true,
             selectedPisma,
             viewModel::loadPisma,
             viewModel::getPisma
         )
         setupFilter(
-            "Jezik",
+            resources.getString(R.string.jezik),
             true,
             selectedJezici,
             viewModel::loadJezici,

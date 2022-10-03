@@ -52,7 +52,7 @@
                     android:id="@+id/knjige_btn_filters_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Filters"
+                    android:text="@string/filters"
                     android:textColor="@color/blue"
                     android:textSize="16sp" />
                 <View
@@ -92,7 +92,7 @@
                 android:id="@+id/knjige_text_results_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Popularne knjige"
+                android:text="@string/popularne_knjige"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginLeft="15dp"
@@ -133,7 +133,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pogledaj još"
+                    android:text="@string/pogledaj_jos"
                     android:textColor="@color/blue"
                     android:textSize="16sp" />
                 <View
@@ -158,7 +158,7 @@
                 android:id="@+id/knjige_text_kategorije_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kategorije"
+                android:text="@string/kategorije"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginLeft="15dp"
@@ -188,7 +188,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pogledaj još"
+                    android:text="@string/pogledaj_jos"
                     android:textColor="@color/blue"
                     android:textSize="16sp" />
                 <View
@@ -214,7 +214,7 @@
                 android:id="@+id/knjige_text_zanrovi_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zanrovi"
+                android:text="@string/zanrovi"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginLeft="15dp"
@@ -244,7 +244,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pogledaj još"
+                    android:text="@string/pogledaj_jos"
                     android:textColor="@color/blue"
                     android:textSize="16sp" />
                 <View

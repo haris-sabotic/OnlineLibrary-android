@@ -76,9 +76,9 @@ class ForgotLoginFragment : Fragment() {
                     }
                 } else {
                     // show error message otherwise
-                    var snackBarMsg = "Invalid username"
+                    var snackBarMsg = resources.getString(R.string.nevalidno_korisnicko_ime)
                     if (radioGroup.checkedRadioButtonId == R.id.forgot_login_radio_username) {
-                        snackBarMsg = "Invalid email"
+                        snackBarMsg = resources.getString(R.string.nevalidan_email)
                     }
 
                     Snackbar.make(
@@ -95,7 +95,7 @@ class ForgotLoginFragment : Fragment() {
                 progressBar.visibility = View.GONE
                 Toast.makeText(
                     requireContext(),
-                    "Sending data failed",
+                    R.string.slanje_podataka_neuspjesno,
                     Toast.LENGTH_LONG
                 ).show()
             }

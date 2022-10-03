@@ -80,7 +80,7 @@ class EditProfileFragment : Fragment() {
 
         viewModel.failure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
-                Toast.makeText(requireContext(), "Failed to edit user", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.izmjena_profila_neuspjesna, Toast.LENGTH_SHORT).show()
                 requireActivity().onBackPressed()
             }
         }
@@ -107,21 +107,21 @@ class EditProfileFragment : Fragment() {
                     EditProfileViewModel.EditProfileStatus.OLD_PASSWORD_INVALID -> {
                         Snackbar.make(
                             requireActivity().findViewById(android.R.id.content),
-                            "Old password invalid",
+                            R.string.stara_sifra_nevalidna,
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
                     EditProfileViewModel.EditProfileStatus.PASSWORD_CONFIRMATION_INVALID -> {
                         Snackbar.make(
                             requireActivity().findViewById(android.R.id.content),
-                            "Password confirmation does not match",
+                            R.string.potvrda_sifre_nevelidna,
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
                     EditProfileViewModel.EditProfileStatus.EMPTY_FIELDS -> {
                         Snackbar.make(
                             requireActivity().findViewById(android.R.id.content),
-                            "Please fill out every field",
+                            R.string.ispunite_svako_polje,
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }

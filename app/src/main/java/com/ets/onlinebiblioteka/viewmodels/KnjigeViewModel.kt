@@ -1,9 +1,11 @@
 package com.ets.onlinebiblioteka.viewmodels
 
+import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ets.onlinebiblioteka.R
 import com.ets.onlinebiblioteka.models.Book
 import com.ets.onlinebiblioteka.models.Paginated
 import com.ets.onlinebiblioteka.models.filters.Kategorija
@@ -74,7 +76,7 @@ class KnjigeViewModel : ViewModel() {
         })
     }
 
-    fun search(textQuery: String?) {
+    fun search(resources: Resources, textQuery: String?) {
         val call: Call<Paginated<Book>>
         val filters = selectedFilters.value
 
@@ -97,9 +99,9 @@ class KnjigeViewModel : ViewModel() {
                 textQuery,
                 // transform chip names to identifiers used by the api
                 when (filters.availability) {
-                    "Izdato" -> "rented"
-                    "Rezervisano" -> "reserved"
-                    "Na raspolaganju" -> "available"
+                    resources.getString(R.string.izdato) -> "rented"
+                    resources.getString(R.string.rezervisano) -> "reserved"
+                    resources.getString(R.string.na_raspolaganju) -> "available"
                     else -> null
                 },
                 // get only IDs from every (ID, name) pair

@@ -1,17 +1,17 @@
 package com.ets.onlinebiblioteka.fragments.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ets.onlinebiblioteka.R
-import com.ets.onlinebiblioteka.util.FcmService
 import com.ets.onlinebiblioteka.util.GlobalData
 import com.ets.onlinebiblioteka.viewmodels.SettingsViewModel
 import com.google.android.material.switchmaterial.SwitchMaterial
+
 
 class SettingsFragment : Fragment() {
     private val viewModel: SettingsViewModel by viewModels()
@@ -35,6 +35,7 @@ class SettingsFragment : Fragment() {
         val btnDeleteIstorijaPretrazivanja = view.findViewById<Button>(R.id.settings_btn_delete_istorija_pretrazivanja)
         val btnDeleteListaZelja = view.findViewById<Button>(R.id.settings_btn_delete_lista_zelja)
         val switchNovaKnjiga = view.findViewById<SwitchMaterial>(R.id.settings_switch_nova)
+        val radioGroupLanguage = view.findViewById<RadioGroup>(R.id.settings_radio_group_language)
 
         // load switch state
         switchNovaKnjiga.isChecked = viewModel.getNovaKnjiga()
@@ -65,7 +66,7 @@ class SettingsFragment : Fragment() {
 
             Toast.makeText(
                 requireContext(),
-                "Istorija pretraživanja uspješno obrisana",
+                R.string.istorija_pretrazivanja_uspjesno_obrisana,
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -81,11 +82,14 @@ class SettingsFragment : Fragment() {
 
             Toast.makeText(
                 requireContext(),
-                "Lista želja uspješno obrisana",
+                R.string.lista_zelja_uspjesno_obrisana,
                 Toast.LENGTH_SHORT
             ).show()
         }
 
+        radioGroupLanguage.setOnCheckedChangeListener { _, i ->
+
+        }
 
         switchNovaKnjiga.setOnCheckedChangeListener { _, checked ->
             viewModel.toggleNovaKnjiga(checked)

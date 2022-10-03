@@ -37,7 +37,7 @@ class AktivnostiFragment : Fragment() {
 
         viewModel.failure().observe(viewLifecycleOwner) { failed ->
             if (failed) {
-                Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), R.string.ucitavanje_podataka_neuspjesno, Toast.LENGTH_SHORT)
                     .show()
             }
         }

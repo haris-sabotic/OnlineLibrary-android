@@ -72,7 +72,7 @@ class AuthorDetailsFragment : Fragment() {
 
         // load summary from author data
         var summary = if (authorData.biography == null) {
-            "Autor nema opis"
+            resources.getString(R.string.autor_nema_opis)
         } else {
             authorData.biography!!.trim().removeHtmlPTag()
         }
@@ -88,7 +88,7 @@ class AuthorDetailsFragment : Fragment() {
         textDescription.text = summary
 
         // Knjige od autora <b>${author name}</b>
-        textLabelMoreBooks.text = SpannableStringBuilder("Knjige od autora ").append(
+        textLabelMoreBooks.text = SpannableStringBuilder(resources.getString(R.string.knjige_od_autora_)).append(
             "\"${authorData.name}\"",
             StyleSpan(android.graphics.Typeface.BOLD),
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -98,7 +98,7 @@ class AuthorDetailsFragment : Fragment() {
         btnReadMore.setOnClickListener {
             if (descriptionReadMoreShown) {
                 var summary = if (authorData.biography == null) {
-                    "Autor nema opis"
+                    resources.getString(R.string.autor_nema_opis)
                 } else {
                     authorData.biography!!.trim().removeHtmlPTag()
                 }
@@ -112,18 +112,18 @@ class AuthorDetailsFragment : Fragment() {
                 textDescription.text = summary
                 descriptionReadMoreShown = false
 
-                btnReadMoreText.text = "Pročitaj više"
+                btnReadMoreText.text = resources.getString(R.string.procitaj_vise)
                 btnReadMoreIcon.rotation = 90F
             } else {
                 textDescription.text = if (authorData.biography == null) {
-                    "Autor nema opis"
+                    resources.getString(R.string.autor_nema_opis)
                 } else {
                     authorData.biography!!.trim().removeHtmlPTag()
                 }
 
                 descriptionReadMoreShown = true
 
-                btnReadMoreText.text = "Pročitaj manje"
+                btnReadMoreText.text = resources.getString(R.string.procitaj_manje)
                 btnReadMoreIcon.rotation = -90F
             }
         }
@@ -145,9 +145,9 @@ class AuthorDetailsFragment : Fragment() {
                     Snackbar.make(
                         view,
                         if (available) {
-                            "Knjiga je na raspolaganju"
+                            R.string.knjiga_je_na_raspolaganju
                         } else {
-                            "Knjiga je izdata, trenutno je nemamo u biblioteci"
+                            R.string.knjiga_je_izdata_trenutno_je_nemamo_u_biblioteci
                         },
                         Snackbar.LENGTH_SHORT
                     ).setAction("OK") {

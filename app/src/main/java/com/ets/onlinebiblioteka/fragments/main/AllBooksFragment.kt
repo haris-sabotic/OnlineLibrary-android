@@ -45,7 +45,7 @@ class AllBooksFragment : Fragment() {
             selectedFilters = it.getParcelable("SELECTED_FILTERS")
 
             // load books right away
-            viewModel.loadBooks(1, textQuery, selectedFilters)
+            viewModel.loadBooks(resources, 1, textQuery, selectedFilters)
         }
     }
 
@@ -55,7 +55,7 @@ class AllBooksFragment : Fragment() {
     ): View? {
         // reload books when going back to this fragment over the backstack
         if (arguments == null) {
-            viewModel.loadBooks(1, textQuery, selectedFilters)
+            viewModel.loadBooks(resources, 1, textQuery, selectedFilters)
         } else {
             arguments = null
         }
@@ -86,9 +86,9 @@ class AllBooksFragment : Fragment() {
                 Snackbar.make(
                     view,
                     if (available) {
-                        "Knjiga je na raspolaganju"
+                        R.string.knjiga_je_na_raspolaganju
                     } else {
-                        "Knjiga je izdata, trenutno je nemamo u biblioteci"
+                        R.string.knjiga_je_izdata_trenutno_je_nemamo_u_biblioteci
                     },
                     Snackbar.LENGTH_SHORT
                 ).setAction("OK") {
@@ -127,7 +127,7 @@ class AllBooksFragment : Fragment() {
                 if (!recyclerView.canScrollVertically(1) && canLoadMore
                     && progressBarBottom.visibility == View.GONE) {
                     progressBarBottom.visibility = View.VISIBLE
-                    viewModel.loadBooks(page + 1, textQuery, selectedFilters)
+                    viewModel.loadBooks(resources, page + 1, textQuery, selectedFilters)
                 }
             }
         })

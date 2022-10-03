@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 android:textColor="@color/gray"
-                android:text="Period rezervacije:"
+                android:text="@string/period_rezervacije"
                 android:layout_marginRight="5dp" />
 
             <TextView
@@ -83,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:text="Tip zahtjeva"
+            android:text="@string/tip_zahtjeva"
             android:layout_marginHorizontal="15dp" />
 
 
@@ -95,7 +95,7 @@
             app:chipStrokeWidth="1dp"
             app:chipStrokeColor="@color/orange"
             android:textColor="@color/orange"
-            android:text="Rezervacija"
+            android:text="@string/rezervacija"
             android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="15dp" />
 
