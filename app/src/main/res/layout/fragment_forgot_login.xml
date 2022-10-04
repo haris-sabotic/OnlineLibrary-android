@@ -1,137 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.login.ForgotLoginFragment">
 
-    <ImageView
-        android:id="@+id/forgot_login_img_cortex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_cortex"
-        android:layout_marginTop="70dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/forgot_login_text_ne_mogu_da_pristupim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextHeadline6"
-        android:text="@string/ne_mogu_da_pristupim_mom_nalogu"
-        android:layout_marginTop="50dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgot_login_img_cortex" />
-
-    <TextView
-        android:id="@+id/forgot_login_text_ukucajte_trazeni_podatak"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        style="@style/TextBody1"
-        android:text="@string/ukucajte_trazeni_podatak_i_dobicete_email"
-        android:textAlignment="center"
-        android:layout_marginTop="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgot_login_text_ne_mogu_da_pristupim" />
-
-
-
-    <TextView
-        android:id="@+id/forgot_login_text_sta_ste_zaboravili"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        style="@style/TextBody1"
-        android:text="@string/sta_ste_zaboravili"
-        android:letterSpacing="0"
-        android:layout_marginTop="50dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgot_login_text_ukucajte_trazeni_podatak" />
-
-    <RadioGroup
-        android:id="@+id/forgot_login_radio_group"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/forgot_login_text_sta_ste_zaboravili"
-        app:layout_constraintRight_toRightOf="@id/forgot_login_text_sta_ste_zaboravili"
-        app:layout_constraintLeft_toLeftOf="@id/forgot_login_text_sta_ste_zaboravili"
-        android:orientation="vertical"
-        >
-
-        <RadioButton
-            android:id="@+id/forgot_login_radio_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:paddingLeft="15dp"
-            android:layout_marginBottom="-8dp"
-            />
-
-        <RadioButton
-            android:id="@+id/forgot_login_radio_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/username"
-            android:paddingLeft="15dp"
-            android:layout_marginTop="-8dp"
-            />
-    </RadioGroup>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/forgot_login_et_username_or_email"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/forgot_login_radio_group"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        style="@style/TextInputLayout" >
-        <com.google.android.material.textfield.TextInputEditText
+        android:layout_height="match_parent"
+        android:scrollbarSize="0dp"
+        android:orientation="vertical" >
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="@string/username"
-            android:background="@drawable/edit_text_background" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:paddingBottom="70dp" >
+
+            <ImageView
+                android:id="@+id/forgot_login_img_cortex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cortex"
+                android:layout_marginTop="70dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/forgot_login_text_ne_mogu_da_pristupim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextHeadline6"
+                android:text="@string/ne_mogu_da_pristupim_mom_nalogu"
+                android:layout_marginTop="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forgot_login_img_cortex" />
+
+            <TextView
+                android:id="@+id/forgot_login_text_ukucajte_trazeni_podatak"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                style="@style/TextBody1"
+                android:text="@string/ukucajte_trazeni_podatak_i_dobicete_email"
+                android:textAlignment="center"
+                android:layout_marginTop="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forgot_login_text_ne_mogu_da_pristupim" />
 
 
-    <Button
-        android:id="@+id/forgot_login_btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Button"
-        android:text="@string/posalji"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/forgot_login_text_nazad" />
 
-    <TextView
-        android:id="@+id/forgot_login_text_nazad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextLink"
-        android:text="@string/nazad_na_log_in"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+                android:id="@+id/forgot_login_text_sta_ste_zaboravili"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                style="@style/TextBody1"
+                android:text="@string/sta_ste_zaboravili"
+                android:letterSpacing="0"
+                android:layout_marginTop="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forgot_login_text_ukucajte_trazeni_podatak" />
+
+            <RadioGroup
+                android:id="@+id/forgot_login_radio_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/forgot_login_text_sta_ste_zaboravili"
+                app:layout_constraintRight_toRightOf="@id/forgot_login_text_sta_ste_zaboravili"
+                app:layout_constraintLeft_toLeftOf="@id/forgot_login_text_sta_ste_zaboravili"
+                android:orientation="vertical"
+                >
+
+                <RadioButton
+                    android:id="@+id/forgot_login_radio_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/password"
+                    android:paddingLeft="15dp"
+                    android:layout_marginBottom="-8dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/forgot_login_radio_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/username"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="-8dp"
+                    />
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/forgot_login_et_username_or_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/forgot_login_radio_group"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                style="@style/TextInputLayout" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/username"
+                    android:background="@drawable/edit_text_background" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <ProgressBar
-        android:id="@+id/forgot_login_progress_bar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+            <Button
+                android:id="@+id/forgot_login_btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Button"
+                android:text="@string/posalji"
+                android:layout_marginTop="100dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forgot_login_et_username_or_email" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/forgot_login_text_nazad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextLink"
+                android:text="@string/nazad_na_log_in"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forgot_login_btn_submit" />
+
+
+            <ProgressBar
+                android:id="@+id/forgot_login_progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</FrameLayout>
