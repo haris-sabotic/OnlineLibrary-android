@@ -60,7 +60,7 @@ class FcmService : FirebaseMessagingService() {
 
             // set up notification
             val builder = NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_app)
+                .setSmallIcon(R.mipmap.ic_logo)
                 .setContentTitle(resources.getString(R.string.nova_knjiga))
                 .setContentText("${resources.getString(R.string.knjiga_po_imenu)} $title ${resources.getString(R.string.je_dodata_u_bazu_podataka)}.")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
