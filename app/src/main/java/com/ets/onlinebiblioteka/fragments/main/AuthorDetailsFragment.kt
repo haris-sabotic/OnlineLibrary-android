@@ -67,6 +67,10 @@ class AuthorDetailsFragment : Fragment() {
         textLabelMoreBooks = view.findViewById(R.id.author_details_text_label_more_books)
         recyclerMoreBooks = view.findViewById(R.id.author_details_recycler_view_more_books)
 
+        btnBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
         textName.text = authorData.name
 
 
