@@ -301,17 +301,18 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintTop_toBottomOf="@id/book_details_separator_three" >
+
                 <TextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
-                    android:text="Specifikacije"
-                    android:textStyle="bold"
+                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_alignParentLeft="true" />
+                    android:text="@string/specifikacije"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="12dp"
