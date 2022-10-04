@@ -43,13 +43,8 @@ class LoginFragment : Fragment() {
             view.findNavController().navigate(R.id.nav_login_action_main_to_forgot)
         }
 
-        // open registration page in browser
         textRegister.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://tim7.ictcortex.me/register")
-            )
-            startActivity(intent)
+            view.findNavController().navigate(R.id.nav_login_action_main_to_registration)
         }
 
         loginBtn.setOnClickListener {

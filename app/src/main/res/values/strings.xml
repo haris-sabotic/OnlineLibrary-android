@@ -149,4 +149,14 @@
     <string name="app_language">App language</string>
     <string name="english">English</string>
     <string name="serbian">Serbian</string>
+    <string name="registration">Registration</string>
+    <string name="register">Register</string>
+    <string name="enter_your_data_to_create_an_account">Enter your data to create a new account</string>
+    <string name="password_confirm">Password confirmation</string>
+    <string name="registration_failed">Registration failed</string>
+    <string name="email_taken">Email taken</string>
+    <string name="username_taken">Username taken</string>
+    <string name="jmbg_taken">JMBG taken</string>
+    <string name="password_too_short">Password too short</string>
+    <string name="jmbg_should_contain_13_digits">The JMBG should contain 13 digits</string>
 </resources>

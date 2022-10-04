@@ -51,6 +51,9 @@ class LoginActivity : AppCompatActivity() {
             R.id.nav_login_request_sent_username_fragment -> {
                 navController.navigate(R.id.nav_login_action_request_sent_username_to_main)
             }
+            R.id.nav_login_registration_fragment -> {
+                navController.navigate(R.id.nav_login_action_registration_to_main)
+            }
             R.id.nav_login_forgot_fragment -> {
                 navController.navigate(R.id.nav_login_action_forgot_to_main)
             }

@@ -35,6 +35,13 @@ interface ApiInterface {
     @POST("login")
     fun login(@Query("username") username: String, @Query("password") password: String): Call<Login>
 
+    @POST("register")
+    fun register(@Query("username") username: String,
+                 @Query("name") name: String,
+                 @Query("email") email: String,
+                 @Query("jmbg") jmbg: String,
+                 @Query("password") password: String): Call<Registration>
+
     @POST("forgot-password")
     fun forgotPassword(@Query("username") username: String): Call<ForgotLogin>
     @POST("forgot-username")

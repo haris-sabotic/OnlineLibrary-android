@@ -147,4 +147,14 @@
     <string name="app_language">Jezik aplikacije</string>
     <string name="english">Engleski</string>
     <string name="serbian">Srpski</string>
+    <string name="registration">Registracija</string>
+    <string name="register">Registruj se</string>
+    <string name="enter_your_data_to_create_an_account">Unesite svoje podatke kako bi ste kreirali novi nalog</string>
+    <string name="password_confirm">Potvrda šifre</string>
+    <string name="registration_failed">Registracija neuspješna</string>
+    <string name="email_taken">Email zauzet</string>
+    <string name="username_taken">Korisničko ime zauzeto</string>
+    <string name="jmbg_taken">JMBG zauzet</string>
+    <string name="password_too_short">Šifra je prekratka</string>
+    <string name="jmbg_should_contain_13_digits">JMBG treba da sadrži 13 cifara</string>
 </resources>

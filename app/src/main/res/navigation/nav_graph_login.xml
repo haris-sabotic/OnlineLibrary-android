@@ -13,6 +13,10 @@
             android:id="@+id/nav_login_action_main_to_forgot"
             app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_forgot_fragment" />
+        <action
+            android:id="@+id/nav_login_action_main_to_registration"
+            app:enterAnim="@anim/fade_in"
+            app:destination="@id/nav_login_registration_fragment" />
     </fragment>
 
     <fragment
@@ -51,6 +55,16 @@
         tools:layout="@layout/fragment_request_sent_username" >
         <action
             android:id="@+id/nav_login_action_request_sent_username_to_main"
+            app:enterAnim="@anim/fade_in"
+            app:destination="@id/nav_login_main_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login_registration_fragment"
+        android:name="com.ets.onlinebiblioteka.fragments.login.RegistrationFragment"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/nav_login_action_registration_to_main"
             app:enterAnim="@anim/fade_in"
             app:destination="@id/nav_login_main_fragment" />
     </fragment>
