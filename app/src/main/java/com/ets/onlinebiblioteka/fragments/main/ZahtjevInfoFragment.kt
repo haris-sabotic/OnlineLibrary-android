@@ -64,6 +64,11 @@ class ZahtjevInfoFragment : Fragment() {
         val chip = view.findViewById<Chip>(R.id.zahtjev_info_chip)
         val btnPonisti = view.findViewById<LinearLayout>(R.id.zahtjev_info_btn_ponisti)
         val textPonisti = btnPonisti.findViewById<TextView>(R.id.zahtjev_info_text_ponisti)
+        val btnBack = view.findViewById<ImageView>(R.id.zahtjev_info_btn_back)
+
+        btnBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
 
         textTitle.text = data.book.title
         textLibrarian.text = data.librarian
