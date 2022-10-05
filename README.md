@@ -1,13 +1,19 @@
 # OnlineLibrary
-ICT Cortex praksa 2022
-
-Ovo je projekat napravljen za ICT Cortex praksu 2022. godine.
-Ime tima: MACH
+*ICT Cortex praksa 2022.*
 
 <br>
 
+Ovo je projekat napravljen za ICT Cortex praksu 2022. godine u firmi Amplitudo.
+
+Ime tima: ***MACH***
+
+## Web verzija
+- [Github repo](https://github.com/haris-sabotic/library-build-de/)
+- [Sajt](https://tim7.ictcortex.me/)
+
+## Dizajn aplikacije
 [Figma dizajn](https://www.figma.com/file/Ms97j5ZW9nCHrKhqVGDyX0/Online-Biblioteka?node-id=0%3A1)
-## Dodaci na dizajn
+### Dodaci na dizajn
 - [x] Opcije za brisanje istorije pretraživanja i liste želja
 - [x] Prikaz za selekciju filtera sa paginacijom
 - [x] Ekran za registraciju
