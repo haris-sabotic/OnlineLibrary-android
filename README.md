@@ -17,6 +17,7 @@ Ime tima: ***MACH***
 - [x] Opcije za brisanje istorije pretraživanja i liste želja
 - [x] Prikaz za selekciju filtera sa paginacijom
 - [x] Ekran za registraciju
+- [x] Aplikacija potpuno podržava engleski i srpski jezik, koji će prikazati zavisi od izabranog jezika za čitav Android sistem
 - [x] Obavještenja i poruke kao "Nema knjiga" u slučaju da termin za pretragu ne vraća nikakve rezultate
 
 ## Screenshot-ovi nekih djelova aplikacije
